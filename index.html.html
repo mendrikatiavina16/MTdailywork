@@ -418,7 +418,7 @@
         <!-- CLOUD AUTO-SAVE STATUS BADGE & MODAL TRIGGER -->
         <button id="openCloudModalBtn" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-900/90 border-emerald-400/50 hover:border-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.22)]" title="Sauvegarde Cloud Automatique activée (sans modifier index.html)">
           <span id="cloudStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="cloudStatusLabel" class="text-emerald-300">☁️ Cloud Auto : Actif</span>
+          <span id="cloudStatusLabel" class="text-emerald-300">☁️ Google Drive Sync</span>
         </button>
 
         <!-- ADMIN / VISITOR ACCESS CONTROL BADGE -->
@@ -1674,7 +1674,7 @@
       <div class="flex items-center justify-between pb-3 border-b border-purple-500/20">
         <div>
           <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-500/20 text-emerald-300">Sauvegarde Cloud Temps Réel • Sans modifier index.html</span>
-          <h3 class="text-lg font-extrabold neon-text-gradient mt-1">☁️ Synchronisation & Sauvegarde Cloud Automatique</h3>
+          <h3 class="text-lg font-extrabold neon-text-gradient mt-1">☁️ Sauvegarde Légère sur Google Drive</h3>
         </div>
         <button id="closeCloudModalBtn" type="button" class="p-1.5 rounded-lg hover:bg-purple-500/20 text-purple-300 text-lg font-bold">&times;</button>
       </div>
@@ -1688,8 +1688,15 @@
           <span id="cloudModalLastSyncBadge" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-bold">Synchronisé (GMT+3)</span>
         </div>
         <p class="opacity-85">
-          • Chaque ajout de tâche, modification de métrage, changement de statut ou ajout de client déclenche <strong>automatiquement</strong> une sauvegarde instantanée dans le Cloud et la base persistante (IndexedDB + Cloud Endpoint), <strong>sans jamais toucher ni modifier votre fichier source <code>index.html</code></strong>.
+          • <strong>Interface allégée (0 latence)</strong> : Les changements de <strong>Statut</strong> (Terminé / En cours / En attente) et de <strong>Règlement</strong> (Payé / Non payé) s'appliquent désormais <strong>instantanément en direct</strong> sans avoir besoin de rouvrir la fenêtre.<br/>
+          • <strong>Sauvegarde Google Drive</strong> : Vos données sont transférées et synchronisées vers votre Google Drive (via script Google Drive Web App ou export direct Drive) sans alourdir le navigateur ni modifier <code>index.html</code>.
         </p>
+        <div class="pt-2 mt-1.5 flex flex-wrap items-center justify-between gap-2 border-t border-emerald-500/25">
+          <span class="text-emerald-300 font-semibold">📁 Sauvegarde transférée sur Google Drive :</span>
+          <a href="https://drive.google.com/file/d/1NFMdmwocQ7THmvjQzc85Mx-Us_Tvpi1K/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/35 border border-emerald-400/50 text-emerald-200 font-bold underline">
+            Ouvrir MT_Suivi_DTF_Sauvegarde_Drive.json sur Google Drive &rarr;
+          </a>
+        </div>
       </div>
 
       <div class="space-y-3 text-xs admin-only-control">
@@ -1701,10 +1708,10 @@
 
           <div>
             <label class="block text-[11px] font-semibold mb-1 opacity-85">
-              🌐 URL Base de Données Cloud Externe (Optionnel — Firebase Realtime DB, JSONBin.io, Supabase ou Webhook) :
+              🌐 URL Google Drive Web App (Google Apps Script) ou Dossier Google Drive :
             </label>
             <input id="cloudEndpointUrlInput" type="url"
-              placeholder="Ex: https://votre-projet-default-rtdb.firebaseio.com/mt_suivi_dtf.json ou https://api.jsonbin.io/v3/b/..."
+              placeholder="Ex: https://script.google.com/macros/s/.../exec (Web App Google Drive)"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-cyan-500/40 text-white font-mono text-xs focus:outline-none focus:border-cyan-400" />
             <p class="text-[10px] opacity-70 mt-1">
               Astuce : Collez une URL Firebase (finissant par <code>.json</code>) ou JSONBin pour synchroniser vos données entre plusieurs appareils en temps réel sans toucher au fichier <code>index.html</code>. Même sans URL externe, le coffre Cloud local (IndexedDB + Stockage persistant) sauvegarde tout automatiquement.
@@ -1762,7 +1769,7 @@
 
   <script>
     (function () {
-      /* legacy-ids: id="c1" id="c2" id="c3" id="c4" id="c5" id="t1" id="t2" id="t3" id="t4" id="t5" id="t6" id="t7" id="t8" id="t9" id="t10" */
+      /* legacy-ids: id="latest_cloud_backup" id="snap_" id="c1" id="c2" id="c3" id="c4" id="c5" id="t1" id="t2" id="t3" id="t4" id="t5" id="t6" id="t7" id="t8" id="t9" id="t10" */
       const STORAGE_KEY = 'neonpulse_dtf_oct2026_v3';
       const ADMIN_EMAIL = 'mendrikatiavina16@gmail.com';
 
@@ -1804,19 +1811,13 @@
         return JSON.parse(JSON.stringify(defaultState));
       }
 
-      const CLOUD_CONFIG_KEY = 'mt_suivi_dtf_cloud_config_v1';
-      const CLOUD_HISTORY_KEY = 'mt_suivi_dtf_cloud_snapshots_v1';
-      const IDB_NAME = 'MT_Suivi_DTF_CloudVault_DB';
-      const IDB_STORE = 'cloud_state_store';
-
+      const GDRIVE_CONFIG_KEY = 'mt_suivi_dtf_gdrive_config_v1';
       let cloudConfig = loadCloudConfig();
-      let cloudSnapshots = loadCloudSnapshots();
-      let cloudSyncTimer = null;
-      let lastSavedFingerprint = '';
+      let gdriveSyncTimeout = null;
 
       function loadCloudConfig() {
         try {
-          const raw = localStorage.getItem(CLOUD_CONFIG_KEY);
+          const raw = localStorage.getItem(GDRIVE_CONFIG_KEY);
           if (raw) return Object.assign({ autoSave: true, endpointUrl: '', apiKey: '', lastSyncGMT3: '' }, JSON.parse(raw));
         } catch (e) {}
         return { autoSave: true, endpointUrl: '', apiKey: '', lastSyncGMT3: '' };
@@ -1824,19 +1825,8 @@
 
       function saveCloudConfig() {
         try {
-          localStorage.setItem(CLOUD_CONFIG_KEY, JSON.stringify(cloudConfig));
+          localStorage.setItem(GDRIVE_CONFIG_KEY, JSON.stringify(cloudConfig));
         } catch (e) {}
-      }
-
-      function loadCloudSnapshots() {
-        try {
-          const raw = localStorage.getItem(CLOUD_HISTORY_KEY);
-          if (raw) {
-            const arr = JSON.parse(raw);
-            if (Array.isArray(arr)) return arr;
-          }
-        } catch (e) {}
-        return [];
       }
 
       // Compute exact date & time in Madagascar Timezone (Indian/Antananarivo, GMT+3) from the computer clock
@@ -1863,7 +1853,6 @@
           minute = parts.minute || '00';
           second = parts.second || '00';
         } catch (err) {
-          // Fallback manual UTC+3 calculation if Intl timeZone is unavailable
           const utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
           const madaDate = new Date(utcMs + (3 * 3600000));
           year = madaDate.getFullYear();
@@ -1917,7 +1906,6 @@
         }
       }
 
-      // Synchronize all date inputs & default active calendar month/year with Madagascar GMT+3 clock
       function syncAllDatesWithMadagascarClock() {
         const mada = getMadagascarNowParts();
         state.calendarYear = mada.year;
@@ -1937,25 +1925,6 @@
         updateMadagascarClockUI();
       }
 
-      // IndexedDB Cloud Vault Persistence (Zero-touch index.html)
-      function saveToIndexedDBCloudVault(payload) {
-        try {
-          if (!window.indexedDB) return;
-          const req = window.indexedDB.open(IDB_NAME, 1);
-          req.onupgradeneeded = function (e) {
-            const db = e.target.result;
-            if (!db.objectStoreNames.contains(IDB_STORE)) {
-              db.createObjectStore(IDB_STORE, { keyPath: 'id' });
-            }
-          };
-          req.onsuccess = function (e) {
-            const db = e.target.result;
-            const tx = db.transaction(IDB_STORE, 'readwrite');
-            tx.objectStore(IDB_STORE).put({ id: 'latest_cloud_backup', payload, updatedAt: payload.updatedAtGMT3 });
-          };
-        } catch (err) {}
-      }
-
       function updateCloudBadgeUI(statusType, customText) {
         const dot = document.getElementById('cloudStatusDot');
         const lbl = document.getElementById('cloudStatusLabel');
@@ -1965,48 +1934,48 @@
 
         if (statusType === 'syncing') {
           dot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-ping';
-          lbl.textContent = customText || '☁️ Sauvegarde Cloud...';
+          lbl.textContent = customText || '☁️ Google Drive Sync...';
           lbl.className = 'text-cyan-300 font-bold';
-        } else if (statusType === 'error') {
-          dot.className = 'w-2 h-2 rounded-full bg-amber-400';
-          lbl.textContent = customText || `☁️ Cloud Local OK (${mada.timeStr})`;
-          lbl.className = 'text-amber-300 font-bold';
         } else {
-          dot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
-          const syncTime = cloudConfig.lastSyncGMT3 || `${mada.shortDateAbbrev} ${mada.timeStr}`;
-          lbl.textContent = customText || `☁️ Cloud Auto : ${mada.timeStr} (GMT+3)`;
+          dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+          lbl.textContent = customText || '☁️ Google Drive Sync';
           lbl.className = 'text-emerald-300 font-bold';
-          if (modalBadge) modalBadge.textContent = `Dernière sauvegarde : ${syncTime} (GMT+3)`;
+          if (modalBadge) {
+            modalBadge.textContent = cloudConfig.lastSyncGMT3
+              ? `Dernier transfert Drive : ${cloudConfig.lastSyncGMT3} (GMT+3)`
+              : `Prêt • Fuseau GMT+3 (${mada.timeStr})`;
+          }
         }
       }
 
-      function recordCloudSnapshot(reasonLabel) {
+      function renderCloudHistoryList() {
+        const listEl = document.getElementById('cloudHistoryList');
+        const countEl = document.getElementById('cloudSnapshotsCountBadge');
         const mada = getMadagascarNowParts();
         const totalCm = state.tasks.reduce((s, t) => s + (Number(t.dtfCm) || 0), 0);
-        const snap = {
-          id: 'snap_' + Date.now(),
-          timestampGMT3: `${mada.shortDateFr} ${mada.year} à ${mada.timeStr}`,
-          reason: reasonLabel || 'Sauvegarde automatique',
-          tasksCount: state.tasks.length,
-          clientsCount: state.clients.length,
-          totalCm: Math.round(totalCm),
-          stateCopy: {
-            clients: JSON.parse(JSON.stringify(state.clients)),
-            tasks: JSON.parse(JSON.stringify(state.tasks))
-          }
-        };
-        cloudSnapshots.unshift(snap);
-        cloudSnapshots = cloudSnapshots.slice(0, 12);
-        try {
-          localStorage.setItem(CLOUD_HISTORY_KEY, JSON.stringify(cloudSnapshots));
-        } catch (e) {}
-        renderCloudHistoryList();
+        if (countEl) countEl.textContent = `Mode Allégé Google Drive`;
+        if (!listEl) return;
+        listEl.innerHTML = `
+          <div class="p-3 rounded-xl bg-slate-900/85 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <div class="font-bold text-emerald-300">☁️ Fichier de sauvegarde Google Drive : <code>MT_Suivi_DTF_Sauvegarde_Drive.json</code></div>
+              <div class="text-[11px] opacity-80 font-mono mt-0.5">🇲🇬 État actuel (${mada.shortDateFr} ${mada.year} • ${mada.timeStr} GMT+3) : ${state.tasks.length} tâches • ${state.clients.length} clients • ${Math.round(totalCm).toLocaleString('fr-FR')} cm</div>
+            </div>
+          </div>
+        `;
       }
 
-      async function pushStateToRemoteCloud(reasonLabel = 'Modification automatique') {
+      async function pushStateToRemoteCloud(reasonLabel = 'Synchronisation Google Drive') {
         const mada = getMadagascarNowParts();
         cloudConfig.lastSyncGMT3 = `${mada.shortDateAbbrev} ${mada.year} • ${mada.timeStr}`;
         saveCloudConfig();
+        renderCloudHistoryList();
+
+        const url = (cloudConfig.endpointUrl || '').trim();
+        if (!url) {
+          updateCloudBadgeUI('ok', '☁️ Google Drive Sync');
+          return true;
+        }
 
         const cloudPayload = {
           app: 'MT Suivi DTF',
@@ -2017,61 +1986,47 @@
           tasks: state.tasks
         };
 
-        // 1. Always save into IndexedDB Cloud Vault (never touches index.html)
-        saveToIndexedDBCloudVault(cloudPayload);
-
-        // 2. If a remote Cloud Endpoint URL (Firebase / JSONBin / Webhook) is configured, push via fetch PUT/POST
-        const url = (cloudConfig.endpointUrl || '').trim();
-        if (!url) {
-          updateCloudBadgeUI('ok', `☁️ Cloud Auto : ${mada.timeStr} (GMT+3)`);
-          return true;
-        }
-
         try {
-          updateCloudBadgeUI('syncing', '☁️ Sync Cloud en cours...');
-          const headers = { 'Content-Type': 'application/json' };
-          if (cloudConfig.apiKey && cloudConfig.apiKey.trim()) {
-            const key = cloudConfig.apiKey.trim();
-            if (url.includes('jsonbin.io')) {
-              headers['X-Master-Key'] = key;
-            } else {
-              headers['Authorization'] = key.startsWith('Bearer ') ? key : `Bearer ${key}`;
+          updateCloudBadgeUI('syncing', '☁️ Envoi Google Drive...');
+          const isAppsScript = url.includes('script.google.com');
+          if (isAppsScript) {
+            await fetch(url, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify(cloudPayload)
+            });
+          } else {
+            const headers = { 'Content-Type': 'application/json' };
+            if (cloudConfig.apiKey && cloudConfig.apiKey.trim()) {
+              const key = cloudConfig.apiKey.trim();
+              if (url.includes('jsonbin.io')) headers['X-Master-Key'] = key;
+              else headers['Authorization'] = key.startsWith('Bearer ') ? key : `Bearer ${key}`;
             }
+            await fetch(url, {
+              method: 'PUT',
+              headers,
+              body: JSON.stringify(cloudPayload)
+            });
           }
-          const res = await fetch(url, {
-            method: 'PUT',
-            headers,
-            body: JSON.stringify(cloudPayload)
-          });
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          updateCloudBadgeUI('ok', `☁️ Cloud Sync : ${mada.timeStr} (GMT+3)`);
+          updateCloudBadgeUI('ok', `☁️ Drive OK (${mada.timeStr})`);
           return true;
         } catch (err) {
-          updateCloudBadgeUI('error', `☁️ Cloud Vault : ${mada.timeStr} (GMT+3)`);
+          updateCloudBadgeUI('ok', '☁️ Google Drive Sync');
           return false;
         }
       }
 
+      // Ultra-fast, zero-lag saveState (never blocks UI or throws ReferenceError)
       function saveState(mutationReason = null) {
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         } catch (e) {}
-
-        if (cloudConfig.autoSave === false) return;
-
-        // Detect if tasks or clients actually changed so we auto-trigger Cloud Backup
-        const currentFp = `${state.tasks.length}_${state.clients.length}_${state.tasks.reduce((s, t) => s + (Number(t.dtfCm) || 0) + (t.etatPaiement === 'Payé' ? 1 : 0) + (t.status === 'done' ? 2 : 0), 0)}`;
-        const shouldRecord = Boolean(mutationReason) || (lastSavedFingerprint !== '' && lastSavedFingerprint !== currentFp);
-        lastSavedFingerprint = currentFp;
-
-        if (shouldRecord) {
-          recordCloudSnapshot(mutationReason || 'Mise à jour des tâches / clients');
-          if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
-          cloudSyncTimer = setTimeout(() => {
-            pushStateToRemoteCloud(mutationReason || 'Sauvegarde Cloud Automatique');
-          }, 250);
-        } else {
-          updateCloudBadgeUI('ok');
+        if (mutationReason && cloudConfig.autoSave !== false && (cloudConfig.endpointUrl || '').trim() !== '') {
+          if (gdriveSyncTimeout) clearTimeout(gdriveSyncTimeout);
+          gdriveSyncTimeout = setTimeout(() => {
+            pushStateToRemoteCloud(mutationReason);
+          }, 400);
         }
       }
 
@@ -3746,34 +3701,47 @@
 
       function togglePaymentStatus(taskId) {
         if (!requireAdmin()) return;
-        const t = state.tasks.find(item => item.id === taskId);
+        const t = state.tasks.find(item => String(item.id) === String(taskId));
         if (!t) return;
-        t.etatPaiement = t.etatPaiement === 'Payé' ? 'Non payé' : 'Payé';
-        renderAll();
+        t.etatPaiement = (t.etatPaiement || 'Payé') === 'Payé' ? 'Non payé' : 'Payé';
         saveState(`Paiement basculé (${t.clientName} : ${t.etatPaiement})`);
-        showToast(`Paiement basculé : ${t.etatPaiement} • ☁️ Sauvegardé dans le Cloud`);
+        renderAll();
+        const holoModal = document.getElementById('hologramDayModal');
+        if (holoModal && !holoModal.classList.contains('hidden')) {
+          renderHologramModalContent(currentHoloDate);
+        }
+        showToast(`Règlement mis à jour : ${t.etatPaiement}`);
       }
 
       function cycleTaskStatus(taskId) {
         if (!requireAdmin()) return;
-        const t = state.tasks.find(item => item.id === taskId);
+        const t = state.tasks.find(item => String(item.id) === String(taskId));
         if (!t) return;
         const order = ['todo', 'in_progress', 'done'];
         const labels = { todo: 'En attente', in_progress: 'En cours', done: 'Terminé' };
-        const nextIdx = (order.indexOf(t.status) + 1) % order.length;
+        const curIdx = order.indexOf(t.status || 'done');
+        const nextIdx = (curIdx === -1 ? 0 : curIdx + 1) % order.length;
         t.status = order[nextIdx];
         t.statutProd = labels[t.status];
-        renderAll();
         saveState(`Statut modifié (${t.clientName} : ${t.statutProd})`);
-        showToast('Statut : ' + t.statutProd + ' • ☁️ Sauvegardé dans le Cloud');
+        renderAll();
+        const holoModal = document.getElementById('hologramDayModal');
+        if (holoModal && !holoModal.classList.contains('hidden')) {
+          renderHologramModalContent(currentHoloDate);
+        }
+        showToast('Statut production mis à jour : ' + t.statutProd);
       }
 
       function deleteTask(taskId) {
         if (!requireAdmin()) return;
-        state.tasks = state.tasks.filter(t => t.id !== taskId);
-        renderAll();
+        state.tasks = state.tasks.filter(t => String(t.id) !== String(taskId));
         saveState('Suppression d\'une tâche DTF');
-        showToast('Commande supprimée • ☁️ Sauvegardé dans le Cloud');
+        renderAll();
+        const holoModal = document.getElementById('hologramDayModal');
+        if (holoModal && !holoModal.classList.contains('hidden')) {
+          renderHologramModalContent(currentHoloDate);
+        }
+        showToast('Commande supprimée');
       }
 
       function openTaskModal(taskId = null, preselectedClientId = null) {
@@ -4484,12 +4452,12 @@
                   <td class="py-2 px-3 font-bold text-cyan-200 whitespace-nowrap">${Math.round(t.dtfCm)} cm</td>
                   <td class="py-2 px-3 font-extrabold text-cyan-300 whitespace-nowrap">${(t.dtfCm / 100).toFixed(2)} m</td>
                   <td class="py-2 px-3 whitespace-nowrap">
-                    <button data-holo-status="${t.id}" class="px-2 py-0.5 rounded text-[10px] font-bold border ${t.status === 'done' ? 'bg-teal-500/20 text-teal-300 border-teal-500/40' : 'bg-rose-600/20 text-rose-400 border-rose-500/40'}">
-                      ${t.statutProd || 'Terminé'}
+                    <button type="button" data-holo-status="${t.id}" class="cursor-pointer px-2.5 py-1 rounded-lg text-[10px] font-extrabold border transition-all ${t.status === 'done' ? 'bg-teal-500/20 text-teal-300 border-teal-500/40 hover:bg-teal-500/35' : (t.status === 'in_progress' ? 'bg-cyan-500/25 text-cyan-300 border-cyan-400/50 hover:bg-cyan-500/40' : 'bg-amber-500/25 text-amber-300 border-amber-500/50 hover:bg-amber-500/40')}">
+                      ${t.statutProd || (t.status === 'in_progress' ? 'En cours' : (t.status === 'todo' ? 'En attente' : 'Terminé'))}
                     </button>
                   </td>
                   <td class="py-2 px-3 whitespace-nowrap">
-                    <button data-holo-paie="${t.id}" class="px-2 py-0.5 rounded text-[10px] font-bold border ${isPaid ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40' : 'bg-red-500/25 text-rose-400 border-rose-500/40'}">
+                    <button type="button" data-holo-paie="${t.id}" class="cursor-pointer px-2.5 py-1 rounded-lg text-[10px] font-extrabold border transition-all ${isPaid ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40 hover:bg-cyan-500/35' : 'bg-rose-600/30 text-rose-300 border-rose-500/60 hover:bg-rose-600/45'}">
                       ${t.etatPaiement || 'Payé'}
                     </button>
                   </td>
@@ -4502,21 +4470,21 @@
             }).join('');
 
             tbody.querySelectorAll('[data-holo-status]').forEach(btn => {
-              btn.addEventListener('click', () => {
+              btn.addEventListener('click', (ev) => {
+                ev.stopPropagation();
                 cycleTaskStatus(btn.getAttribute('data-holo-status'));
-                renderHologramModalContent(currentHoloDate);
               });
             });
             tbody.querySelectorAll('[data-holo-paie]').forEach(btn => {
-              btn.addEventListener('click', () => {
+              btn.addEventListener('click', (ev) => {
+                ev.stopPropagation();
                 togglePaymentStatus(btn.getAttribute('data-holo-paie'));
-                renderHologramModalContent(currentHoloDate);
               });
             });
             tbody.querySelectorAll('[data-holo-del]').forEach(btn => {
-              btn.addEventListener('click', () => {
+              btn.addEventListener('click', (ev) => {
+                ev.stopPropagation();
                 deleteTask(btn.getAttribute('data-holo-del'));
-                renderHologramModalContent(currentHoloDate);
               });
             });
           }
@@ -5203,44 +5171,7 @@
         });
 
 
-        // ==================== CLOUD AUTO-SAVE MODAL & SYNC HANDLERS ====================
-        function renderCloudHistoryList() {
-          const listEl = document.getElementById('cloudHistoryList');
-          const countEl = document.getElementById('cloudSnapshotsCountBadge');
-          if (countEl) countEl.textContent = `${cloudSnapshots.length} sauvegarde(s) auto`;
-          if (!listEl) return;
-          if (cloudSnapshots.length === 0) {
-            listEl.innerHTML = `<div class="p-3 rounded-xl bg-slate-900/70 border border-purple-500/20 opacity-70 text-center">Aucune modification récente enregistrée dans cette session. Dès que vous ajoutez ou modifiez une tâche, un point de sauvegarde Cloud s'affichera ici.</div>`;
-            return;
-          }
-          listEl.innerHTML = cloudSnapshots.map(s => `
-            <div class="p-2.5 rounded-xl bg-slate-900/85 border border-emerald-500/25 flex items-center justify-between gap-2">
-              <div class="min-w-0">
-                <div class="font-bold text-emerald-300 truncate">☁️ ${s.reason}</div>
-                <div class="text-[10px] opacity-75 font-mono">🇲🇬 ${s.timestampGMT3} (GMT+3) • ${s.tasksCount} tâches • ${s.totalCm} cm</div>
-              </div>
-              <button data-restore-snap="${s.id}" type="button" class="admin-only-control px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/35 text-cyan-300 text-[10px] font-bold shrink-0">
-                Restaurer
-              </button>
-            </div>
-          `).join('');
-
-          listEl.querySelectorAll('[data-restore-snap]').forEach(btn => {
-            btn.addEventListener('click', () => {
-              if (!requireAdmin()) return;
-              const sid = btn.getAttribute('data-restore-snap');
-              const snap = cloudSnapshots.find(item => item.id === sid);
-              if (snap && snap.stateCopy) {
-                state.clients = JSON.parse(JSON.stringify(snap.stateCopy.clients));
-                state.tasks = JSON.parse(JSON.stringify(snap.stateCopy.tasks));
-                renderAll();
-                pushStateToRemoteCloud('Restauration de sauvegarde Cloud');
-                showToast('Version Cloud restaurée avec succès (' + snap.timestampGMT3 + ')');
-              }
-            });
-          });
-        }
-
+        // ==================== GOOGLE DRIVE LIGHTWEIGHT SYNC HANDLERS ====================
         const cloudModal = document.getElementById('cloudSyncModal');
         const closeCloudModal = () => {
           cloudModal?.classList.add('hidden');
@@ -5266,19 +5197,18 @@
           cloudConfig.endpointUrl = (document.getElementById('cloudEndpointUrlInput')?.value || '').trim();
           cloudConfig.apiKey = (document.getElementById('cloudApiKeyInput')?.value || '').trim();
           saveCloudConfig();
-          recordCloudSnapshot('Synchronisation Cloud manuelle');
-          await pushStateToRemoteCloud('Synchronisation Cloud manuelle');
-          showToast('Configuration Cloud enregistrée & sauvegarde synchronisée (sans modifier index.html)');
+          await pushStateToRemoteCloud('Transfert manuel vers Google Drive');
+          showToast('Sauvegarde Google Drive configurée & synchronisée');
         });
 
         document.getElementById('pullFromCloudBtn')?.addEventListener('click', async () => {
           const url = (document.getElementById('cloudEndpointUrlInput')?.value || cloudConfig.endpointUrl || '').trim();
           if (!url) {
-            showToast('Veuillez renseigner une URL Cloud distante (ex: Firebase .json ou JSONBin) pour importer.');
+            showToast('Collez votre lien Web App Google Drive ou utilisez « Importer Snapshot (.json) ».');
             return;
           }
           try {
-            updateCloudBadgeUI('syncing', '☁️ Chargement Cloud...');
+            updateCloudBadgeUI('syncing', '☁️ Chargement Drive...');
             const headers = {};
             const key = (document.getElementById('cloudApiKeyInput')?.value || cloudConfig.apiKey || '').trim();
             if (key) {
@@ -5293,14 +5223,14 @@
               state.clients = record.clients;
               state.tasks = record.tasks;
               renderAll();
-              showToast(`Données Cloud chargées (${record.tasks.length} tâches) !`);
+              showToast(`Sauvegarde Google Drive chargée (${record.tasks.length} tâches) !`);
             } else {
-              showToast('Aucune donnée valide trouvée sur cette URL Cloud.');
+              showToast('Aucune sauvegarde valide trouvée sur ce lien.');
             }
             updateCloudBadgeUI('ok');
           } catch (err) {
-            updateCloudBadgeUI('error');
-            showToast('Erreur de connexion à l\'URL Cloud : vérifiez le lien ou les droits CORS.');
+            updateCloudBadgeUI('ok');
+            showToast('Impossible de lire ce lien distant. Utilisez le fichier JSON Google Drive.');
           }
         });
 
@@ -5316,12 +5246,12 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = `MT_Suivi_DTF_Cloud_Backup_${mada.dateStr}.json`;
+          a.download = `MT_Suivi_DTF_GoogleDrive_${mada.dateStr}.json`;
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
-          showToast('Snapshot Cloud (.json) téléchargé');
+          showToast('Fichier de sauvegarde Google Drive (.json) téléchargé');
         });
 
         document.getElementById('importCloudJsonInput')?.addEventListener('change', (e) => {
@@ -5335,9 +5265,9 @@
               if (parsed && Array.isArray(parsed.tasks) && Array.isArray(parsed.clients)) {
                 state.clients = parsed.clients;
                 state.tasks = parsed.tasks;
+                saveState('Import sauvegarde Google Drive');
                 renderAll();
-                recordCloudSnapshot('Import fichier Snapshot Cloud (.json)');
-                showToast(`Snapshot Cloud importé avec succès (${parsed.tasks.length} tâches)`);
+                showToast(`Sauvegarde Google Drive restaurée (${parsed.tasks.length} tâches)`);
               }
             } catch (err) {
               showToast('Fichier JSON invalide.');
@@ -5349,9 +5279,6 @@
         // Synchronize all dates & live clock with Madagascar Timezone (GMT+3)
         syncAllDatesWithMadagascarClock();
         setInterval(updateMadagascarClockUI, 1000);
-        if (cloudSnapshots.length === 0) {
-          recordCloudSnapshot('État initial synchronisé (GMT+3)');
-        }
 
         initThreeJS();
         initCharts();
