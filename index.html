@@ -33,30 +33,48 @@
     };
   </script>
   <style>
-    :root {
-      --bg-primary: #0a0518;
-      --bg-secondary: #130929;
-      --bg-card: rgba(23, 12, 48, 0.84);
-      --border-card: rgba(189, 0, 255, 0.28);
+    :root, html.dark {
+      --bg-primary: #03050a;
+      --bg-secondary: #060b16;
+      --bg-card: linear-gradient(145deg, rgba(5, 8, 16, 0.90) 0%, rgba(14, 116, 244, 0.22) 100%);
+      --border-card: rgba(56, 189, 248, 0.30);
       --text-main: #f8fafc;
-      --text-muted: #a78bfa;
-      --glow-shadow: 0 8px 32px -4px rgba(189, 0, 255, 0.22), 0 0 15px rgba(0, 242, 254, 0.08);
+      --text-muted: #93c5fd;
+      --glow-shadow: 0 8px 32px -4px rgba(2, 132, 199, 0.28), 0 0 15px rgba(0, 242, 254, 0.10);
     }
 
     html.light {
-      --bg-primary: #f1f0fb;
+      --bg-primary: #f2f6fc;
       --bg-secondary: #ffffff;
-      --bg-card: rgba(255, 255, 255, 0.94);
-      --border-card: rgba(139, 44, 245, 0.22);
-      --text-main: #1e1b4b;
-      --text-muted: #6d28d9;
-      --glow-shadow: 0 10px 28px -6px rgba(139, 44, 245, 0.15), 0 4px 12px rgba(0, 210, 255, 0.08);
+      --bg-card: #ffffff;
+      --border-card: rgba(2, 132, 199, 0.22);
+      --text-main: #0f172a;
+      --text-muted: #0369a1;
+      --glow-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(2, 132, 199, 0.05);
     }
 
-    body {
+    /* Fond Noir sombre + surcouche de bleu à 30% d'opacité en Mode Néon (Sombre) */
+    html.dark body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-primary);
+      background-color: #03050a;
+      background-image:
+        linear-gradient(135deg, rgba(2, 132, 199, 0.30) 0%, rgba(14, 116, 244, 0.30) 50%, rgba(30, 58, 138, 0.30) 100%),
+        radial-gradient(circle at 85% 12%, rgba(0, 242, 254, 0.14) 0%, transparent 55%),
+        radial-gradient(circle at 15% 88%, rgba(37, 99, 235, 0.18) 0%, transparent 55%);
+      background-attachment: fixed;
       color: var(--text-main);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    /* Fond Clair Prémium (Satin Bleu Glacé & Albâtre, même ADN visuel sans surbrillance) */
+    html.light body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f2f6fc;
+      background-image:
+        linear-gradient(135deg, rgba(219, 234, 254, 0.55) 0%, rgba(248, 250, 252, 0.96) 50%, rgba(224, 242, 254, 0.55) 100%);
+      background-attachment: fixed;
+      color: #0f172a;
       transition: background-color 0.3s ease, color 0.3s ease;
       overflow-x: hidden;
     }
@@ -71,30 +89,30 @@
     }
 
     .neon-card:hover {
-      border-color: rgba(59, 130, 246, 0.5);
+      border-color: rgba(56, 189, 248, 0.52);
     }
 
     .neon-gradient-btn {
-      background: linear-gradient(135deg, #00f2fe 0%, #0284c7 45%, #4f46e5 100%);
-      color: #ffffff;
-      box-shadow: 0 4px 20px rgba(0, 242, 254, 0.42);
+      background: linear-gradient(135deg, #00f2fe 0%, #0284c7 45%, #1d4ed8 100%);
+      color: #ffffff !important;
+      box-shadow: 0 4px 20px rgba(0, 242, 254, 0.38);
       transition: all 0.2s ease;
     }
 
     .neon-gradient-btn:hover {
-      filter: brightness(1.14);
+      filter: brightness(1.08);
       transform: translateY(-1px);
-      box-shadow: 0 6px 25px rgba(2, 132, 199, 0.65);
+      box-shadow: 0 6px 24px rgba(2, 132, 199, 0.55);
     }
 
     .neon-pill-active {
-      background: linear-gradient(90deg, #00d2ff 0%, #0284c7 50%, #4f46e5 100%);
+      background: linear-gradient(90deg, #00d2ff 0%, #0284c7 50%, #1d4ed8 100%);
       color: #ffffff !important;
-      box-shadow: 0 4px 18px rgba(0, 210, 255, 0.45);
+      box-shadow: 0 4px 16px rgba(0, 210, 255, 0.38);
     }
 
     .neon-text-gradient {
-      background: linear-gradient(90deg, #00f2fe 0%, #38bdf8 40%, #818cf8 72%, #ff1744 100%);
+      background: linear-gradient(90deg, #00f2fe 0%, #38bdf8 45%, #60a5fa 75%, #ff1744 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -105,17 +123,251 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Hologram Modal Styles */
+    .neon-cyan-text {
+      background: linear-gradient(90deg, #00f2fe 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Harmonisation des sous-conteneurs sombres en Mode Néon (Noir sombre + surcouche bleue 30%) */
+    html.dark .bg-purple-950\/30,
+    html.dark .bg-purple-950\/35,
+    html.dark .bg-purple-950\/40,
+    html.dark .bg-purple-950\/45,
+    html.dark .bg-purple-950\/50,
+    html.dark .bg-purple-950\/60,
+    html.dark .bg-\[\#150b2e\] {
+      background-color: rgba(5, 10, 22, 0.86) !important;
+      background-image: linear-gradient(135deg, rgba(14, 116, 244, 0.24), rgba(2, 132, 199, 0.14)) !important;
+    }
+    html.dark .from-\[\#120726\] {
+      background: linear-gradient(180deg, rgba(4, 9, 20, 0.96) 0%, rgba(14, 116, 244, 0.28) 55%, rgba(3, 6, 14, 0.98) 100%) !important;
+    }
+
+    /* ==================== ADAPTATION COMPLÈTE DU MODE CLAIR PRÉMIUM (SANS SURBRILLANCE) ==================== */
+    html.light .neon-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(2, 132, 199, 0.22) !important;
+      box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(2, 132, 199, 0.04) !important;
+      backdrop-filter: none !important;
+    }
+    html.light .neon-card:hover {
+      border-color: rgba(2, 132, 199, 0.45) !important;
+    }
+
+    /* Suppression totale des surbrillances (glows, shimmers, clignotements, scanlines) en Mode Clair */
+    html.light .kpi-interactive-card {
+      animation: none !important;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06) !important;
+    }
+    html.light .kpi-interactive-card::after {
+      display: none !important;
+      animation: none !important;
+    }
+    html.light .kpi-interactive-card:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 22px -4px rgba(2, 132, 199, 0.14) !important;
+    }
+    html.light .kpi-card-active-filter {
+      outline: 2px solid #0284c7 !important;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.16) !important;
+    }
+    html.light .neon-gradient-btn {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #1d4ed8 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.20) !important;
+    }
+    html.light .neon-gradient-btn:hover {
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.28) !important;
+    }
+    html.light .neon-pill-active {
+      background: linear-gradient(90deg, #0284c7 0%, #0369a1 55%, #1d4ed8 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.20) !important;
+    }
+    html.light .neon-pill-active span,
+    html.light .neon-pill-active div,
+    html.light .neon-gradient-btn span {
+      color: #ffffff !important;
+    }
+    html.light .neon-text-gradient {
+      background: linear-gradient(90deg, #0369a1 0%, #1d4ed8 52%, #be123c 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    html.light .neon-cyan-text {
+      background: linear-gradient(90deg, #0369a1 0%, #1d4ed8 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    html.light .neon-red-orange-text {
+      background: linear-gradient(90deg, #be123c 0%, #9f1239 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    /* Couleurs de fond adaptatives en Mode Clair */
+    html.light .bg-slate-950,
+    html.light .bg-slate-950\/25,
+    html.light .bg-slate-950\/75,
+    html.light .bg-slate-950\/80,
+    html.light .bg-slate-950\/85,
+    html.light .bg-slate-950\/90,
+    html.light .bg-slate-900,
+    html.light .bg-slate-900\/60,
+    html.light .bg-slate-900\/65,
+    html.light .bg-slate-900\/75,
+    html.light .bg-slate-900\/80,
+    html.light .bg-slate-900\/85,
+    html.light .bg-slate-900\/90,
+    html.light .bg-slate-900\/95,
+    html.light .bg-purple-950\/30,
+    html.light .bg-purple-950\/35,
+    html.light .bg-purple-950\/40,
+    html.light .bg-purple-950\/45,
+    html.light .bg-purple-950\/50,
+    html.light .bg-purple-950\/60,
+    html.light .bg-\[\#150b2e\],
+    html.light .bg-slate-800,
+    html.light .bg-slate-800\/50,
+    html.light .bg-slate-700\/50 {
+      background-color: #f1f5f9 !important;
+      background-image: none !important;
+      color: #0f172a !important;
+      border-color: rgba(2, 132, 199, 0.22) !important;
+    }
+
+    html.light input,
+    html.light select,
+    html.light textarea {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-color: rgba(2, 132, 199, 0.32) !important;
+      box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    }
+    html.light input::placeholder,
+    html.light textarea::placeholder {
+      color: #64748b !important;
+    }
+
+    /* Conteneur 3D & HUD en Mode Clair */
+    html.light .from-\[\#120726\] {
+      background: linear-gradient(180deg, #e0f2fe 0%, #f1f5f9 55%, #e2e8f0 100%) !important;
+      border-color: rgba(2, 132, 199, 0.30) !important;
+    }
+    html.light #threeSelectionHud {
+      background: rgba(255, 255, 255, 0.94) !important;
+      border-color: rgba(2, 132, 199, 0.35) !important;
+      color: #0f172a !important;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    /* Fenêtre Hologramme en Mode Clair (Édition Cristal Prémium sans surbrillance) */
+    html.light #hologramDayModal,
+    html.light #taskModal,
+    html.light #clientModal,
+    html.light #authModal,
+    html.light #cloudSyncModal {
+      background-color: rgba(15, 23, 42, 0.45) !important;
+    }
+    html.light .hologram-window {
+      background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%) !important;
+      border: 1.5px solid rgba(2, 132, 199, 0.40) !important;
+      animation: none !important;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.16) !important;
+      color: #0f172a !important;
+    }
+    html.light .hologram-window::before {
+      display: none !important;
+    }
+
+    /* Textes adaptatifs haute lisibilité en Mode Clair */
+    html.light .text-white,
+    html.light .text-slate-200,
+    html.light .text-slate-300 {
+      color: #0f172a !important;
+    }
+    html.light .text-cyan-200,
+    html.light .text-cyan-300,
+    html.light .text-cyan-300\/75,
+    html.light .text-cyan-300\/80,
+    html.light .text-cyan-300\/95,
+    html.light .text-cyan-400,
+    html.light .text-cyan-500,
+    html.light .text-sky-300 {
+      color: #0369a1 !important;
+    }
+    html.light .text-teal-300,
+    html.light .text-emerald-200,
+    html.light .text-emerald-300,
+    html.light .text-emerald-400 {
+      color: #0f766e !important;
+    }
+    html.light .text-purple-200,
+    html.light .text-purple-300,
+    html.light .text-purple-400,
+    html.light .text-violet-300,
+    html.light .text-indigo-200,
+    html.light .text-indigo-300 {
+      color: #4338ca !important;
+    }
+    html.light .text-rose-200,
+    html.light .text-rose-300,
+    html.light .text-rose-400,
+    html.light .text-rose-500,
+    html.light .text-red-300,
+    html.light .text-red-400 {
+      color: #be123c !important;
+    }
+    html.light .text-amber-300 {
+      color: #b45309 !important;
+    }
+
+    /* Suppression des halos lumineux et clignotements en Mode Clair */
+    html.light [class*="shadow-[0_0_"] {
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+    }
+    html.light .animate-ping,
+    html.light .dot-wave-anim {
+      animation: none !important;
+    }
+    html.light .dot-active-pink {
+      background: #e11d48 !important;
+      box-shadow: none !important;
+    }
+    html.light .dot-active-cyan {
+      background: #0284c7 !important;
+      box-shadow: none !important;
+    }
+    html.light .dot-active-purple {
+      background: #4f46e5 !important;
+      box-shadow: none !important;
+    }
+    html.light .dot-inactive {
+      background: #cbd5e1 !important;
+    }
+    html.light .bg-black\/45 {
+      background-color: #e2e8f0 !important;
+    }
+    html.light #toastNotification,
+    html.light .bg-sky-600.text-white {
+      color: #ffffff !important;
+    }
+    html.light .dot-indicator {
+      box-shadow: none !important;
+    }
+
+    /* Hologram Modal Styles (Dark Mode) */
     @keyframes holoScanline {
       0% { background-position: 0 0; }
       100% { background-position: 0 100%; }
     }
     @keyframes holoPulseGlow {
       0%, 100% { box-shadow: 0 0 35px rgba(0, 242, 254, 0.35), 0 0 70px rgba(16, 185, 129, 0.18), inset 0 0 25px rgba(0, 242, 254, 0.15); border-color: rgba(0, 242, 254, 0.65); }
-      50% { box-shadow: 0 0 50px rgba(16, 185, 129, 0.45), 0 0 90px rgba(124, 58, 237, 0.28), inset 0 0 35px rgba(16, 185, 129, 0.22); border-color: rgba(16, 185, 129, 0.8); }
+      50% { box-shadow: 0 0 50px rgba(16, 185, 129, 0.45), 0 0 90px rgba(2, 132, 199, 0.28), inset 0 0 35px rgba(16, 185, 129, 0.22); border-color: rgba(16, 185, 129, 0.8); }
     }
     .hologram-window {
-      background: radial-gradient(circle at 50% 0%, rgba(6, 40, 68, 0.94) 0%, rgba(7, 15, 34, 0.96) 65%, rgba(10, 8, 28, 0.98) 100%);
+      background: radial-gradient(circle at 50% 0%, rgba(6, 40, 68, 0.94) 0%, rgba(5, 12, 26, 0.96) 65%, rgba(3, 6, 14, 0.98) 100%);
       border: 1.5px solid rgba(0, 242, 254, 0.65);
       animation: holoPulseGlow 4s ease-in-out infinite;
       backdrop-filter: blur(22px);
@@ -143,21 +395,15 @@
     .holo-corner-bl { bottom: 8px; left: 8px; border-bottom: 2.5px solid #10b981; border-left: 2.5px solid #10b981; }
     .holo-corner-br { bottom: 8px; right: 8px; border-bottom: 2.5px solid #ff1744; border-right: 2.5px solid #ff1744; }
 
-    .neon-cyan-text {
-      background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(15, 7, 34, 0.4);
+      background: rgba(15, 23, 42, 0.2);
     }
     ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #ff3b30, #8b2cf5);
+      background: linear-gradient(180deg, #0284c7, #1d4ed8);
       border-radius: 9999px;
     }
 
@@ -183,15 +429,15 @@
       box-shadow: 0 0 8px #00f2fe;
     }
     .dot-active-purple {
-      background: #a855f7;
-      box-shadow: 0 0 8px #a855f7;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
     }
     .dot-inactive {
-      background: rgba(167, 139, 250, 0.2);
+      background: rgba(148, 163, 184, 0.22);
     }
 
     @keyframes neonBorderFlow {
-      0%, 100% { border-color: rgba(59, 130, 246, 0.35); box-shadow: 0 8px 32px -4px rgba(189, 0, 255, 0.22), 0 0 15px rgba(0, 242, 254, 0.08); }
+      0%, 100% { border-color: rgba(59, 130, 246, 0.35); box-shadow: 0 8px 32px -4px rgba(2, 132, 199, 0.25), 0 0 15px rgba(0, 242, 254, 0.08); }
       50% { border-color: rgba(0, 242, 254, 0.55); box-shadow: 0 10px 36px -2px rgba(0, 242, 254, 0.28), 0 0 22px rgba(59, 130, 246, 0.18); }
     }
 
@@ -208,11 +454,6 @@
     @keyframes slowOrbitSpin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
-    }
-
-    @keyframes floatSoft {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-3px); }
     }
 
     .kpi-interactive-card {
@@ -255,7 +496,7 @@
 
     .gauge-interactive-box:hover {
       transform: translateY(-3px) scale(1.04);
-      background: rgba(139, 44, 245, 0.12);
+      background: rgba(2, 132, 199, 0.10);
     }
 
     .gauge-orbit-ring {
@@ -277,7 +518,6 @@
       background: rgba(59, 130, 246, 0.14);
     }
 
-
     body.visitor-readonly .admin-only-control {
       display: none !important;
     }
@@ -285,7 +525,6 @@
       pointer-events: none !important;
       opacity: 0.55 !important;
     }
-
   </style>
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row selection:bg-cyan-500 selection:text-white">
@@ -378,55 +617,66 @@
         <p class="text-[11px] opacity-75 mt-1.5">Tarif DTF : 200 Ar / cm (20 000 Ar/m)</p>
       </div>
 
-      <div class="flex items-center justify-between px-2 py-1.5 rounded-xl bg-purple-500/10 border border-purple-500/20">
-        <span class="text-xs font-medium flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-          Thème Néon
-        </span>
-        <button id="themeToggleBtn" class="relative w-12 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 p-0.5 transition-all flex items-center" title="Basculer Mode Sombre / Clair">
-          <span id="themeToggleKnob" class="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform translate-x-0"></span>
-        </button>
-      </div>
+
     </div>
   </aside>
 
   <!-- MAIN CONTENT AREA -->
   <main class="flex-1 p-4 sm:p-6 lg:p-7 overflow-y-auto max-w-[1600px] mx-auto w-full space-y-6">
 
-    <header class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-      <div>
-        <div class="flex flex-wrap items-center gap-2.5">
-          <h1 id="pageTitle" class="text-xl sm:text-2xl font-extrabold tracking-tight">🎯 MT Suivi DTF • Tableau de Bord & Rapport Journalier</h1>
-          <span id="headerSyncedBadge" class="px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-cyan-500/20 via-emerald-500/20 to-purple-500/20 border border-cyan-400/40 text-teal-300">
-            Suivi Production • Octobre 2026
-          </span>
+    <header class="flex flex-col gap-3">
+      <!-- TOP BAR WITH THEME NÉON PLACED AT THE VERY TOP RIGHT OF THE PAGE -->
+      <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-3">
+        <div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <h1 id="pageTitle" class="text-xl sm:text-2xl font-extrabold tracking-tight">🎯 MT Suivi DTF • Tableau de Bord & Rapport Journalier</h1>
+            <span id="headerSyncedBadge" class="px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-cyan-500/20 via-emerald-500/20 to-blue-500/20 border border-cyan-400/40 text-teal-300">
+              Suivi Production • Octobre 2026
+            </span>
+          </div>
+          <p id="headerSyncedSubtext" class="text-xs sm:text-sm opacity-75 mt-0.5">
+            Suivi personnel quotidien & mensuel des tirages DTF • Cliquez sur une date du calendrier pour ouvrir l'Hologramme du Jour
+          </p>
         </div>
-        <p id="headerSyncedSubtext" class="text-xs sm:text-sm opacity-75 mt-0.5">
-          Suivi personnel quotidien & mensuel des tirages DTF • Cliquez sur une date du calendrier pour ouvrir l'Hologramme du Jour
-        </p>
+
+        <!-- TOP-RIGHT BAR: CLOCK + GOOGLE DRIVE + ADMIN + THÈME NÉON TOUT EN HAUT À DROITE -->
+        <div class="flex flex-wrap items-center justify-end gap-2 shrink-0">
+          <!-- LIVE MADAGASCAR GMT+3 CLOCK BADGE -->
+          <div id="madagascarClockBadge" class="px-3 py-1.5 rounded-xl text-xs font-bold border bg-slate-900/90 border-teal-400/40 text-teal-300 flex items-center gap-2 shadow-[0_0_12px_rgba(20,184,166,0.18)]" title="Date et heure synchronisées automatiquement avec l'horloge de l'ordinateur au fuseau horaire de Madagascar (Indian/Antananarivo • GMT+3)">
+            <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
+            <span id="madagascarClockText" class="font-mono">🇲🇬 GMT+3 • Synchronisation...</span>
+          </div>
+
+          <!-- CLOUD AUTO-SAVE STATUS BADGE & MODAL TRIGGER -->
+          <button id="openCloudModalBtn" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-900/90 border-emerald-400/50 hover:border-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.22)]" title="Sauvegarde Google Drive active (sans modifier index.html)">
+            <span id="cloudStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="cloudStatusLabel" class="text-emerald-300">☁️ Google Drive Sync</span>
+          </button>
+
+          <!-- ADMIN / VISITOR ACCESS CONTROL BADGE -->
+          <button id="openAuthModalBtn" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-900/90 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]" title="Gérer l'accès Administrateur / Visiteur">
+            <span id="authStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="authStatusLabel" class="text-cyan-300">Admin : mendrikatiavina16@gmail.com</span>
+            <span class="px-1.5 py-0.5 rounded bg-cyan-500/20 text-[10px] text-white">Changer</span>
+          </button>
+
+          <!-- THÈME NÉON (TOUT EN HAUT À DROITE DE LA PAGE) -->
+          <div id="topRightThemeSwitchBox" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-cyan-400/50 shadow-[0_0_15px_rgba(2,132,199,0.25)]">
+            <span class="text-xs font-extrabold flex items-center gap-1.5 text-cyan-300">
+              <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+              <span id="themeToggleModeText">Thème Néon</span>
+            </span>
+            <button id="themeToggleBtn" type="button" class="relative w-12 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5 transition-all flex items-center cursor-pointer" title="Basculer entre le Thème Néon (Noir sombre + surcouche bleue 30%) et le Mode Clair Prémium">
+              <span id="themeToggleKnob" class="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform translate-x-0"></span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-2.5">
-        <!-- LIVE MADAGASCAR GMT+3 CLOCK BADGE -->
-        <div id="madagascarClockBadge" class="px-3 py-1.5 rounded-xl text-xs font-bold border bg-slate-900/90 border-teal-400/40 text-teal-300 flex items-center gap-2 shadow-[0_0_12px_rgba(20,184,166,0.18)]" title="Date et heure synchronisées automatiquement avec l'horloge de l'ordinateur au fuseau horaire de Madagascar (Indian/Antananarivo • GMT+3)">
-          <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
-          <span id="madagascarClockText" class="font-mono">🇲🇬 GMT+3 • Synchronisation...</span>
-        </div>
-
-        <!-- CLOUD AUTO-SAVE STATUS BADGE & MODAL TRIGGER -->
-        <button id="openCloudModalBtn" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-900/90 border-emerald-400/50 hover:border-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.22)]" title="Sauvegarde Cloud Automatique activée (sans modifier index.html)">
-          <span id="cloudStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="cloudStatusLabel" class="text-emerald-300">☁️ Google Drive Sync</span>
-        </button>
-
-        <!-- ADMIN / VISITOR ACCESS CONTROL BADGE -->
-        <button id="openAuthModalBtn" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-900/90 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]" title="Gérer l'accès Administrateur / Visiteur">
-          <span id="authStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="authStatusLabel" class="text-cyan-300">Admin : mendrikatiavina16@gmail.com</span>
-          <span class="px-1.5 py-0.5 rounded bg-cyan-500/20 text-[10px] text-white">Changer</span>
-        </button>
+      <!-- SECOND BAR: RECHERCHE, FILTRE CLIENT & BOUTONS D'AJOUT -->
+      <div class="flex flex-wrap items-center justify-end gap-2.5">
 
         <div class="relative flex-1 sm:flex-initial sm:w-60">
           <input id="globalSearchInput" type="text" placeholder="Rechercher client, remarque..."
@@ -2146,14 +2396,46 @@
       function applyTheme() {
         const htmlEl = document.documentElement;
         const knob = document.getElementById('themeToggleKnob');
-        if (state.theme === 'light') {
+        const modeTxt = document.getElementById('themeToggleModeText');
+        const isLight = state.theme === 'light';
+
+        if (isLight) {
           htmlEl.classList.remove('dark');
           htmlEl.classList.add('light');
           if (knob) knob.classList.add('translate-x-6');
+          if (modeTxt) modeTxt.textContent = 'Thème Néon • Clair';
         } else {
           htmlEl.classList.remove('light');
           htmlEl.classList.add('dark');
           if (knob) knob.classList.remove('translate-x-6');
+          if (modeTxt) modeTxt.textContent = 'Thème Néon';
+        }
+
+        // Adapt Chart.js colors dynamically for Light Mode vs Dark Mode
+        const tickColor = isLight ? '#334155' : '#94a3b8';
+        const gridColor = isLight ? 'rgba(2, 132, 199, 0.12)' : 'rgba(56, 189, 248, 0.12)';
+        const legendColor = isLight ? '#0f172a' : '#e2e8f0';
+
+        if (typeof growthChartInstance !== 'undefined' && growthChartInstance) {
+          growthChartInstance.options.plugins.legend.labels.color = legendColor;
+          growthChartInstance.options.scales.x.ticks.color = tickColor;
+          growthChartInstance.options.scales.y.ticks.color = tickColor;
+          growthChartInstance.options.scales.x.grid.color = gridColor;
+          growthChartInstance.options.scales.y.grid.color = gridColor;
+          growthChartInstance.update('none');
+        }
+        if (typeof radarChartInstance !== 'undefined' && radarChartInstance) {
+          radarChartInstance.options.plugins.legend.labels.color = legendColor;
+          radarChartInstance.options.scales.r.pointLabels.color = legendColor;
+          radarChartInstance.options.scales.r.grid.color = gridColor;
+          radarChartInstance.options.scales.r.angleLines.color = isLight ? 'rgba(2, 132, 199, 0.22)' : 'rgba(0, 242, 254, 0.22)';
+          radarChartInstance.update('none');
+        }
+        if (typeof weeklyBarChartInstance !== 'undefined' && weeklyBarChartInstance) {
+          weeklyBarChartInstance.options.scales.x.ticks.color = tickColor;
+          weeklyBarChartInstance.options.scales.y.ticks.color = tickColor;
+          weeklyBarChartInstance.options.scales.y.grid.color = gridColor;
+          weeklyBarChartInstance.update('none');
         }
       }
 
@@ -2485,20 +2767,21 @@
         canvas.height = 96;
         const ctx = canvas.getContext('2d');
 
-        ctx.fillStyle = 'rgba(6, 16, 35, 0.88)';
-        ctx.strokeStyle = accentHex || '#00f2fe';
+        const isLightMode = state.theme === 'light';
+        ctx.fillStyle = isLightMode ? 'rgba(255, 255, 255, 0.94)' : 'rgba(4, 10, 22, 0.90)';
+        ctx.strokeStyle = isLightMode ? '#0284c7' : (accentHex || '#00f2fe');
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.roundRect(6, 6, 244, 84, 14);
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillStyle = '#ffffff';
+        ctx.fillStyle = isLightMode ? '#0f172a' : '#ffffff';
         ctx.font = 'bold 24px Inter, sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText(mainText.slice(0, 16), 128, 42);
 
-        ctx.fillStyle = accentHex || '#10b981';
+        ctx.fillStyle = isLightMode ? (accentHex === '#ff1744' ? '#be123c' : '#0369a1') : (accentHex || '#10b981');
         ctx.font = 'bold 20px Inter, sans-serif';
         ctx.fillText(subText, 128, 72);
 
@@ -3176,24 +3459,31 @@
           let btnClasses = 'p-1.5 rounded-xl text-xs font-bold transition-all relative flex flex-col items-center justify-between min-h-[46px] ';
           let statusTag = '';
 
+          const isLight = state.theme === 'light';
           if (isSelected) {
-            btnClasses += 'neon-pill-active ring-2 ring-cyan-300 scale-105 z-10';
+            btnClasses += 'neon-pill-active ring-2 ring-sky-400 scale-105 z-10';
             statusTag = `<span class="text-[8px] font-extrabold uppercase text-white">ACTIF</span>`;
           } else if (isToday) {
-            btnClasses += 'bg-gradient-to-br from-cyan-500/35 via-blue-600/35 to-rose-600/35 text-white border-2 border-cyan-300 shadow-[0_0_12px_rgba(0,242,254,0.45)]';
-            statusTag = `<span class="px-1 rounded bg-cyan-400 text-slate-950 text-[8px] font-extrabold">AUJ</span>`;
+            btnClasses += isLight
+              ? 'bg-sky-100 text-slate-900 border-2 border-sky-600'
+              : 'bg-gradient-to-br from-cyan-500/35 via-blue-600/35 to-rose-600/35 text-white border-2 border-cyan-300 shadow-[0_0_12px_rgba(0,242,254,0.45)]';
+            statusTag = `<span class="px-1 rounded ${isLight ? 'bg-sky-600 text-white' : 'bg-cyan-400 text-slate-950'} text-[8px] font-extrabold">AUJ</span>`;
           } else if (needsCheck) {
-            // Day needing verification (unpaid or pending production) -> Premium Crimson Red
-            btnClasses += 'bg-gradient-to-br from-rose-950/90 via-red-900/50 to-slate-900 text-rose-200 border border-rose-500/80 hover:border-rose-400 shadow-[0_0_8px_rgba(255,23,68,0.25)]';
+            btnClasses += isLight
+              ? 'bg-rose-50 text-rose-900 border border-rose-300 hover:border-rose-500'
+              : 'bg-gradient-to-br from-rose-950/90 via-red-900/50 to-slate-900 text-rose-200 border border-rose-500/80 hover:border-rose-400 shadow-[0_0_8px_rgba(255,23,68,0.25)]';
             statusTag = `<span class="text-[9px] font-extrabold text-rose-400">⚠ ${dayM.toFixed(0)}m</span>`;
           } else if (dayTasks.length > 0) {
-            // 100% Validated & Paid Day -> Blue-Teal gradient by volume
-            btnClasses += dayM >= 22
-              ? 'bg-gradient-to-br from-sky-900/80 via-cyan-900/60 to-blue-950 text-cyan-200 border border-cyan-400/60 hover:border-cyan-300'
-              : 'bg-gradient-to-br from-blue-950/80 to-slate-900 text-sky-200 border border-sky-500/40 hover:border-sky-300';
+            btnClasses += isLight
+              ? 'bg-sky-50/90 text-sky-900 border border-sky-200 hover:border-sky-400'
+              : (dayM >= 22
+                ? 'bg-gradient-to-br from-sky-900/80 via-cyan-900/60 to-blue-950 text-cyan-200 border border-cyan-400/60 hover:border-cyan-300'
+                : 'bg-gradient-to-br from-blue-950/80 to-slate-900 text-sky-200 border border-sky-500/40 hover:border-sky-300');
             statusTag = `<span class="text-[9px] font-bold text-cyan-300">✓ ${dayM.toFixed(0)}m</span>`;
           } else {
-            btnClasses += 'bg-slate-950/40 hover:bg-slate-900/60 text-slate-500 border border-slate-800/60 opacity-50';
+            btnClasses += isLight
+              ? 'bg-slate-50 hover:bg-slate-100 text-slate-400 border border-slate-200'
+              : 'bg-slate-950/40 hover:bg-slate-900/60 text-slate-500 border border-slate-800/60 opacity-50';
             statusTag = `<span class="text-[8px] opacity-40">—</span>`;
           }
 
@@ -3261,17 +3551,26 @@
           if (calGridFilterMode === 'active' && dayTasks.length === 0) dimClass = 'opacity-25 scale-95';
           if (calGridFilterMode === 'unpaid' && unpaidCount === 0) dimClass = 'opacity-25 scale-95';
 
+          const isLight = state.theme === 'light';
           const isTodayRef = dateStr === getMadagascarNowParts().dateStr;
           const needsVerify = pendingProd > 0 || unpaidCount > 0;
-          let cardStyle = 'bg-slate-950/45 border-slate-800/70 hover:border-cyan-400/60';
+          let cardStyle = isLight
+            ? 'bg-slate-50/90 border-slate-200 hover:border-sky-400'
+            : 'bg-slate-950/45 border-slate-800/70 hover:border-cyan-400/60';
           if (isSelected) {
-            cardStyle = 'neon-pill-active ring-2 ring-cyan-300 border-cyan-300 scale-[1.02] z-10';
+            cardStyle = 'neon-pill-active ring-2 ring-sky-400 border-sky-400 scale-[1.02] z-10';
           } else if (isTodayRef) {
-            cardStyle = 'bg-gradient-to-br from-cyan-950/90 via-blue-950/80 to-rose-950/70 border-2 border-cyan-300 shadow-[0_0_16px_rgba(0,242,254,0.38)]';
+            cardStyle = isLight
+              ? 'bg-sky-100/90 border-2 border-sky-600'
+              : 'bg-gradient-to-br from-cyan-950/90 via-blue-950/80 to-rose-950/70 border-2 border-cyan-300 shadow-[0_0_16px_rgba(0,242,254,0.38)]';
           } else if (needsVerify) {
-            cardStyle = 'bg-gradient-to-br from-rose-950/85 via-red-950/55 to-slate-900/90 border border-rose-500/80 hover:border-rose-400 shadow-[0_0_10px_rgba(255,23,68,0.2)]';
+            cardStyle = isLight
+              ? 'bg-rose-50/95 border border-rose-300 hover:border-rose-500'
+              : 'bg-gradient-to-br from-rose-950/85 via-red-950/55 to-slate-900/90 border border-rose-500/80 hover:border-rose-400 shadow-[0_0_10px_rgba(255,23,68,0.2)]';
           } else if (dayTasks.length > 0) {
-            cardStyle = 'bg-gradient-to-br from-slate-900/90 via-sky-950/65 to-cyan-950/55 border border-cyan-400/50 hover:border-cyan-300';
+            cardStyle = isLight
+              ? 'bg-sky-50/85 border border-sky-200 hover:border-sky-400'
+              : 'bg-gradient-to-br from-slate-900/90 via-sky-950/65 to-cyan-950/55 border border-cyan-400/50 hover:border-cyan-300';
           }
 
           cellsHtml += `
@@ -4525,8 +4824,8 @@
 
         document.getElementById('themeToggleBtn')?.addEventListener('click', () => {
           state.theme = state.theme === 'dark' ? 'light' : 'dark';
-          applyTheme();
-          saveState();
+          renderAll();
+          showToast(state.theme === 'light' ? 'Mode Clair Prémium activé (sans surbrillance)' : 'Thème Néon Sombre activé (Noir sombre + surcouche bleue 30%)');
         });
 
         document.getElementById('globalSearchInput')?.addEventListener('input', (e) => {
