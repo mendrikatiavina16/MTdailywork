@@ -518,13 +518,158 @@
       background: rgba(59, 130, 246, 0.14);
     }
 
-    body.visitor-readonly .admin-only-control {
+        body.visitor-readonly .admin-only-control {
+      display: none !important;
+    }
+    body:not(.visitor-readonly) .visitor-only-control {
       display: none !important;
     }
     body.visitor-readonly .admin-lock-input {
       pointer-events: none !important;
       opacity: 0.55 !important;
     }
+    html.light #loginGateOverlay {
+      background-color: rgba(15, 23, 42, 0.65) !important;
+    }
+
+    /* ==================== ALGORITHME DE RECONNAISSANCE DE PLATEFORME : ADAPTATION SMARTPHONE / PETIT ÉCRAN ==================== */
+    html.platform-smartphone body {
+      font-size: 12px !important;
+    }
+    html.platform-smartphone aside {
+      padding: 0.5rem 0.65rem !important;
+    }
+    html.platform-smartphone aside .mb-6 {
+      margin-bottom: 0.45rem !important;
+    }
+    html.platform-smartphone aside .w-12.h-12 {
+      width: 2rem !important;
+      height: 2rem !important;
+      border-radius: 0.5rem !important;
+    }
+    html.platform-smartphone #brandMainTitle {
+      font-size: 0.9rem !important;
+    }
+    html.platform-smartphone #sidebarSyncedSubtitle {
+      font-size: 9.5px !important;
+    }
+    html.platform-smartphone .nav-btn {
+      padding: 0.38rem 0.65rem !important;
+      font-size: 11px !important;
+      border-radius: 0.6rem !important;
+      gap: 0.35rem !important;
+    }
+    html.platform-smartphone main {
+      padding: 0.55rem 0.6rem !important;
+      gap: 0.65rem !important;
+    }
+    html.platform-smartphone main.space-y-6 > :not([hidden]) ~ :not([hidden]),
+    html.platform-smartphone #view-dashboard.space-y-6 > :not([hidden]) ~ :not([hidden]),
+    html.platform-smartphone #view-tasks.space-y-6 > :not([hidden]) ~ :not([hidden]),
+    html.platform-smartphone #view-clients.space-y-6 > :not([hidden]) ~ :not([hidden]),
+    html.platform-smartphone #view-calendar.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+      margin-top: 0.65rem !important;
+    }
+    html.platform-smartphone #topControlButtonsBar {
+      gap: 0.3rem !important;
+      justify-content: space-between !important;
+    }
+    html.platform-smartphone #madagascarClockBadge,
+    html.platform-smartphone #openCloudModalBtn,
+    html.platform-smartphone #openAuthModalBtn,
+    html.platform-smartphone #visitorLoginBtn,
+    html.platform-smartphone #topRightThemeSwitchBox {
+      padding: 0.25rem 0.48rem !important;
+      font-size: 9.5px !important;
+      border-radius: 0.55rem !important;
+      gap: 0.25rem !important;
+    }
+    html.platform-smartphone #themeToggleBtn {
+      width: 2.1rem !important;
+      height: 1.1rem !important;
+    }
+    html.platform-smartphone #themeToggleKnob {
+      width: 0.85rem !important;
+      height: 0.85rem !important;
+    }
+    html.platform-smartphone.light #themeToggleKnob {
+      transform: translateX(0.95rem) !important;
+    }
+    html.platform-smartphone #pageTitle {
+      font-size: 12.5px !important;
+      line-height: 1.25 !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+    }
+    html.platform-smartphone #kpiTopGrid4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 0.45rem !important;
+    }
+    html.platform-smartphone .neon-card {
+      padding: 0.65rem !important;
+      border-radius: 0.75rem !important;
+    }
+    html.platform-smartphone #excelKpiCA,
+    html.platform-smartphone #excelKpiMetrage,
+    html.platform-smartphone #excelKpiOrders,
+    html.platform-smartphone #excelKpiEncaisse,
+    html.platform-smartphone #kpiTotalBudget,
+    html.platform-smartphone #kpiTotalTasks {
+      font-size: 1.05rem !important;
+      line-height: 1.2 !important;
+      margin-top: 0.2rem !important;
+    }
+    html.platform-smartphone .gauge-interactive-box {
+      padding: 0.2rem !important;
+    }
+    html.platform-smartphone .gauge-interactive-box .w-24.h-24 {
+      width: 3.6rem !important;
+      height: 3.6rem !important;
+    }
+    html.platform-smartphone #gaugeDailyValue,
+    html.platform-smartphone #gaugeMonthlyValue,
+    html.platform-smartphone #gaugeSlaValue {
+      font-size: 0.75rem !important;
+    }
+    html.platform-smartphone #threeCanvasWrapper {
+      height: 185px !important;
+    }
+    html.platform-smartphone #threeSelectionHud {
+      padding: 0.38rem 0.55rem !important;
+      font-size: 9.5px !important;
+      bottom: 0.35rem !important;
+      left: 0.35rem !important;
+      right: 0.35rem !important;
+    }
+    html.platform-smartphone #hudDetails {
+      font-size: 9px !important;
+      line-height: 1.2 !important;
+      margin-top: 0.15rem !important;
+    }
+    html.platform-smartphone #growthChartWrapper {
+      height: 120px !important;
+    }
+    html.platform-smartphone #radarChartWrapper,
+    html.platform-smartphone #weeklyChartWrapper {
+      height: 135px !important;
+    }
+    html.platform-smartphone .big-cal-cell {
+      min-height: 62px !important;
+      padding: 0.35rem !important;
+    }
+    html.platform-smartphone .cal-day-btn {
+      min-height: 34px !important;
+      padding: 0.2rem !important;
+      font-size: 10px !important;
+    }
+    html.platform-smartphone table th,
+    html.platform-smartphone table td {
+      padding: 0.35rem 0.4rem !important;
+      font-size: 10.5px !important;
+    }
+
   </style>
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row selection:bg-cyan-500 selection:text-white">
@@ -624,59 +769,62 @@
   <!-- MAIN CONTENT AREA -->
   <main class="flex-1 p-4 sm:p-6 lg:p-7 overflow-y-auto max-w-[1600px] mx-auto w-full space-y-6">
 
-    <header class="flex flex-col gap-3">
-      <!-- TOP BAR WITH THEME NÉON PLACED AT THE VERY TOP RIGHT OF THE PAGE -->
-      <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-3">
-        <div>
-          <div class="flex flex-wrap items-center gap-2.5">
-            <h1 id="pageTitle" class="text-xl sm:text-2xl font-extrabold tracking-tight">🎯 MT Suivi DTF • Tableau de Bord & Rapport Journalier</h1>
-            <span id="headerSyncedBadge" class="px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-cyan-500/20 via-emerald-500/20 to-blue-500/20 border border-cyan-400/40 text-teal-300">
-              Suivi Production • Octobre 2026
-            </span>
-          </div>
-          <p id="headerSyncedSubtext" class="text-xs sm:text-sm opacity-75 mt-0.5">
-            Suivi personnel quotidien & mensuel des tirages DTF • Cliquez sur une date du calendrier pour ouvrir l'Hologramme du Jour
-          </p>
+    <header class="flex flex-col gap-2">
+      <!-- PARTIE LA PLUS HAUTE : LES 4 BOUTONS POSITIONNÉS TOUT EN HAUT -->
+      <div id="topControlButtonsBar" class="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 w-full">
+        <!-- 1. HORLOGE MADAGASCAR GMT+3 -->
+        <div id="madagascarClockBadge" class="px-2.5 py-1 rounded-xl text-[11px] font-bold border bg-slate-900/90 border-teal-400/40 text-teal-300 flex items-center gap-1.5 shadow-[0_0_10px_rgba(20,184,166,0.15)]" title="Date et heure synchronisées au fuseau horaire de Madagascar (GMT+3)">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></span>
+          <span id="madagascarClockText" class="font-mono">🇲🇬 GMT+3</span>
         </div>
 
-        <!-- TOP-RIGHT BAR: CLOCK + GOOGLE DRIVE + ADMIN + THÈME NÉON TOUT EN HAUT À DROITE -->
-        <div class="flex flex-wrap items-center justify-end gap-2 shrink-0">
-          <!-- LIVE MADAGASCAR GMT+3 CLOCK BADGE -->
-          <div id="madagascarClockBadge" class="px-3 py-1.5 rounded-xl text-xs font-bold border bg-slate-900/90 border-teal-400/40 text-teal-300 flex items-center gap-2 shadow-[0_0_12px_rgba(20,184,166,0.18)]" title="Date et heure synchronisées automatiquement avec l'horloge de l'ordinateur au fuseau horaire de Madagascar (Indian/Antananarivo • GMT+3)">
-            <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
-            <span id="madagascarClockText" class="font-mono">🇲🇬 GMT+3 • Synchronisation...</span>
-          </div>
+        <!-- Hidden multi-device sync node kept for live sync telemetry -->
+        <div id="multiDeviceSyncBadge" class="hidden"><span id="multiDeviceSyncDot"></span><span id="multiDeviceSyncText"></span></div>
 
-          <!-- CLOUD AUTO-SAVE STATUS BADGE & MODAL TRIGGER -->
-          <button id="openCloudModalBtn" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-900/90 border-emerald-400/50 hover:border-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.22)]" title="Sauvegarde Google Drive active (sans modifier index.html)">
-            <span id="cloudStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span id="cloudStatusLabel" class="text-emerald-300">☁️ Google Drive Sync</span>
+        <!-- 2. GOOGLE DRIVE SYNC (MASQUÉ SI NON CONNECTÉ AVEC LE COMPTE PROPRIÉTAIRE) -->
+        <button id="openCloudModalBtn" type="button" class="admin-only-control px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all flex items-center gap-1.5 bg-slate-900/90 border-emerald-400/50 hover:border-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.2)]" title="Sauvegarde Google Drive & Synchronisation Multi-Appareils">
+          <span id="cloudStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="cloudStatusLabel" class="text-emerald-300">☁️ Google Drive Sync</span>
+        </button>
+
+        <!-- 3. BOUTON ADMIN (MASQUÉ SI NON CONNECTÉ AVEC LE COMPTE PROPRIÉTAIRE) -->
+        <button id="openAuthModalBtn" type="button" class="admin-only-control px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all flex items-center gap-1.5 bg-slate-900/90 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_12px_rgba(0,242,254,0.18)]" title="Compte Google Propriétaire reconnu">
+          <span id="authStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="authStatusLabel" class="text-cyan-300">Admin : mendrikatiavina16@gmail.com</span>
+          <span class="px-1.5 py-0.5 rounded bg-cyan-500/20 text-[10px] text-white">Changer</span>
+        </button>
+
+        <!-- BOUTON CONNEXION VISITEUR (AFFICHÉ UNIQUEMENT SI NON ADMIN) -->
+        <button id="visitorLoginBtn" type="button" class="visitor-only-control px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all flex items-center gap-1.5 bg-slate-900/90 border-cyan-500/40 hover:border-cyan-400 text-cyan-300" title="Se connecter avec le compte Administrateur">
+          <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span>Connexion</span>
+        </button>
+
+        <!-- 4. THÈME NÉON (TOUT EN HAUT À DROITE) -->
+        <div id="topRightThemeSwitchBox" class="flex items-center gap-2 px-2.5 py-1 rounded-xl bg-slate-900/90 border border-cyan-400/50 shadow-[0_0_12px_rgba(2,132,199,0.22)]">
+          <span class="text-[11px] font-extrabold flex items-center gap-1 text-cyan-300">
+            <svg class="w-3.5 h-3.5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <span id="themeToggleModeText">Thème Néon</span>
+          </span>
+          <button id="themeToggleBtn" type="button" class="relative w-10 h-5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5 transition-all flex items-center cursor-pointer" title="Basculer entre le Thème Néon et le Mode Clair Prémium">
+            <span id="themeToggleKnob" class="w-4 h-4 rounded-full bg-white shadow-md transform transition-transform translate-x-0"></span>
           </button>
-
-          <!-- ADMIN / VISITOR ACCESS CONTROL BADGE -->
-          <button id="openAuthModalBtn" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-900/90 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]" title="Gérer l'accès Administrateur / Visiteur">
-            <span id="authStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span id="authStatusLabel" class="text-cyan-300">Admin : mendrikatiavina16@gmail.com</span>
-            <span class="px-1.5 py-0.5 rounded bg-cyan-500/20 text-[10px] text-white">Changer</span>
-          </button>
-
-          <!-- THÈME NÉON (TOUT EN HAUT À DROITE DE LA PAGE) -->
-          <div id="topRightThemeSwitchBox" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-cyan-400/50 shadow-[0_0_15px_rgba(2,132,199,0.25)]">
-            <span class="text-xs font-extrabold flex items-center gap-1.5 text-cyan-300">
-              <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-              <span id="themeToggleModeText">Thème Néon</span>
-            </span>
-            <button id="themeToggleBtn" type="button" class="relative w-12 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5 transition-all flex items-center cursor-pointer" title="Basculer entre le Thème Néon (Noir sombre + surcouche bleue 30%) et le Mode Clair Prémium">
-              <span id="themeToggleKnob" class="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform translate-x-0"></span>
-            </button>
-          </div>
         </div>
       </div>
 
-      <!-- SECOND BAR: RECHERCHE, FILTRE CLIENT & BOUTONS D'AJOUT -->
-      <div class="flex flex-wrap items-center justify-end gap-2.5">
+      <!-- DEUXIÈME LIGNE : TITRE DE L'ONGLET EN TEXTE GRAS BLANC TOUT DROIT (SUR UNE SEULE LIGNE) + OUTILS DE RECHERCHE -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-2">
+        <div class="min-w-0 flex-1">
+          <h1 id="pageTitle" class="text-sm sm:text-base lg:text-lg font-extrabold tracking-tight text-white whitespace-nowrap overflow-hidden text-ellipsis">🎯 MT Suivi DTF • Tableau de Bord & Calendrier (Octobre 2026)</h1>
+          <span id="headerSyncedBadge" class="hidden"></span>
+          <p id="headerSyncedSubtext" class="hidden"></p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-end gap-2 shrink-0">
 
         <div class="relative flex-1 sm:flex-initial sm:w-60">
           <input id="globalSearchInput" type="text" placeholder="Rechercher client, remarque..."
@@ -703,11 +851,12 @@
           </svg>
           <span>Nouvelle Tâche</span>
         </button>
+        </div>
       </div>
     </header>
 
     <!-- 4 OPERATIONAL PRODUCTION KPI CARDS (FOCUSED ON DAILY & MONTHLY WORKFLOW) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+    <div id="kpiTopGrid4" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
       <!-- KPI Card 1: Production du Jour / Rapport Journalier -->
       <div id="kpiCardCA" data-kpi-action="open_latest_hologram" class="neon-card kpi-interactive-card p-4 border-l-4 border-l-teal-400 group" title="Cliquer pour ouvrir l'Hologramme du rapport journalier actif">
         <div class="flex items-center justify-between">
@@ -1042,7 +1191,7 @@
             </div>
           </div>
 
-          <div class="relative w-full h-80 sm:h-96 rounded-xl overflow-hidden bg-gradient-to-b from-[#120726] via-[#0d051d] to-[#080312] border border-purple-500/30">
+          <div id="threeCanvasWrapper" class="relative w-full h-80 sm:h-96 rounded-xl overflow-hidden bg-gradient-to-b from-[#120726] via-[#0d051d] to-[#080312] border border-purple-500/30">
             <div id="threeCanvasContainer" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
 
             <div class="absolute top-3 left-3 flex flex-wrap gap-3 bg-slate-950/75 backdrop-blur-md px-3 py-1.5 rounded-lg border border-cyan-500/30 text-[11px] text-white pointer-events-none">
@@ -1086,7 +1235,7 @@
                 319,08 m
               </span>
             </div>
-            <div class="relative h-44 w-full">
+            <div id="growthChartWrapper" class="relative h-44 w-full">
               <canvas id="growthAreaChart"></canvas>
             </div>
           </div>
@@ -1101,7 +1250,7 @@
                 ✨ Animer Polygone
               </button>
             </div>
-            <div class="relative h-52 w-full">
+            <div id="radarChartWrapper" class="relative h-52 w-full">
               <canvas id="clientRadarChart"></canvas>
             </div>
           </div>
@@ -1126,7 +1275,7 @@
             <span class="px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-400/40 font-bold">🟣 12–20m (Std)</span>
             <span class="px-1.5 py-0.5 rounded bg-slate-700/50 text-slate-300 font-semibold">⚪ &lt; 12m</span>
           </div>
-          <div class="relative h-52 w-full my-auto">
+          <div id="weeklyChartWrapper" class="relative h-52 w-full my-auto">
             <canvas id="weeklyBarChart"></canvas>
           </div>
         </div>
@@ -1873,46 +2022,52 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL: ADMIN / VISITOR AUTHENTICATION ==================== -->
-  <div id="authModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="neon-card w-full max-w-md p-6 border border-cyan-400/60 space-y-4">
-      <div class="flex items-center justify-between pb-3 border-b border-purple-500/20">
-        <div>
-          <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-cyan-500/20 text-cyan-300">Sécurité & Droits d'Accès</span>
-          <h3 class="text-lg font-extrabold neon-text-gradient mt-1">Identification Administrateur / Visiteur</h3>
+  <!-- ==================== PORTAIL DE CONNEXION & RECONNAISSANCE DE COMPTE GOOGLE ==================== -->
+  <div id="authModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xl hidden items-center justify-center p-4">
+    <div class="neon-card w-full max-w-md p-6 border border-cyan-400/60 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-cyan-500/25">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-400/60 flex items-center justify-center text-cyan-300 font-extrabold text-sm shadow-[0_0_15px_rgba(0,242,254,0.3)]">
+            G
+          </div>
+          <div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-cyan-500/20 text-cyan-300">Reconnaissance de Compte Google</span>
+            <h3 class="text-lg font-extrabold neon-text-gradient mt-0.5">Connexion MT Suivi DTF</h3>
+          </div>
         </div>
-        <button id="closeAuthModalBtn" class="p-1.5 rounded-lg hover:bg-purple-500/20 text-purple-300 text-lg font-bold">&times;</button>
+        <button id="closeAuthModalBtn" type="button" class="p-1.5 rounded-lg hover:bg-purple-500/20 text-purple-300 text-lg font-bold" title="Continuer en mode visiteur">&times;</button>
       </div>
 
-      <div class="p-3.5 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-xs space-y-1.5">
-        <p class="font-bold text-cyan-300">🔒 Règle de sécurité active :</p>
-        <p class="opacity-85">• Seul l'email <strong class="text-emerald-400 font-mono">mendrikatiavina16@gmail.com</strong> est reconnu comme <strong>Administrateur</strong> (ajout, modification, suppression).</p>
-        <p class="opacity-85">• Tout autre email ou utilisateur est reconnu comme <strong>Visiteur (Lecture seule)</strong> et ne peut rien modifier sur le site.</p>
-      </div>
 
-      <form id="authForm" class="space-y-3 text-xs sm:text-sm">
+
+      <form id="authForm" class="space-y-3.5 text-xs sm:text-sm">
         <div>
-          <label class="block text-xs font-semibold mb-1 opacity-85">Votre adresse Email :</label>
-          <input id="authEmailInput" type="email" required placeholder="Ex: mendrikatiavina16@gmail.com ou visiteur@gmail.com"
-            class="w-full px-3 py-2 rounded-xl bg-purple-950/60 border border-cyan-500/50 text-white font-mono focus:outline-none focus:border-cyan-400" />
+          <label class="block text-xs font-semibold mb-1 opacity-90">Adresse de votre compte Google :</label>
+          <input id="authEmailInput" type="email" required autocomplete="email" placeholder="votre.compte@gmail.com"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-cyan-500/50 text-white font-mono focus:outline-none focus:border-cyan-400" />
         </div>
 
-        <div class="flex flex-wrap gap-2 pt-1">
-          <button type="button" id="quickFillAdminBtn" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/35 border border-emerald-400/40 text-emerald-300 text-xs font-bold">
-            🔑 Connecter Admin (mendrikatiavina16@gmail.com)
-          </button>
-          <button type="button" id="quickFillVisitorBtn" class="px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/35 border border-rose-400/40 text-rose-300 text-xs font-bold">
-            👁️ Passer en Mode Visiteur (Lecture seule)
-          </button>
+        <div>
+          <label class="block text-xs font-semibold mb-1 opacity-90">Mot de passe Administrateur :</label>
+          <input id="authPinInput" type="password" autocomplete="current-password" placeholder="Mot de passe Administrateur (Laisser vide si visiteur)"
+            class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-purple-500/40 text-white font-mono focus:outline-none focus:border-cyan-400" />
         </div>
 
-        <div class="flex items-center justify-end gap-2 pt-3 border-t border-purple-500/20">
-          <button type="button" id="cancelAuthModalBtn" class="px-4 py-2 rounded-xl text-xs font-semibold bg-purple-500/15 hover:bg-purple-500/25">
-            Fermer
+        <div id="authRecognitionFeedback" class="hidden p-2.5 rounded-xl text-xs font-bold border"></div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-2 border-t border-cyan-500/20">
+          <button type="button" id="quickFillVisitorBtn" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 text-xs font-bold">
+            👁️ Entrer en Mode Visiteur (Sans compte)
           </button>
-          <button type="submit" class="neon-gradient-btn px-5 py-2 rounded-xl text-xs font-bold">
-            Valider l'accès
-          </button>
+          <div class="flex items-center gap-2">
+            <button type="button" id="quickFillAdminBtn" class="hidden"></button>
+            <button type="button" id="cancelAuthModalBtn" class="px-3 py-2 rounded-xl text-xs font-semibold bg-purple-500/15 hover:bg-purple-500/25">
+              Fermer
+            </button>
+            <button type="submit" class="neon-gradient-btn px-5 py-2 rounded-xl text-xs font-bold flex-1 sm:flex-initial">
+              Vérifier & Entrer
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -2020,12 +2175,19 @@
   <script>
     (function () {
       /* legacy-ids: id="latest_cloud_backup" id="snap_" id="c1" id="c2" id="c3" id="c4" id="c5" id="t1" id="t2" id="t3" id="t4" id="t5" id="t6" id="t7" id="t8" id="t9" id="t10" */
-      const STORAGE_KEY = 'neonpulse_dtf_oct2026_v3';
+      const STORAGE_KEY = 'neonpulse_dtf_oct2026_v4';
+      const LEGACY_STORAGE_KEY = 'neonpulse_dtf_oct2026_v3';
       const ADMIN_EMAIL = 'mendrikatiavina16@gmail.com';
+      const ADMIN_PASSWORD = 'Nora1640';
+      const MULTI_DEVICE_SYNC_TOPIC = 'mt_suivi_dtf_mendrika_sync_2026_v4';
+      const MULTI_DEVICE_SYNC_URL = 'https://ntfy.sh/' + MULTI_DEVICE_SYNC_TOPIC;
 
       const defaultState = {
         theme: 'dark',
-        currentUserEmail: 'mendrikatiavina16@gmail.com',
+        currentUserEmail: '',
+        adminPasswordVerified: false,
+        sessionAuthenticated: false,
+        deletedTaskIds: [],
         selectedView: 'dashboard',
         globalSearch: '',
         globalClient: 'all',
@@ -2043,27 +2205,86 @@
         statementStart: '2026-10-11',
         statementEnd: '2026-10-18',
         clients: [{"id": "c_tsiory", "name": "Tsiory", "contact": "Tsiory", "sector": "Impression DTF Textile", "email": "tsiory@dtf-client.mg", "retainer": 1099800.0, "color": "#38bdf8"}, {"id": "c_lcagape", "name": "LC Agape", "contact": "LC Agape", "sector": "Impression DTF Textile", "email": "lcagape@dtf-client.mg", "retainer": 975800.0, "color": "#38bdf8"}, {"id": "c_dinaandriamady", "name": "Dina andriamady", "contact": "Dina andriamady", "sector": "Impression DTF Textile", "email": "dinaandria@dtf-client.mg", "retainer": 443800.0, "color": "#00f2fe"}, {"id": "c_mirah", "name": "Mirah", "contact": "Mirah", "sector": "Impression DTF Textile", "email": "mirah@dtf-client.mg", "retainer": 404400.0, "color": "#ff3b30"}, {"id": "c_anselme", "name": "Anselme", "contact": "Anselme", "sector": "Impression DTF Textile", "email": "anselme@dtf-client.mg", "retainer": 388200.0, "color": "#e11d48"}, {"id": "c_ranavalona", "name": "Ranavalona", "contact": "Ranavalona", "sector": "Impression DTF Textile", "email": "ranavalona@dtf-client.mg", "retainer": 368000.0, "color": "#00f2fe"}, {"id": "c_rasihanaka", "name": "Rasihanaka", "contact": "Rasihanaka", "sector": "Impression DTF Textile", "email": "rasihanaka@dtf-client.mg", "retainer": 358000.0, "color": "#ff3b30"}, {"id": "c_rojo", "name": "Rojo", "contact": "Rojo", "sector": "Impression DTF Textile", "email": "rojo@dtf-client.mg", "retainer": 159400.0, "color": "#38bdf8"}, {"id": "c_akram", "name": "Akram", "contact": "Akram", "sector": "Impression DTF Textile", "email": "akram@dtf-client.mg", "retainer": 156000.0, "color": "#a855f7"}, {"id": "c_mialisoa", "name": "Mialisoa", "contact": "Mialisoa", "sector": "Impression DTF Textile", "email": "mialisoa@dtf-client.mg", "retainer": 140200.0, "color": "#eab308"}, {"id": "c_marinazy", "name": "Marinazy", "contact": "Marinazy", "sector": "Impression DTF Textile", "email": "marinazy@dtf-client.mg", "retainer": 120000.0, "color": "#e11d48"}, {"id": "c_andrilalaina", "name": "Andrilalaina", "contact": "Andrilalaina", "sector": "Impression DTF Textile", "email": "andrilalai@dtf-client.mg", "retainer": 118000.0, "color": "#a855f7"}, {"id": "c_henintsoa", "name": "Henintsoa", "contact": "Henintsoa", "sector": "Impression DTF Textile", "email": "henintsoa@dtf-client.mg", "retainer": 114000.0, "color": "#e11d48"}, {"id": "c_dina", "name": "Dina", "contact": "Dina", "sector": "Impression DTF Textile", "email": "dina@dtf-client.mg", "retainer": 114000.0, "color": "#00f2fe"}, {"id": "c_santio", "name": "Santio", "contact": "Santio", "sector": "Impression DTF Textile", "email": "santio@dtf-client.mg", "retainer": 113200.0, "color": "#ff3b30"}, {"id": "c_fahasambarana", "name": "Fahasambarana", "contact": "Fahasambarana", "sector": "Impression DTF Textile", "email": "fahasambar@dtf-client.mg", "retainer": 110000.0, "color": "#ec4899"}, {"id": "c_mirahsafidy", "name": "Mirah Safidy", "contact": "Mirah Safidy", "sector": "Impression DTF Textile", "email": "mirahsafid@dtf-client.mg", "retainer": 91200.0, "color": "#e11d48"}, {"id": "c_lilie", "name": "Lilie", "contact": "Lilie", "sector": "Impression DTF Textile", "email": "lilie@dtf-client.mg", "retainer": 82400.0, "color": "#eab308"}, {"id": "c_vlm", "name": "VLM", "contact": "VLM", "sector": "Impression DTF Textile", "email": "vlm@dtf-client.mg", "retainer": 82000.0, "color": "#38bdf8"}, {"id": "c_sitraka", "name": "Sitraka", "contact": "Sitraka", "sector": "Impression DTF Textile", "email": "sitraka@dtf-client.mg", "retainer": 79000.0, "color": "#e11d48"}, {"id": "c_sakadi", "name": "Sakadi", "contact": "Sakadi", "sector": "Impression DTF Textile", "email": "sakadi@dtf-client.mg", "retainer": 67000.0, "color": "#ff3b30"}, {"id": "c_hanitra", "name": "Hanitra", "contact": "Hanitra", "sector": "Impression DTF Textile", "email": "hanitra@dtf-client.mg", "retainer": 65000.0, "color": "#a855f7"}, {"id": "c_lalaina", "name": "Lalaina", "contact": "Lalaina", "sector": "Impression DTF Textile", "email": "lalaina@dtf-client.mg", "retainer": 65000.0, "color": "#a855f7"}, {"id": "c_sanda", "name": "Sanda", "contact": "Sanda", "sector": "Impression DTF Textile", "email": "sanda@dtf-client.mg", "retainer": 60000.0, "color": "#38bdf8"}, {"id": "c_amirantely", "name": "Amirantely", "contact": "Amirantely", "sector": "Impression DTF Textile", "email": "amirantely@dtf-client.mg", "retainer": 55400.0, "color": "#00f2fe"}, {"id": "c_ranto", "name": "Ranto", "contact": "Ranto", "sector": "Impression DTF Textile", "email": "ranto@dtf-client.mg", "retainer": 48200.0, "color": "#a855f7"}, {"id": "c_rakoto", "name": "Rakoto", "contact": "Rakoto", "sector": "Impression DTF Textile", "email": "rakoto@dtf-client.mg", "retainer": 40000.0, "color": "#ff3b30"}, {"id": "c_faratiavina", "name": "Fara Tiavina", "contact": "Fara Tiavina", "sector": "Impression DTF Textile", "email": "faratiavin@dtf-client.mg", "retainer": 39000.0, "color": "#00f2fe"}, {"id": "c_steeve", "name": "Steeve", "contact": "Steeve", "sector": "Impression DTF Textile", "email": "steeve@dtf-client.mg", "retainer": 38000.0, "color": "#ec4899"}, {"id": "c_harison", "name": "Harison", "contact": "Harison", "sector": "Impression DTF Textile", "email": "harison@dtf-client.mg", "retainer": 36000.0, "color": "#10b981"}, {"id": "c_damba", "name": "Damba", "contact": "Damba", "sector": "Impression DTF Textile", "email": "damba@dtf-client.mg", "retainer": 32000.0, "color": "#38bdf8"}, {"id": "c_lilia", "name": "Lilia", "contact": "Lilia", "sector": "Impression DTF Textile", "email": "lilia@dtf-client.mg", "retainer": 28000.0, "color": "#a855f7"}, {"id": "c_nadia", "name": "Nadia", "contact": "Nadia", "sector": "Impression DTF Textile", "email": "nadia@dtf-client.mg", "retainer": 23600.0, "color": "#00f2fe"}, {"id": "c_fabienne", "name": "Fabienne", "contact": "Fabienne", "sector": "Impression DTF Textile", "email": "fabienne@dtf-client.mg", "retainer": 22000.0, "color": "#10b981"}, {"id": "c_mendrikamaillot", "name": "Mendrika Maillot", "contact": "Mendrika Maillot", "sector": "Impression DTF Textile", "email": "mendrikama@dtf-client.mg", "retainer": 20000.0, "color": "#10b981"}, {"id": "c_zo", "name": "Zo", "contact": "Zo", "sector": "Impression DTF Textile", "email": "zo@dtf-client.mg", "retainer": 20000.0, "color": "#ff3b30"}, {"id": "c_vatosoa", "name": "Vatosoa", "contact": "Vatosoa", "sector": "Impression DTF Textile", "email": "vatosoa@dtf-client.mg", "retainer": 18000.0, "color": "#ec4899"}, {"id": "c_tsiry", "name": "Tsiry", "contact": "Tsiry", "sector": "Impression DTF Textile", "email": "tsiry@dtf-client.mg", "retainer": 14000.0, "color": "#38bdf8"}, {"id": "c_nadya", "name": "Nadya", "contact": "Nadya", "sector": "Impression DTF Textile", "email": "nadya@dtf-client.mg", "retainer": 14000.0, "color": "#eab308"}, {"id": "c_mpiandryfitiavana", "name": "Mpiandry Fitiavana", "contact": "Mpiandry Fitiavana", "sector": "Impression DTF Textile", "email": "mpiandryfi@dtf-client.mg", "retainer": 12000.0, "color": "#eab308"}, {"id": "c_dihyfiderana", "name": "Dihy fiderana", "contact": "Dihy fiderana", "sector": "Impression DTF Textile", "email": "dihyfidera@dtf-client.mg", "retainer": 12000.0, "color": "#ec4899"}, {"id": "c_aina", "name": "Aina", "contact": "Aina", "sector": "Impression DTF Textile", "email": "aina@dtf-client.mg", "retainer": 10000.0, "color": "#ff3b30"}, {"id": "c_toky", "name": "Toky", "contact": "Toky", "sector": "Impression DTF Textile", "email": "toky@dtf-client.mg", "retainer": 10000.0, "color": "#ec4899"}, {"id": "c_rinah", "name": "Rinah", "contact": "Rinah", "sector": "Impression DTF Textile", "email": "rinah@dtf-client.mg", "retainer": 10000.0, "color": "#e11d48"}, {"id": "c_vola", "name": "Vola", "contact": "Vola", "sector": "Impression DTF Textile", "email": "vola@dtf-client.mg", "retainer": 10000.0, "color": "#10b981"}, {"id": "c_sabrinah", "name": "Sabrinah", "contact": "Sabrinah", "sector": "Impression DTF Textile", "email": "sabrinah@dtf-client.mg", "retainer": 10000.0, "color": "#eab308"}, {"id": "c_gileadapetanquetshrit", "name": "Gileada & petanque & tshrit", "contact": "Gileada & petanque & tshrit", "sector": "Impression DTF Textile", "email": "gileadapet@dtf-client.mg", "retainer": 10000.0, "color": "#a855f7"}, {"id": "c_tiavina", "name": "Tiavina", "contact": "Tiavina", "sector": "Impression DTF Textile", "email": "tiavina@dtf-client.mg", "retainer": 10000.0, "color": "#00f2fe"}, {"id": "c_sabrina", "name": "Sabrina", "contact": "Sabrina", "sector": "Impression DTF Textile", "email": "sabrina@dtf-client.mg", "retainer": 10000.0, "color": "#ec4899"}, {"id": "c_logoskoto", "name": "Logo skoto", "contact": "Logo skoto", "sector": "Impression DTF Textile", "email": "logoskoto@dtf-client.mg", "retainer": 10000.0, "color": "#10b981"}, {"id": "c_benja", "name": "Benja", "contact": "Benja", "sector": "Impression DTF Textile", "email": "benja@dtf-client.mg", "retainer": 10000.0, "color": "#e11d48"}, {"id": "c_mitia", "name": "Mitia", "contact": "Mitia", "sector": "Impression DTF Textile", "email": "mitia@dtf-client.mg", "retainer": 10000.0, "color": "#10b981"}, {"id": "c_tshirtakatsuki", "name": "Tshirt akatsuki", "contact": "Tshirt akatsuki", "sector": "Impression DTF Textile", "email": "tshirtakat@dtf-client.mg", "retainer": 6000.0, "color": "#ec4899"}, {"id": "c_mialisoasuite", "name": "Mialisoa suite", "contact": "Mialisoa suite", "sector": "Impression DTF Textile", "email": "mialisoasu@dtf-client.mg", "retainer": 6000.0, "color": "#eab308"}, {"id": "c_tshirtmarion", "name": "Tshirt Marion", "contact": "Tshirt Marion", "sector": "Impression DTF Textile", "email": "tshirtmari@dtf-client.mg", "retainer": 5000.0, "color": "#ff3b30"}, {"id": "c_tshirtlapaix", "name": "Tshirt La paix", "contact": "Tshirt La paix", "sector": "Impression DTF Textile", "email": "tshirtlapa@dtf-client.mg", "retainer": 4000.0, "color": "#eab308"}, {"id": "c_tshirtmommy", "name": "Tshirt Mommy", "contact": "Tshirt Mommy", "sector": "Impression DTF Textile", "email": "tshirtmomm@dtf-client.mg", "retainer": 4000.0, "color": "#10b981"}],
-        tasks: [{"id": "dtf_1", "num": 1, "sheet": "01 Octobre", "clientId": "c_aina", "clientName": "Aina", "title": "Commande DTF #1 — Aina (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_2", "num": 2, "sheet": "01 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #2 — Amirantely (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_3", "num": 3, "sheet": "01 Octobre", "clientId": "c_andrilalaina", "clientName": "Andrilalaina", "title": "Commande DTF #3 — Andrilalaina (270 cm)", "description": "Tirage DTF 2.70 m linéaires (270 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 270.0, "dtfM": 2.7, "hours": 2.7, "budget": 54000.0}, {"id": "dtf_4", "num": 4, "sheet": "01 Octobre", "clientId": "c_anselme", "clientName": "Anselme", "title": "Commande DTF #4 — Anselme (1900 cm)", "description": "Tirage DTF 19.00 m linéaires (1900 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 1900.0, "dtfM": 19.0, "hours": 19.0, "budget": 380000.0}, {"id": "dtf_5", "num": 5, "sheet": "01 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #5 — Tsiory (130 cm)", "description": "Tirage DTF 1.30 m linéaires (130 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 130.0, "dtfM": 1.3, "hours": 1.3, "budget": 26000.0}, {"id": "dtf_6", "num": 6, "sheet": "01 Octobre", "clientId": "c_vatosoa", "clientName": "Vatosoa", "title": "Commande DTF #6 — Vatosoa (90 cm)", "description": "Tirage DTF 0.90 m linéaires (90 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 90.0, "dtfM": 0.9, "hours": 0.9, "budget": 18000.0}, {"id": "dtf_7", "num": 1, "sheet": "02 Octobre", "clientId": "c_mendrikamaillot", "clientName": "Mendrika Maillot", "title": "Commande DTF #1 — Mendrika Maillot (100 cm)", "description": "Tirage DTF 1.00 m linéaires (100 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_8", "num": 2, "sheet": "02 Octobre", "clientId": "c_mialisoa", "clientName": "Mialisoa", "title": "Commande DTF #2 — Mialisoa (590 cm)", "description": "Tirage DTF 5.90 m linéaires (590 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 590.0, "dtfM": 5.9, "hours": 5.9, "budget": 118000.0}, {"id": "dtf_9", "num": 3, "sheet": "02 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #3 — Mirah (417 cm)", "description": "Tirage DTF 4.17 m linéaires (417 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 417.0, "dtfM": 4.17, "hours": 4.17, "budget": 83400.0}, {"id": "dtf_10", "num": 4, "sheet": "02 Octobre", "clientId": "c_ranavalona", "clientName": "Ranavalona", "title": "Commande DTF #4 — Ranavalona (92 cm)", "description": "Tirage DTF 0.92 m linéaires (92 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 92.0, "dtfM": 0.92, "hours": 0.92, "budget": 18400.0}, {"id": "dtf_11", "num": 5, "sheet": "02 Octobre", "clientId": "c_ranto", "clientName": "Ranto", "title": "Commande DTF #5 — Ranto (191 cm)", "description": "Tirage DTF 1.91 m linéaires (191 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 191.0, "dtfM": 1.91, "hours": 1.91, "budget": 38200.0}, {"id": "dtf_12", "num": 6, "sheet": "02 Octobre", "clientId": "c_sitraka", "clientName": "Sitraka", "title": "Commande DTF #6 — Sitraka (155 cm)", "description": "Tirage DTF 1.55 m linéaires (155 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 155.0, "dtfM": 1.55, "hours": 1.55, "budget": 31000.0}, {"id": "dtf_13", "num": 7, "sheet": "02 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #7 — Tsiory (132 cm)", "description": "Tirage DTF 1.32 m linéaires (132 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 132.0, "dtfM": 1.32, "hours": 1.32, "budget": 26400.0}, {"id": "dtf_14", "num": 8, "sheet": "02 Octobre", "clientId": "c_vlm", "clientName": "VLM", "title": "Commande DTF #8 — VLM (410 cm)", "description": "Tirage DTF 4.10 m linéaires (410 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 410.0, "dtfM": 4.1, "hours": 4.1, "budget": 82000.0}, {"id": "dtf_15", "num": 1, "sheet": "03 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #1 — Amirantely (30 cm)", "description": "Tirage DTF 0.30 m linéaires (30 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 30.0, "dtfM": 0.3, "hours": 0.3, "budget": 6000.0}, {"id": "dtf_16", "num": 2, "sheet": "03 Octobre", "clientId": "c_tshirtakatsuki", "clientName": "Tshirt akatsuki", "title": "Commande DTF #2 — Tshirt akatsuki (30 cm)", "description": "Tirage DTF 0.30 m linéaires (30 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 30.0, "dtfM": 0.3, "hours": 0.3, "budget": 6000.0}, {"id": "dtf_17", "num": 3, "sheet": "03 Octobre", "clientId": "c_fabienne", "clientName": "Fabienne", "title": "Commande DTF #3 — Fabienne (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_18", "num": 4, "sheet": "03 Octobre", "clientId": "c_mialisoasuite", "clientName": "Mialisoa suite", "title": "Commande DTF #4 — Mialisoa suite (30 cm)", "description": "Tirage DTF 0.30 m linéaires (30 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 30.0, "dtfM": 0.3, "hours": 0.3, "budget": 6000.0}, {"id": "dtf_19", "num": 5, "sheet": "03 Octobre", "clientId": "c_rakoto", "clientName": "Rakoto", "title": "Commande DTF #5 — Rakoto (200 cm)", "description": "Tirage DTF 2.00 m linéaires (200 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 200.0, "dtfM": 2.0, "hours": 2.0, "budget": 40000.0}, {"id": "dtf_20", "num": 6, "sheet": "03 Octobre", "clientId": "c_dinaandriamady", "clientName": "Dina andriamady", "title": "Commande DTF #6 — Dina andriamady (2219 cm)", "description": "Tirage DTF 22.19 m linéaires (2219 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 2219.0, "dtfM": 22.19, "hours": 22.19, "budget": 443800.0}, {"id": "dtf_21", "num": 1, "sheet": "05 Octobre", "clientId": "c_andrilalaina", "clientName": "Andrilalaina", "title": "Commande DTF #1 — Andrilalaina (100 cm)", "description": "Tirage DTF 1.00 m linéaires (100 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_22", "num": 2, "sheet": "05 Octobre", "clientId": "c_hanitra", "clientName": "Hanitra", "title": "Commande DTF #2 — Hanitra (80 cm)", "description": "Tirage DTF 0.80 m linéaires (80 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 80.0, "dtfM": 0.8, "hours": 0.8, "budget": 16000.0}, {"id": "dtf_23", "num": 3, "sheet": "05 Octobre", "clientId": "c_henintsoa", "clientName": "Henintsoa", "title": "Commande DTF #3 — Henintsoa (140 cm)", "description": "Tirage DTF 1.40 m linéaires (140 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 140.0, "dtfM": 1.4, "hours": 1.4, "budget": 28000.0}, {"id": "dtf_24", "num": 4, "sheet": "05 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #4 — Mirah (60 cm)", "description": "Tirage DTF 0.60 m linéaires (60 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 60.0, "dtfM": 0.6, "hours": 0.6, "budget": 12000.0}, {"id": "dtf_25", "num": 5, "sheet": "05 Octobre", "clientId": "c_ranavalona", "clientName": "Ranavalona", "title": "Commande DTF #5 — Ranavalona (930 cm)", "description": "Tirage DTF 9.30 m linéaires (930 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 930.0, "dtfM": 9.3, "hours": 9.3, "budget": 186000.0}, {"id": "dtf_26", "num": 6, "sheet": "05 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Commande DTF #6 — Rojo (230 cm)", "description": "Tirage DTF 2.30 m linéaires (230 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 230.0, "dtfM": 2.3, "hours": 2.3, "budget": 46000.0}, {"id": "dtf_27", "num": 7, "sheet": "05 Octobre", "clientId": "c_toky", "clientName": "Toky", "title": "Commande DTF #7 — Toky (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_28", "num": 1, "sheet": "06 Octobre", "clientId": "c_harison", "clientName": "Harison", "title": "Commande DTF #1 — Harison (100 cm)", "description": "Tirage DTF 1.00 m linéaires (100 cm)", "frequency": "daily", "date": "2026-10-06", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_29", "num": 2, "sheet": "06 Octobre", "clientId": "c_tshirtlapaix", "clientName": "Tshirt La paix", "title": "Commande DTF #2 — Tshirt La paix (20 cm)", "description": "Tirage DTF 0.20 m linéaires (20 cm)", "frequency": "daily", "date": "2026-10-06", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 20.0, "dtfM": 0.2, "hours": 0.2, "budget": 4000.0}, {"id": "dtf_30", "num": 3, "sheet": "06 Octobre", "clientId": "c_rasihanaka", "clientName": "Rasihanaka", "title": "Commande DTF #3 — Rasihanaka (1790 cm)", "description": "Tirage DTF 17.90 m linéaires (1790 cm)", "frequency": "daily", "date": "2026-10-06", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 1790.0, "dtfM": 17.9, "hours": 17.9, "budget": 358000.0}, {"id": "dtf_31", "num": 4, "sheet": "06 Octobre", "clientId": "c_ranavalona", "clientName": "Ranavalona", "title": "Commande DTF #4 — Ranavalona (335 cm)", "description": "Tirage DTF 3.35 m linéaires (335 cm)", "frequency": "daily", "date": "2026-10-06", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 335.0, "dtfM": 3.35, "hours": 3.35, "budget": 67000.0}, {"id": "dtf_32", "num": 1, "sheet": "07 Octobre", "clientId": "c_andrilalaina", "clientName": "Andrilalaina", "title": "Commande DTF #1 — Andrilalaina (220 cm)", "description": "Tirage DTF 2.20 m linéaires (220 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 220.0, "dtfM": 2.2, "hours": 2.2, "budget": 44000.0}, {"id": "dtf_33", "num": 2, "sheet": "07 Octobre", "clientId": "c_fabienne", "clientName": "Fabienne", "title": "Commande DTF #2 — Fabienne (60 cm)", "description": "Tirage DTF 0.60 m linéaires (60 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 60.0, "dtfM": 0.6, "hours": 0.6, "budget": 12000.0}, {"id": "dtf_34", "num": 3, "sheet": "07 Octobre", "clientId": "c_harison", "clientName": "Harison", "title": "Commande DTF #3 — Harison (80 cm)", "description": "Tirage DTF 0.80 m linéaires (80 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 80.0, "dtfM": 0.8, "hours": 0.8, "budget": 16000.0}, {"id": "dtf_35", "num": 4, "sheet": "07 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #4 — Mirah (450 cm)", "description": "Tirage DTF 4.50 m linéaires (450 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 450.0, "dtfM": 4.5, "hours": 4.5, "budget": 90000.0}, {"id": "dtf_36", "num": 5, "sheet": "07 Octobre", "clientId": "c_nadia", "clientName": "Nadia", "title": "Commande DTF #5 — Nadia (118 cm)", "description": "Tirage DTF 1.18 m linéaires (118 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 118.0, "dtfM": 1.18, "hours": 1.18, "budget": 23600.0}, {"id": "dtf_37", "num": 6, "sheet": "07 Octobre", "clientId": "c_sitraka", "clientName": "Sitraka", "title": "Commande DTF #6 — Sitraka (190 cm)", "description": "Tirage DTF 1.90 m linéaires (190 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 190.0, "dtfM": 1.9, "hours": 1.9, "budget": 38000.0}, {"id": "dtf_38", "num": 7, "sheet": "07 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #7 — Tsiory (554 cm)", "description": "Tirage DTF 5.54 m linéaires (554 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 554.0, "dtfM": 5.54, "hours": 5.54, "budget": 110800.0}, {"id": "dtf_39", "num": 1, "sheet": "08 Octobre", "clientId": "c_lilia", "clientName": "Lilia", "title": "Commande DTF #1 — Lilia (140 cm)", "description": "Tirage DTF 1.40 m linéaires (140 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 140.0, "dtfM": 1.4, "hours": 1.4, "budget": 28000.0}, {"id": "dtf_40", "num": 2, "sheet": "08 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #2 — Mirah (125 cm)", "description": "Tirage DTF 1.25 m linéaires (125 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 125.0, "dtfM": 1.25, "hours": 1.25, "budget": 25000.0}, {"id": "dtf_41", "num": 3, "sheet": "08 Octobre", "clientId": "c_rinah", "clientName": "Rinah", "title": "Commande DTF #3 — Rinah (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_42", "num": 4, "sheet": "08 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Commande DTF #4 — Rojo (142 cm)", "description": "Tirage DTF 1.42 m linéaires (142 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 142.0, "dtfM": 1.42, "hours": 1.42, "budget": 28400.0}, {"id": "dtf_43", "num": 5, "sheet": "08 Octobre", "clientId": "c_sanda", "clientName": "Sanda", "title": "Commande DTF #5 — Sanda (300 cm)", "description": "Tirage DTF 3.00 m linéaires (300 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 300.0, "dtfM": 3.0, "hours": 3.0, "budget": 60000.0}, {"id": "dtf_44", "num": 6, "sheet": "08 Octobre", "clientId": "c_steeve", "clientName": "Steeve", "title": "Commande DTF #6 — Steeve (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_45", "num": 7, "sheet": "08 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #7 — Tsiory (300 cm)", "description": "Tirage DTF 3.00 m linéaires (300 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 300.0, "dtfM": 3.0, "hours": 3.0, "budget": 60000.0}, {"id": "dtf_46", "num": 8, "sheet": "08 Octobre", "clientId": "c_vola", "clientName": "Vola", "title": "Commande DTF #8 — Vola (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_47", "num": 9, "sheet": "08 Octobre", "clientId": "c_sabrinah", "clientName": "Sabrinah", "title": "Commande DTF #9 — Sabrinah (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_48", "num": 10, "sheet": "08 Octobre", "clientId": "c_zo", "clientName": "Zo", "title": "Commande DTF #10 — Zo (100 cm)", "description": "Tirage DTF 1.00 m linéaires (100 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_49", "num": 1, "sheet": "09 Octobre", "clientId": "c_anselme", "clientName": "Anselme", "title": "Commande DTF #1 — Anselme (41 cm)", "description": "Tirage DTF 0.41 m linéaires (41 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 41.0, "dtfM": 0.41, "hours": 0.41, "budget": 8200.0}, {"id": "dtf_50", "num": 2, "sheet": "09 Octobre", "clientId": "c_dina", "clientName": "Dina", "title": "Commande DTF #2 — Dina (340 cm)", "description": "Tirage DTF 3.40 m linéaires (340 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 340.0, "dtfM": 3.4, "hours": 3.4, "budget": 68000.0}, {"id": "dtf_51", "num": 3, "sheet": "09 Octobre", "clientId": "c_gileadapetanquetshrit", "clientName": "Gileada & petanque & tshrit", "title": "Commande DTF #3 — Gileada & petanque & tshrit (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_52", "num": 4, "sheet": "09 Octobre", "clientId": "c_marinazy", "clientName": "Marinazy", "title": "Commande DTF #4 — Marinazy (600 cm)", "description": "Tirage DTF 6.00 m linéaires (600 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 600.0, "dtfM": 6.0, "hours": 6.0, "budget": 120000.0}, {"id": "dtf_53", "num": 5, "sheet": "09 Octobre", "clientId": "c_mialisoa", "clientName": "Mialisoa", "title": "Commande DTF #5 — Mialisoa (111 cm)", "description": "Tirage DTF 1.11 m linéaires (111 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 111.0, "dtfM": 1.11, "hours": 1.11, "budget": 22200.0}, {"id": "dtf_54", "num": 6, "sheet": "09 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #6 — Mirah (120 cm)", "description": "Tirage DTF 1.20 m linéaires (120 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 120.0, "dtfM": 1.2, "hours": 1.2, "budget": 24000.0}, {"id": "dtf_55", "num": 7, "sheet": "09 Octobre", "clientId": "c_steeve", "clientName": "Steeve", "title": "Commande DTF #7 — Steeve (40 cm)", "description": "suite", "frequency": "daily", "date": "2026-10-09", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "suite", "dtfCm": 40.0, "dtfM": 0.4, "hours": 0.4, "budget": 8000.0}, {"id": "dtf_56", "num": 8, "sheet": "09 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #8 — Tsiory (350 cm)", "description": "Tirage DTF 3.50 m linéaires (350 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 350.0, "dtfM": 3.5, "hours": 3.5, "budget": 70000.0}, {"id": "dtf_57", "num": 1, "sheet": "10 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #1 — Amirantely (92 cm)", "description": "Tirage DTF 0.92 m linéaires (92 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 92.0, "dtfM": 0.92, "hours": 0.92, "budget": 18400.0}, {"id": "dtf_58", "num": 2, "sheet": "10 Octobre", "clientId": "c_ranavalona", "clientName": "Ranavalona", "title": "Commande DTF #2 — Ranavalona (483 cm)", "description": "Tirage DTF 4.83 m linéaires (483 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 483.0, "dtfM": 4.83, "hours": 4.83, "budget": 96600.0}, {"id": "dtf_59", "num": 3, "sheet": "10 Octobre", "clientId": "c_sitraka", "clientName": "Sitraka", "title": "Commande DTF #3 — Sitraka (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_60", "num": 4, "sheet": "10 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #4 — Tsiory (538 cm)", "description": "Tirage DTF 5.38 m linéaires (538 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 538.0, "dtfM": 5.38, "hours": 5.38, "budget": 107600.0}, {"id": "dtf_61", "num": 5, "sheet": "10 Octobre", "clientId": "c_tsiry", "clientName": "Tsiry", "title": "Commande DTF #5 — Tsiry (70 cm)", "description": "Tirage DTF 0.70 m linéaires (70 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 70.0, "dtfM": 0.7, "hours": 0.7, "budget": 14000.0}, {"id": "dtf_62", "num": 1, "sheet": "12 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #1 — Amirantely (40 cm)", "description": "Tirage DTF 0.40 m linéaires (40 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 40.0, "dtfM": 0.4, "hours": 0.4, "budget": 8000.0}, {"id": "dtf_63", "num": 2, "sheet": "12 Octobre", "clientId": "c_fahasambarana", "clientName": "Fahasambarana", "title": "Commande DTF #2 — Fahasambarana (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_64", "num": 3, "sheet": "12 Octobre", "clientId": "c_henintsoa", "clientName": "Henintsoa", "title": "Commande DTF #3 — Henintsoa (430 cm)", "description": "Tirage DTF 4.30 m linéaires (430 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 430.0, "dtfM": 4.3, "hours": 4.3, "budget": 86000.0}, {"id": "dtf_65", "num": 4, "sheet": "12 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #4 — Mirah (70 cm)", "description": "Tirage DTF 0.70 m linéaires (70 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 70.0, "dtfM": 0.7, "hours": 0.7, "budget": 14000.0}, {"id": "dtf_66", "num": 5, "sheet": "12 Octobre", "clientId": "c_tshirtmommy", "clientName": "Tshirt Mommy", "title": "Commande DTF #5 — Tshirt Mommy (20 cm)", "description": "Tirage DTF 0.20 m linéaires (20 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 20.0, "dtfM": 0.2, "hours": 0.2, "budget": 4000.0}, {"id": "dtf_67", "num": 6, "sheet": "12 Octobre", "clientId": "c_nadya", "clientName": "Nadya", "title": "Commande DTF #6 — Nadya (70 cm)", "description": "Tirage DTF 0.70 m linéaires (70 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 70.0, "dtfM": 0.7, "hours": 0.7, "budget": 14000.0}, {"id": "dtf_68", "num": 7, "sheet": "12 Octobre", "clientId": "c_sakadi", "clientName": "Sakadi", "title": "Commande DTF #7 — Sakadi (335 cm)", "description": "Tirage DTF 3.35 m linéaires (335 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 335.0, "dtfM": 3.35, "hours": 3.35, "budget": 67000.0}, {"id": "dtf_69", "num": 8, "sheet": "12 Octobre", "clientId": "c_tiavina", "clientName": "Tiavina", "title": "Commande DTF #8 — Tiavina (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_70", "num": 9, "sheet": "12 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #9 — Tsiory (300 cm)", "description": "Tirage DTF 3.00 m linéaires (300 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 300.0, "dtfM": 3.0, "hours": 3.0, "budget": 60000.0}, {"id": "dtf_71", "num": 1, "sheet": "13 Octobre", "clientId": "c_akram", "clientName": "Akram", "title": "Commande DTF #1 — Akram (780 cm)", "description": "Tirage DTF 7.80 m linéaires (780 cm)", "frequency": "daily", "date": "2026-10-13", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 780.0, "dtfM": 7.8, "hours": 7.8, "budget": 156000.0}, {"id": "dtf_72", "num": 2, "sheet": "13 Octobre", "clientId": "c_hanitra", "clientName": "Hanitra", "title": "Commande DTF #2 — Hanitra (105 cm)", "description": "Tirage DTF 1.05 m linéaires (105 cm)", "frequency": "daily", "date": "2026-10-13", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 105.0, "dtfM": 1.05, "hours": 1.05, "budget": 21000.0}, {"id": "dtf_73", "num": 3, "sheet": "13 Octobre", "clientId": "c_mirahsafidy", "clientName": "Mirah Safidy", "title": "Commande DTF #3 — Mirah Safidy (456 cm)", "description": "Tirage DTF 4.56 m linéaires (456 cm)", "frequency": "daily", "date": "2026-10-13", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 456.0, "dtfM": 4.56, "hours": 4.56, "budget": 91200.0}, {"id": "dtf_74", "num": 4, "sheet": "13 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #4 — Tsiory (267 cm)", "description": "Tirage DTF 2.67 m linéaires (267 cm)", "frequency": "daily", "date": "2026-10-13", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 267.0, "dtfM": 2.67, "hours": 2.67, "budget": 53400.0}, {"id": "dtf_75", "num": 1, "sheet": "14 Octobre", "clientId": "c_lcagape", "clientName": "LC Agape", "title": "Commande DTF #1 — LC Agape (4879 cm)", "description": "Tirage DTF 48.79 m linéaires (4879 cm)", "frequency": "daily", "date": "2026-10-14", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 4879.0, "dtfM": 48.79, "hours": 48.79, "budget": 975800.0}, {"id": "dtf_76", "num": 2, "sheet": "14 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Commande DTF #2 — Rojo (120 cm)", "description": "Tirage DTF 1.20 m linéaires (120 cm)", "frequency": "daily", "date": "2026-10-14", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 120.0, "dtfM": 1.2, "hours": 1.2, "budget": 24000.0}, {"id": "dtf_77", "num": 3, "sheet": "14 Octobre", "clientId": "c_sabrina", "clientName": "Sabrina", "title": "Commande DTF #3 — Sabrina (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-14", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_78", "num": 4, "sheet": "14 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #4 — Tsiory (238 cm)", "description": "Tirage DTF 2.38 m linéaires (238 cm)", "frequency": "daily", "date": "2026-10-14", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 238.0, "dtfM": 2.38, "hours": 2.38, "budget": 47600.0}, {"id": "dtf_79", "num": 1, "sheet": "15 Octobre", "clientId": "c_logoskoto", "clientName": "Logo skoto", "title": "Commande DTF #1 — Logo skoto (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_80", "num": 2, "sheet": "15 Octobre", "clientId": "c_mpiandryfitiavana", "clientName": "Mpiandry Fitiavana", "title": "Commande DTF #2 — Mpiandry Fitiavana (60 cm)", "description": "Tirage DTF 0.60 m linéaires (60 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 60.0, "dtfM": 0.6, "hours": 0.6, "budget": 12000.0}, {"id": "dtf_81", "num": 3, "sheet": "15 Octobre", "clientId": "c_ranto", "clientName": "Ranto", "title": "Commande DTF #3 — Ranto (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_82", "num": 4, "sheet": "15 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Commande DTF #4 — Rojo (305 cm)", "description": "Tirage DTF 3.05 m linéaires (305 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 305.0, "dtfM": 3.05, "hours": 3.05, "budget": 61000.0}, {"id": "dtf_83", "num": 5, "sheet": "15 Octobre", "clientId": "c_steeve", "clientName": "Steeve", "title": "Commande DTF #5 — Steeve (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_84", "num": 6, "sheet": "15 Octobre", "clientId": "c_tshirtmarion", "clientName": "Tshirt Marion", "title": "Commande DTF #6 — Tshirt Marion (25 cm)", "description": "Tirage DTF 0.25 m linéaires (25 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 25.0, "dtfM": 0.25, "hours": 0.25, "budget": 5000.0}, {"id": "dtf_85", "num": 7, "sheet": "15 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #7 — Tsiory (1183 cm)", "description": "Tirage DTF 11.83 m linéaires (1183 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 1183.0, "dtfM": 11.83, "hours": 11.83, "budget": 236600.0}, {"id": "dtf_86", "num": 1, "sheet": "16 Octobre", "clientId": "c_dina", "clientName": "Dina", "title": "Commande DTF #1 — Dina (230 cm)", "description": "Tirage DTF 2.30 m linéaires (230 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 230.0, "dtfM": 2.3, "hours": 2.3, "budget": 46000.0}, {"id": "dtf_87", "num": 2, "sheet": "16 Octobre", "clientId": "c_fahasambarana", "clientName": "Fahasambarana", "title": "Commande DTF #2 — Fahasambarana (120 cm)", "description": "Tirage DTF 1.20 m linéaires (120 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 120.0, "dtfM": 1.2, "hours": 1.2, "budget": 24000.0}, {"id": "dtf_88", "num": 3, "sheet": "16 Octobre", "clientId": "c_faratiavina", "clientName": "Fara Tiavina", "title": "Commande DTF #3 — Fara Tiavina (195 cm)", "description": "Tirage DTF 1.95 m linéaires (195 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 195.0, "dtfM": 1.95, "hours": 1.95, "budget": 39000.0}, {"id": "dtf_89", "num": 4, "sheet": "16 Octobre", "clientId": "c_lalaina", "clientName": "Lalaina", "title": "Commande DTF #4 — Lalaina (325 cm)", "description": "Tirage DTF 3.25 m linéaires (325 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 325.0, "dtfM": 3.25, "hours": 3.25, "budget": 65000.0}, {"id": "dtf_90", "num": 5, "sheet": "16 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #5 — Mirah (705 cm)", "description": "Tirage DTF 7.05 m linéaires (705 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 705.0, "dtfM": 7.05, "hours": 7.05, "budget": 141000.0}, {"id": "dtf_91", "num": 6, "sheet": "16 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #6 — Tsiory (140 cm)", "description": "Tirage DTF 1.40 m linéaires (140 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 140.0, "dtfM": 1.4, "hours": 1.4, "budget": 28000.0}, {"id": "dtf_92", "num": 7, "sheet": "16 Octobre", "clientId": "c_hanitra", "clientName": "Hanitra", "title": "Commande DTF #7 — Hanitra (140 cm)", "description": "Tirage DTF 1.40 m linéaires (140 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 140.0, "dtfM": 1.4, "hours": 1.4, "budget": 28000.0}, {"id": "dtf_93", "num": 1, "sheet": "17 Octobre", "clientId": "c_benja", "clientName": "Benja", "title": "Commande DTF #1 — Benja (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-17", "priority": "low", "status": "todo", "statutProd": "En attente", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_94", "num": 2, "sheet": "17 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #2 — Tsiory (461 cm)", "description": "Tirage DTF 4.61 m linéaires (461 cm)", "frequency": "daily", "date": "2026-10-17", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 461.0, "dtfM": 4.61, "hours": 4.61, "budget": 92200.0}, {"id": "dtf_95", "num": 3, "sheet": "17 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #3 — Amirantely (65 cm)", "description": "Tirage DTF 0.65 m linéaires (65 cm)", "frequency": "daily", "date": "2026-10-17", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 65.0, "dtfM": 0.65, "hours": 0.65, "budget": 13000.0}, {"id": "dtf_96", "num": 4, "sheet": "17 Octobre", "clientId": "c_damba", "clientName": "Damba", "title": "Commande DTF #4 — Damba (160 cm)", "description": "Presse 14pcs", "frequency": "daily", "date": "2026-10-17", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Presse 14pcs", "dtfCm": 160.0, "dtfM": 1.6, "hours": 1.6, "budget": 32000.0}, {"id": "dtf_97", "num": 5, "sheet": "17 Octobre", "clientId": "c_dihyfiderana", "clientName": "Dihy fiderana", "title": "Commande DTF #5 — Dihy fiderana (60 cm)", "description": "Tirage DTF 0.60 m linéaires (60 cm)", "frequency": "daily", "date": "2026-10-17", "priority": "low", "status": "todo", "statutProd": "En attente", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 60.0, "dtfM": 0.6, "hours": 0.6, "budget": 12000.0}, {"id": "dtf_98", "num": 1, "sheet": "19 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #1 — Tsiory (906 cm)", "description": "508 Brickaville • Souvenir Mica new camion & Confection Doris (X5) • baleine Misantatra ny vita malagasy & zanak'ANTEMORO", "frequency": "daily", "date": "2026-10-19", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "508 Brickaville • Souvenir Mica new camion & Confection Doris (X5) • baleine Misantatra ny vita malagasy & zanak'ANTEMORO", "dtfCm": 906.0, "dtfM": 9.06, "hours": 9.06, "budget": 181200.0}, {"id": "dtf_99", "num": 2, "sheet": "19 Octobre", "clientId": "c_fahasambarana", "clientName": "Fahasambarana", "title": "Commande DTF #2 — Fahasambarana (380 cm)", "description": "fleure Correction", "frequency": "daily", "date": "2026-10-19", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "fleure Correction", "dtfCm": 380.0, "dtfM": 3.8, "hours": 3.8, "budget": 76000.0}, {"id": "dtf_100", "num": 3, "sheet": "19 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #3 — Mirah (75 cm)", "description": "FPA & hand lips & CSB", "frequency": "daily", "date": "2026-10-19", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "FPA & hand lips & CSB", "dtfCm": 75.0, "dtfM": 0.75, "hours": 0.75, "budget": 15000.0}, {"id": "dtf_101", "num": 4, "sheet": "19 Octobre", "clientId": "c_mitia", "clientName": "Mitia", "title": "Commande DTF #4 — Mitia (50 cm)", "description": "Oh my stars & m's property & coeur & lips", "frequency": "daily", "date": "2026-10-19", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Oh my stars & m's property & coeur & lips", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_102", "num": 5, "sheet": "19 Octobre", "clientId": "c_lilie", "clientName": "Lilie", "title": "Commande DTF #5 — Lilie (412 cm)", "description": "Ares Antsoha", "frequency": "daily", "date": "2026-10-19", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Ares Antsoha", "dtfCm": 412.0, "dtfM": 4.12, "hours": 4.12, "budget": 82400.0}, {"id": "dtf_103", "num": 6, "sheet": "19 Octobre", "clientId": "c_santio", "clientName": "Santio", "title": "Commande DTF #6 — Santio (566 cm)", "description": "Famille VECILAS & UIR & Polisim-pirenena & cospn • Thellia & You re my only one & taranaky mandrosy & valisoa tech & black clover", "frequency": "daily", "date": "2026-10-19", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "Famille VECILAS & UIR & Polisim-pirenena & cospn • Thellia & You re my only one & taranaky mandrosy & valisoa tech & black clover", "dtfCm": 566.0, "dtfM": 5.66, "hours": 5.66, "budget": 113200.0}, {"id": "dtf_104", "num": 7, "sheet": "19 Octobre", "clientId": "c_steeve", "clientName": "Steeve", "title": "Commande DTF #7 — Steeve (50 cm)", "description": "Dino sutie", "frequency": "daily", "date": "2026-10-19", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Dino sutie", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_105", "num": 1, "sheet": "20 Octobre", "clientId": "c_lalaina", "clientName": "Lalaina", "title": "Lalaina — Voahirana FTL", "description": "Voahirana FTL", "frequency": "daily", "date": "2026-10-20", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Voahirana FTL", "folderPathClean": "Lalaina • Voahirana FTL (55 cm)", "dtfCm": 55.0, "dtfM": 0.55, "hours": 0.55, "budget": 11000.0}]
+        tasks: [{"id": "dtf_1", "num": 1, "sheet": "01 Octobre", "clientId": "c_aina", "clientName": "Aina", "title": "Commande DTF #1 — Aina (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_2", "num": 2, "sheet": "01 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #2 — Amirantely (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_3", "num": 3, "sheet": "01 Octobre", "clientId": "c_andrilalaina", "clientName": "Andrilalaina", "title": "Commande DTF #3 — Andrilalaina (270 cm)", "description": "Tirage DTF 2.70 m linéaires (270 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 270.0, "dtfM": 2.7, "hours": 2.7, "budget": 54000.0}, {"id": "dtf_4", "num": 4, "sheet": "01 Octobre", "clientId": "c_anselme", "clientName": "Anselme", "title": "Commande DTF #4 — Anselme (1900 cm)", "description": "Tirage DTF 19.00 m linéaires (1900 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 1900.0, "dtfM": 19.0, "hours": 19.0, "budget": 380000.0}, {"id": "dtf_5", "num": 5, "sheet": "01 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #5 — Tsiory (130 cm)", "description": "Tirage DTF 1.30 m linéaires (130 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 130.0, "dtfM": 1.3, "hours": 1.3, "budget": 26000.0}, {"id": "dtf_6", "num": 6, "sheet": "01 Octobre", "clientId": "c_vatosoa", "clientName": "Vatosoa", "title": "Commande DTF #6 — Vatosoa (90 cm)", "description": "Tirage DTF 0.90 m linéaires (90 cm)", "frequency": "daily", "date": "2026-10-01", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 90.0, "dtfM": 0.9, "hours": 0.9, "budget": 18000.0}, {"id": "dtf_7", "num": 1, "sheet": "02 Octobre", "clientId": "c_mendrikamaillot", "clientName": "Mendrika Maillot", "title": "Commande DTF #1 — Mendrika Maillot (100 cm)", "description": "Tirage DTF 1.00 m linéaires (100 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_8", "num": 2, "sheet": "02 Octobre", "clientId": "c_mialisoa", "clientName": "Mialisoa", "title": "Commande DTF #2 — Mialisoa (590 cm)", "description": "Tirage DTF 5.90 m linéaires (590 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 590.0, "dtfM": 5.9, "hours": 5.9, "budget": 118000.0}, {"id": "dtf_9", "num": 3, "sheet": "02 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #3 — Mirah (417 cm)", "description": "Tirage DTF 4.17 m linéaires (417 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 417.0, "dtfM": 4.17, "hours": 4.17, "budget": 83400.0}, {"id": "dtf_10", "num": 4, "sheet": "02 Octobre", "clientId": "c_ranavalona", "clientName": "Ranavalona", "title": "Commande DTF #4 — Ranavalona (92 cm)", "description": "Tirage DTF 0.92 m linéaires (92 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 92.0, "dtfM": 0.92, "hours": 0.92, "budget": 18400.0}, {"id": "dtf_11", "num": 5, "sheet": "02 Octobre", "clientId": "c_ranto", "clientName": "Ranto", "title": "Commande DTF #5 — Ranto (191 cm)", "description": "Tirage DTF 1.91 m linéaires (191 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 191.0, "dtfM": 1.91, "hours": 1.91, "budget": 38200.0}, {"id": "dtf_12", "num": 6, "sheet": "02 Octobre", "clientId": "c_sitraka", "clientName": "Sitraka", "title": "Commande DTF #6 — Sitraka (155 cm)", "description": "Tirage DTF 1.55 m linéaires (155 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 155.0, "dtfM": 1.55, "hours": 1.55, "budget": 31000.0}, {"id": "dtf_13", "num": 7, "sheet": "02 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #7 — Tsiory (132 cm)", "description": "Tirage DTF 1.32 m linéaires (132 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 132.0, "dtfM": 1.32, "hours": 1.32, "budget": 26400.0}, {"id": "dtf_14", "num": 8, "sheet": "02 Octobre", "clientId": "c_vlm", "clientName": "VLM", "title": "Commande DTF #8 — VLM (410 cm)", "description": "Tirage DTF 4.10 m linéaires (410 cm)", "frequency": "daily", "date": "2026-10-02", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 410.0, "dtfM": 4.1, "hours": 4.1, "budget": 82000.0}, {"id": "dtf_15", "num": 1, "sheet": "03 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #1 — Amirantely (30 cm)", "description": "Tirage DTF 0.30 m linéaires (30 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 30.0, "dtfM": 0.3, "hours": 0.3, "budget": 6000.0}, {"id": "dtf_16", "num": 2, "sheet": "03 Octobre", "clientId": "c_tshirtakatsuki", "clientName": "Tshirt akatsuki", "title": "Commande DTF #2 — Tshirt akatsuki (30 cm)", "description": "Tirage DTF 0.30 m linéaires (30 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 30.0, "dtfM": 0.3, "hours": 0.3, "budget": 6000.0}, {"id": "dtf_17", "num": 3, "sheet": "03 Octobre", "clientId": "c_fabienne", "clientName": "Fabienne", "title": "Commande DTF #3 — Fabienne (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_18", "num": 4, "sheet": "03 Octobre", "clientId": "c_mialisoasuite", "clientName": "Mialisoa suite", "title": "Commande DTF #4 — Mialisoa suite (30 cm)", "description": "Tirage DTF 0.30 m linéaires (30 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 30.0, "dtfM": 0.3, "hours": 0.3, "budget": 6000.0}, {"id": "dtf_19", "num": 5, "sheet": "03 Octobre", "clientId": "c_rakoto", "clientName": "Rakoto", "title": "Commande DTF #5 — Rakoto (200 cm)", "description": "Tirage DTF 2.00 m linéaires (200 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 200.0, "dtfM": 2.0, "hours": 2.0, "budget": 40000.0}, {"id": "dtf_20", "num": 6, "sheet": "03 Octobre", "clientId": "c_dinaandriamady", "clientName": "Dina andriamady", "title": "Commande DTF #6 — Dina andriamady (2219 cm)", "description": "Tirage DTF 22.19 m linéaires (2219 cm)", "frequency": "daily", "date": "2026-10-03", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 2219.0, "dtfM": 22.19, "hours": 22.19, "budget": 443800.0}, {"id": "dtf_21", "num": 1, "sheet": "05 Octobre", "clientId": "c_andrilalaina", "clientName": "Andrilalaina", "title": "Commande DTF #1 — Andrilalaina (100 cm)", "description": "Tirage DTF 1.00 m linéaires (100 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_22", "num": 2, "sheet": "05 Octobre", "clientId": "c_hanitra", "clientName": "Hanitra", "title": "Commande DTF #2 — Hanitra (80 cm)", "description": "Tirage DTF 0.80 m linéaires (80 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 80.0, "dtfM": 0.8, "hours": 0.8, "budget": 16000.0}, {"id": "dtf_23", "num": 3, "sheet": "05 Octobre", "clientId": "c_henintsoa", "clientName": "Henintsoa", "title": "Commande DTF #3 — Henintsoa (140 cm)", "description": "Tirage DTF 1.40 m linéaires (140 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 140.0, "dtfM": 1.4, "hours": 1.4, "budget": 28000.0}, {"id": "dtf_24", "num": 4, "sheet": "05 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #4 — Mirah (60 cm)", "description": "Tirage DTF 0.60 m linéaires (60 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 60.0, "dtfM": 0.6, "hours": 0.6, "budget": 12000.0}, {"id": "dtf_25", "num": 5, "sheet": "05 Octobre", "clientId": "c_ranavalona", "clientName": "Ranavalona", "title": "Commande DTF #5 — Ranavalona (930 cm)", "description": "Tirage DTF 9.30 m linéaires (930 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 930.0, "dtfM": 9.3, "hours": 9.3, "budget": 186000.0}, {"id": "dtf_26", "num": 6, "sheet": "05 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Commande DTF #6 — Rojo (230 cm)", "description": "Tirage DTF 2.30 m linéaires (230 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 230.0, "dtfM": 2.3, "hours": 2.3, "budget": 46000.0}, {"id": "dtf_27", "num": 7, "sheet": "05 Octobre", "clientId": "c_toky", "clientName": "Toky", "title": "Commande DTF #7 — Toky (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-05", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_28", "num": 1, "sheet": "06 Octobre", "clientId": "c_harison", "clientName": "Harison", "title": "Commande DTF #1 — Harison (100 cm)", "description": "Tirage DTF 1.00 m linéaires (100 cm)", "frequency": "daily", "date": "2026-10-06", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_29", "num": 2, "sheet": "06 Octobre", "clientId": "c_tshirtlapaix", "clientName": "Tshirt La paix", "title": "Commande DTF #2 — Tshirt La paix (20 cm)", "description": "Tirage DTF 0.20 m linéaires (20 cm)", "frequency": "daily", "date": "2026-10-06", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 20.0, "dtfM": 0.2, "hours": 0.2, "budget": 4000.0}, {"id": "dtf_30", "num": 3, "sheet": "06 Octobre", "clientId": "c_rasihanaka", "clientName": "Rasihanaka", "title": "Commande DTF #3 — Rasihanaka (1790 cm)", "description": "Tirage DTF 17.90 m linéaires (1790 cm)", "frequency": "daily", "date": "2026-10-06", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 1790.0, "dtfM": 17.9, "hours": 17.9, "budget": 358000.0}, {"id": "dtf_31", "num": 4, "sheet": "06 Octobre", "clientId": "c_ranavalona", "clientName": "Ranavalona", "title": "Commande DTF #4 — Ranavalona (335 cm)", "description": "Tirage DTF 3.35 m linéaires (335 cm)", "frequency": "daily", "date": "2026-10-06", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 335.0, "dtfM": 3.35, "hours": 3.35, "budget": 67000.0}, {"id": "dtf_32", "num": 1, "sheet": "07 Octobre", "clientId": "c_andrilalaina", "clientName": "Andrilalaina", "title": "Commande DTF #1 — Andrilalaina (220 cm)", "description": "Tirage DTF 2.20 m linéaires (220 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 220.0, "dtfM": 2.2, "hours": 2.2, "budget": 44000.0}, {"id": "dtf_33", "num": 2, "sheet": "07 Octobre", "clientId": "c_fabienne", "clientName": "Fabienne", "title": "Commande DTF #2 — Fabienne (60 cm)", "description": "Tirage DTF 0.60 m linéaires (60 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 60.0, "dtfM": 0.6, "hours": 0.6, "budget": 12000.0}, {"id": "dtf_34", "num": 3, "sheet": "07 Octobre", "clientId": "c_harison", "clientName": "Harison", "title": "Commande DTF #3 — Harison (80 cm)", "description": "Tirage DTF 0.80 m linéaires (80 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 80.0, "dtfM": 0.8, "hours": 0.8, "budget": 16000.0}, {"id": "dtf_35", "num": 4, "sheet": "07 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #4 — Mirah (450 cm)", "description": "Tirage DTF 4.50 m linéaires (450 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 450.0, "dtfM": 4.5, "hours": 4.5, "budget": 90000.0}, {"id": "dtf_36", "num": 5, "sheet": "07 Octobre", "clientId": "c_nadia", "clientName": "Nadia", "title": "Commande DTF #5 — Nadia (118 cm)", "description": "Tirage DTF 1.18 m linéaires (118 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 118.0, "dtfM": 1.18, "hours": 1.18, "budget": 23600.0}, {"id": "dtf_37", "num": 6, "sheet": "07 Octobre", "clientId": "c_sitraka", "clientName": "Sitraka", "title": "Commande DTF #6 — Sitraka (190 cm)", "description": "Tirage DTF 1.90 m linéaires (190 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 190.0, "dtfM": 1.9, "hours": 1.9, "budget": 38000.0}, {"id": "dtf_38", "num": 7, "sheet": "07 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #7 — Tsiory (554 cm)", "description": "Tirage DTF 5.54 m linéaires (554 cm)", "frequency": "daily", "date": "2026-10-07", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 554.0, "dtfM": 5.54, "hours": 5.54, "budget": 110800.0}, {"id": "dtf_39", "num": 1, "sheet": "08 Octobre", "clientId": "c_lilia", "clientName": "Lilia", "title": "Commande DTF #1 — Lilia (140 cm)", "description": "Tirage DTF 1.40 m linéaires (140 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 140.0, "dtfM": 1.4, "hours": 1.4, "budget": 28000.0}, {"id": "dtf_40", "num": 2, "sheet": "08 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #2 — Mirah (125 cm)", "description": "Tirage DTF 1.25 m linéaires (125 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 125.0, "dtfM": 1.25, "hours": 1.25, "budget": 25000.0}, {"id": "dtf_41", "num": 3, "sheet": "08 Octobre", "clientId": "c_rinah", "clientName": "Rinah", "title": "Commande DTF #3 — Rinah (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_42", "num": 4, "sheet": "08 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Commande DTF #4 — Rojo (142 cm)", "description": "Tirage DTF 1.42 m linéaires (142 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 142.0, "dtfM": 1.42, "hours": 1.42, "budget": 28400.0}, {"id": "dtf_43", "num": 5, "sheet": "08 Octobre", "clientId": "c_sanda", "clientName": "Sanda", "title": "Commande DTF #5 — Sanda (300 cm)", "description": "Tirage DTF 3.00 m linéaires (300 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 300.0, "dtfM": 3.0, "hours": 3.0, "budget": 60000.0}, {"id": "dtf_44", "num": 6, "sheet": "08 Octobre", "clientId": "c_steeve", "clientName": "Steeve", "title": "Commande DTF #6 — Steeve (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_45", "num": 7, "sheet": "08 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #7 — Tsiory (300 cm)", "description": "Tirage DTF 3.00 m linéaires (300 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 300.0, "dtfM": 3.0, "hours": 3.0, "budget": 60000.0}, {"id": "dtf_46", "num": 8, "sheet": "08 Octobre", "clientId": "c_vola", "clientName": "Vola", "title": "Commande DTF #8 — Vola (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_47", "num": 9, "sheet": "08 Octobre", "clientId": "c_sabrinah", "clientName": "Sabrinah", "title": "Commande DTF #9 — Sabrinah (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_48", "num": 10, "sheet": "08 Octobre", "clientId": "c_zo", "clientName": "Zo", "title": "Commande DTF #10 — Zo (100 cm)", "description": "Tirage DTF 1.00 m linéaires (100 cm)", "frequency": "daily", "date": "2026-10-08", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_49", "num": 1, "sheet": "09 Octobre", "clientId": "c_anselme", "clientName": "Anselme", "title": "Commande DTF #1 — Anselme (41 cm)", "description": "Tirage DTF 0.41 m linéaires (41 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 41.0, "dtfM": 0.41, "hours": 0.41, "budget": 8200.0}, {"id": "dtf_50", "num": 2, "sheet": "09 Octobre", "clientId": "c_dina", "clientName": "Dina", "title": "Commande DTF #2 — Dina (340 cm)", "description": "Tirage DTF 3.40 m linéaires (340 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 340.0, "dtfM": 3.4, "hours": 3.4, "budget": 68000.0}, {"id": "dtf_51", "num": 3, "sheet": "09 Octobre", "clientId": "c_gileadapetanquetshrit", "clientName": "Gileada & petanque & tshrit", "title": "Commande DTF #3 — Gileada & petanque & tshrit (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_52", "num": 4, "sheet": "09 Octobre", "clientId": "c_marinazy", "clientName": "Marinazy", "title": "Commande DTF #4 — Marinazy (600 cm)", "description": "Tirage DTF 6.00 m linéaires (600 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 600.0, "dtfM": 6.0, "hours": 6.0, "budget": 120000.0}, {"id": "dtf_53", "num": 5, "sheet": "09 Octobre", "clientId": "c_mialisoa", "clientName": "Mialisoa", "title": "Commande DTF #5 — Mialisoa (111 cm)", "description": "Tirage DTF 1.11 m linéaires (111 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 111.0, "dtfM": 1.11, "hours": 1.11, "budget": 22200.0}, {"id": "dtf_54", "num": 6, "sheet": "09 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #6 — Mirah (120 cm)", "description": "Tirage DTF 1.20 m linéaires (120 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 120.0, "dtfM": 1.2, "hours": 1.2, "budget": 24000.0}, {"id": "dtf_55", "num": 7, "sheet": "09 Octobre", "clientId": "c_steeve", "clientName": "Steeve", "title": "Commande DTF #7 — Steeve (40 cm)", "description": "suite", "frequency": "daily", "date": "2026-10-09", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "suite", "dtfCm": 40.0, "dtfM": 0.4, "hours": 0.4, "budget": 8000.0}, {"id": "dtf_56", "num": 8, "sheet": "09 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #8 — Tsiory (350 cm)", "description": "Tirage DTF 3.50 m linéaires (350 cm)", "frequency": "daily", "date": "2026-10-09", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 350.0, "dtfM": 3.5, "hours": 3.5, "budget": 70000.0}, {"id": "dtf_57", "num": 1, "sheet": "10 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #1 — Amirantely (92 cm)", "description": "Tirage DTF 0.92 m linéaires (92 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 92.0, "dtfM": 0.92, "hours": 0.92, "budget": 18400.0}, {"id": "dtf_58", "num": 2, "sheet": "10 Octobre", "clientId": "c_ranavalona", "clientName": "Ranavalona", "title": "Commande DTF #2 — Ranavalona (483 cm)", "description": "Tirage DTF 4.83 m linéaires (483 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 483.0, "dtfM": 4.83, "hours": 4.83, "budget": 96600.0}, {"id": "dtf_59", "num": 3, "sheet": "10 Octobre", "clientId": "c_sitraka", "clientName": "Sitraka", "title": "Commande DTF #3 — Sitraka (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_60", "num": 4, "sheet": "10 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #4 — Tsiory (538 cm)", "description": "Tirage DTF 5.38 m linéaires (538 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 538.0, "dtfM": 5.38, "hours": 5.38, "budget": 107600.0}, {"id": "dtf_61", "num": 5, "sheet": "10 Octobre", "clientId": "c_tsiry", "clientName": "Tsiry", "title": "Commande DTF #5 — Tsiry (70 cm)", "description": "Tirage DTF 0.70 m linéaires (70 cm)", "frequency": "daily", "date": "2026-10-10", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 70.0, "dtfM": 0.7, "hours": 0.7, "budget": 14000.0}, {"id": "dtf_62", "num": 1, "sheet": "12 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #1 — Amirantely (40 cm)", "description": "Tirage DTF 0.40 m linéaires (40 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 40.0, "dtfM": 0.4, "hours": 0.4, "budget": 8000.0}, {"id": "dtf_63", "num": 2, "sheet": "12 Octobre", "clientId": "c_fahasambarana", "clientName": "Fahasambarana", "title": "Commande DTF #2 — Fahasambarana (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_64", "num": 3, "sheet": "12 Octobre", "clientId": "c_henintsoa", "clientName": "Henintsoa", "title": "Commande DTF #3 — Henintsoa (430 cm)", "description": "Tirage DTF 4.30 m linéaires (430 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 430.0, "dtfM": 4.3, "hours": 4.3, "budget": 86000.0}, {"id": "dtf_65", "num": 4, "sheet": "12 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #4 — Mirah (70 cm)", "description": "Tirage DTF 0.70 m linéaires (70 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 70.0, "dtfM": 0.7, "hours": 0.7, "budget": 14000.0}, {"id": "dtf_66", "num": 5, "sheet": "12 Octobre", "clientId": "c_tshirtmommy", "clientName": "Tshirt Mommy", "title": "Commande DTF #5 — Tshirt Mommy (20 cm)", "description": "Tirage DTF 0.20 m linéaires (20 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 20.0, "dtfM": 0.2, "hours": 0.2, "budget": 4000.0}, {"id": "dtf_67", "num": 6, "sheet": "12 Octobre", "clientId": "c_nadya", "clientName": "Nadya", "title": "Commande DTF #6 — Nadya (70 cm)", "description": "Tirage DTF 0.70 m linéaires (70 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 70.0, "dtfM": 0.7, "hours": 0.7, "budget": 14000.0}, {"id": "dtf_68", "num": 7, "sheet": "12 Octobre", "clientId": "c_sakadi", "clientName": "Sakadi", "title": "Commande DTF #7 — Sakadi (335 cm)", "description": "Tirage DTF 3.35 m linéaires (335 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 335.0, "dtfM": 3.35, "hours": 3.35, "budget": 67000.0}, {"id": "dtf_69", "num": 8, "sheet": "12 Octobre", "clientId": "c_tiavina", "clientName": "Tiavina", "title": "Commande DTF #8 — Tiavina (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_70", "num": 9, "sheet": "12 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #9 — Tsiory (300 cm)", "description": "Tirage DTF 3.00 m linéaires (300 cm)", "frequency": "daily", "date": "2026-10-12", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 300.0, "dtfM": 3.0, "hours": 3.0, "budget": 60000.0}, {"id": "dtf_71", "num": 1, "sheet": "13 Octobre", "clientId": "c_akram", "clientName": "Akram", "title": "Commande DTF #1 — Akram (780 cm)", "description": "Tirage DTF 7.80 m linéaires (780 cm)", "frequency": "daily", "date": "2026-10-13", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 780.0, "dtfM": 7.8, "hours": 7.8, "budget": 156000.0}, {"id": "dtf_72", "num": 2, "sheet": "13 Octobre", "clientId": "c_hanitra", "clientName": "Hanitra", "title": "Commande DTF #2 — Hanitra (105 cm)", "description": "Tirage DTF 1.05 m linéaires (105 cm)", "frequency": "daily", "date": "2026-10-13", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 105.0, "dtfM": 1.05, "hours": 1.05, "budget": 21000.0}, {"id": "dtf_73", "num": 3, "sheet": "13 Octobre", "clientId": "c_mirahsafidy", "clientName": "Mirah Safidy", "title": "Commande DTF #3 — Mirah Safidy (456 cm)", "description": "Tirage DTF 4.56 m linéaires (456 cm)", "frequency": "daily", "date": "2026-10-13", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 456.0, "dtfM": 4.56, "hours": 4.56, "budget": 91200.0}, {"id": "dtf_74", "num": 4, "sheet": "13 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #4 — Tsiory (267 cm)", "description": "Tirage DTF 2.67 m linéaires (267 cm)", "frequency": "daily", "date": "2026-10-13", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 267.0, "dtfM": 2.67, "hours": 2.67, "budget": 53400.0}, {"id": "dtf_75", "num": 1, "sheet": "14 Octobre", "clientId": "c_lcagape", "clientName": "LC Agape", "title": "Commande DTF #1 — LC Agape (4879 cm)", "description": "Tirage DTF 48.79 m linéaires (4879 cm)", "frequency": "daily", "date": "2026-10-14", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 4879.0, "dtfM": 48.79, "hours": 48.79, "budget": 975800.0}, {"id": "dtf_76", "num": 2, "sheet": "14 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Commande DTF #2 — Rojo (120 cm)", "description": "Tirage DTF 1.20 m linéaires (120 cm)", "frequency": "daily", "date": "2026-10-14", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 120.0, "dtfM": 1.2, "hours": 1.2, "budget": 24000.0}, {"id": "dtf_77", "num": 3, "sheet": "14 Octobre", "clientId": "c_sabrina", "clientName": "Sabrina", "title": "Commande DTF #3 — Sabrina (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-14", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_78", "num": 4, "sheet": "14 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #4 — Tsiory (238 cm)", "description": "Tirage DTF 2.38 m linéaires (238 cm)", "frequency": "daily", "date": "2026-10-14", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 238.0, "dtfM": 2.38, "hours": 2.38, "budget": 47600.0}, {"id": "dtf_79", "num": 1, "sheet": "15 Octobre", "clientId": "c_logoskoto", "clientName": "Logo skoto", "title": "Commande DTF #1 — Logo skoto (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_80", "num": 2, "sheet": "15 Octobre", "clientId": "c_mpiandryfitiavana", "clientName": "Mpiandry Fitiavana", "title": "Commande DTF #2 — Mpiandry Fitiavana (60 cm)", "description": "Tirage DTF 0.60 m linéaires (60 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 60.0, "dtfM": 0.6, "hours": 0.6, "budget": 12000.0}, {"id": "dtf_81", "num": 3, "sheet": "15 Octobre", "clientId": "c_ranto", "clientName": "Ranto", "title": "Commande DTF #3 — Ranto (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_82", "num": 4, "sheet": "15 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Commande DTF #4 — Rojo (305 cm)", "description": "Tirage DTF 3.05 m linéaires (305 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 305.0, "dtfM": 3.05, "hours": 3.05, "budget": 61000.0}, {"id": "dtf_83", "num": 5, "sheet": "15 Octobre", "clientId": "c_steeve", "clientName": "Steeve", "title": "Commande DTF #5 — Steeve (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_84", "num": 6, "sheet": "15 Octobre", "clientId": "c_tshirtmarion", "clientName": "Tshirt Marion", "title": "Commande DTF #6 — Tshirt Marion (25 cm)", "description": "Tirage DTF 0.25 m linéaires (25 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 25.0, "dtfM": 0.25, "hours": 0.25, "budget": 5000.0}, {"id": "dtf_85", "num": 7, "sheet": "15 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #7 — Tsiory (1183 cm)", "description": "Tirage DTF 11.83 m linéaires (1183 cm)", "frequency": "daily", "date": "2026-10-15", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 1183.0, "dtfM": 11.83, "hours": 11.83, "budget": 236600.0}, {"id": "dtf_86", "num": 1, "sheet": "16 Octobre", "clientId": "c_dina", "clientName": "Dina", "title": "Commande DTF #1 — Dina (230 cm)", "description": "Tirage DTF 2.30 m linéaires (230 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 230.0, "dtfM": 2.3, "hours": 2.3, "budget": 46000.0}, {"id": "dtf_87", "num": 2, "sheet": "16 Octobre", "clientId": "c_fahasambarana", "clientName": "Fahasambarana", "title": "Commande DTF #2 — Fahasambarana (120 cm)", "description": "Tirage DTF 1.20 m linéaires (120 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 120.0, "dtfM": 1.2, "hours": 1.2, "budget": 24000.0}, {"id": "dtf_88", "num": 3, "sheet": "16 Octobre", "clientId": "c_faratiavina", "clientName": "Fara Tiavina", "title": "Commande DTF #3 — Fara Tiavina (195 cm)", "description": "Tirage DTF 1.95 m linéaires (195 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 195.0, "dtfM": 1.95, "hours": 1.95, "budget": 39000.0}, {"id": "dtf_89", "num": 4, "sheet": "16 Octobre", "clientId": "c_lalaina", "clientName": "Lalaina", "title": "Commande DTF #4 — Lalaina (325 cm)", "description": "Tirage DTF 3.25 m linéaires (325 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 325.0, "dtfM": 3.25, "hours": 3.25, "budget": 65000.0}, {"id": "dtf_90", "num": 5, "sheet": "16 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #5 — Mirah (705 cm)", "description": "Tirage DTF 7.05 m linéaires (705 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 705.0, "dtfM": 7.05, "hours": 7.05, "budget": 141000.0}, {"id": "dtf_91", "num": 6, "sheet": "16 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #6 — Tsiory (140 cm)", "description": "Tirage DTF 1.40 m linéaires (140 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 140.0, "dtfM": 1.4, "hours": 1.4, "budget": 28000.0}, {"id": "dtf_92", "num": 7, "sheet": "16 Octobre", "clientId": "c_hanitra", "clientName": "Hanitra", "title": "Commande DTF #7 — Hanitra (140 cm)", "description": "Tirage DTF 1.40 m linéaires (140 cm)", "frequency": "daily", "date": "2026-10-16", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 140.0, "dtfM": 1.4, "hours": 1.4, "budget": 28000.0}, {"id": "dtf_93", "num": 1, "sheet": "17 Octobre", "clientId": "c_benja", "clientName": "Benja", "title": "Commande DTF #1 — Benja (50 cm)", "description": "Tirage DTF 0.50 m linéaires (50 cm)", "frequency": "daily", "date": "2026-10-17", "priority": "low", "status": "todo", "statutProd": "En attente", "etatPaiement": "Payé", "avanceMode": "", "remarques": "", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_94", "num": 2, "sheet": "17 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #2 — Tsiory (461 cm)", "description": "Tirage DTF 4.61 m linéaires (461 cm)", "frequency": "daily", "date": "2026-10-17", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 461.0, "dtfM": 4.61, "hours": 4.61, "budget": 92200.0}, {"id": "dtf_95", "num": 3, "sheet": "17 Octobre", "clientId": "c_amirantely", "clientName": "Amirantely", "title": "Commande DTF #3 — Amirantely (65 cm)", "description": "Tirage DTF 0.65 m linéaires (65 cm)", "frequency": "daily", "date": "2026-10-17", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 65.0, "dtfM": 0.65, "hours": 0.65, "budget": 13000.0}, {"id": "dtf_96", "num": 4, "sheet": "17 Octobre", "clientId": "c_damba", "clientName": "Damba", "title": "Commande DTF #4 — Damba (160 cm)", "description": "Presse 14pcs", "frequency": "daily", "date": "2026-10-17", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Presse 14pcs", "dtfCm": 160.0, "dtfM": 1.6, "hours": 1.6, "budget": 32000.0}, {"id": "dtf_97", "num": 5, "sheet": "17 Octobre", "clientId": "c_dihyfiderana", "clientName": "Dihy fiderana", "title": "Commande DTF #5 — Dihy fiderana (60 cm)", "description": "Tirage DTF 0.60 m linéaires (60 cm)", "frequency": "daily", "date": "2026-10-17", "priority": "low", "status": "todo", "statutProd": "En attente", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "", "dtfCm": 60.0, "dtfM": 0.6, "hours": 0.6, "budget": 12000.0}, {"id": "dtf_98", "num": 1, "sheet": "19 Octobre", "clientId": "c_tsiory", "clientName": "Tsiory", "title": "Commande DTF #1 — Tsiory (906 cm)", "description": "508 Brickaville • Souvenir Mica new camion & Confection Doris (X5) • baleine Misantatra ny vita malagasy & zanak'ANTEMORO", "frequency": "daily", "date": "2026-10-19", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "508 Brickaville • Souvenir Mica new camion & Confection Doris (X5) • baleine Misantatra ny vita malagasy & zanak'ANTEMORO", "dtfCm": 906.0, "dtfM": 9.06, "hours": 9.06, "budget": 181200.0}, {"id": "dtf_99", "num": 2, "sheet": "19 Octobre", "clientId": "c_fahasambarana", "clientName": "Fahasambarana", "title": "Commande DTF #2 — Fahasambarana (380 cm)", "description": "fleure Correction", "frequency": "daily", "date": "2026-10-19", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "fleure Correction", "dtfCm": 380.0, "dtfM": 3.8, "hours": 3.8, "budget": 76000.0}, {"id": "dtf_100", "num": 3, "sheet": "19 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Commande DTF #3 — Mirah (75 cm)", "description": "FPA & hand lips & CSB", "frequency": "daily", "date": "2026-10-19", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "FPA & hand lips & CSB", "dtfCm": 75.0, "dtfM": 0.75, "hours": 0.75, "budget": 15000.0}, {"id": "dtf_101", "num": 4, "sheet": "19 Octobre", "clientId": "c_mitia", "clientName": "Mitia", "title": "Commande DTF #4 — Mitia (50 cm)", "description": "Oh my stars & m's property & coeur & lips", "frequency": "daily", "date": "2026-10-19", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Oh my stars & m's property & coeur & lips", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_102", "num": 5, "sheet": "19 Octobre", "clientId": "c_lilie", "clientName": "Lilie", "title": "Commande DTF #5 — Lilie (412 cm)", "description": "Ares Antsoha", "frequency": "daily", "date": "2026-10-19", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Ares Antsoha", "dtfCm": 412.0, "dtfM": 4.12, "hours": 4.12, "budget": 82400.0}, {"id": "dtf_103", "num": 6, "sheet": "19 Octobre", "clientId": "c_santio", "clientName": "Santio", "title": "Commande DTF #6 — Santio (566 cm)", "description": "Famille VECILAS & UIR & Polisim-pirenena & cospn • Thellia & You re my only one & taranaky mandrosy & valisoa tech & black clover", "frequency": "daily", "date": "2026-10-19", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Non payé", "avanceMode": "", "remarques": "Famille VECILAS & UIR & Polisim-pirenena & cospn • Thellia & You re my only one & taranaky mandrosy & valisoa tech & black clover", "dtfCm": 566.0, "dtfM": 5.66, "hours": 5.66, "budget": 113200.0}, {"id": "dtf_104", "num": 7, "sheet": "19 Octobre", "clientId": "c_steeve", "clientName": "Steeve", "title": "Commande DTF #7 — Steeve (50 cm)", "description": "Dino sutie", "frequency": "daily", "date": "2026-10-19", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Dino sutie", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}, {"id": "dtf_105", "num": 1, "sheet": "20 Octobre", "clientId": "c_lalaina", "clientName": "Lalaina", "title": "Lalaina — Voahirana FTL", "description": "Voahirana FTL", "frequency": "daily", "date": "2026-10-20", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Voahirana FTL", "folderPathClean": "Lalaina • Voahirana FTL (55 cm)", "dtfCm": 55.0, "dtfM": 0.55, "hours": 0.55, "budget": 11000.0}, {"id": "dtf_106", "num": 4, "sheet": "20 Octobre", "clientId": "c_tsiahiana", "clientName": "Tsiahiana", "title": "Tsiahiana — fete de mort & zana-drazana androrangabe", "description": "fete de mort & zana-drazana androrangabe", "frequency": "daily", "date": "2026-10-20", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "fete de mort & zana-drazana androrangabe", "dtfCm": 280.0, "dtfM": 2.8, "hours": 2.8, "budget": 56000.0}, {"id": "dtf_107", "num": 5, "sheet": "20 Octobre", "clientId": "c_andrilalaina", "clientName": "Andrilalaina", "title": "Andrilalaina — Ambodivoara & Aloalo", "description": "Ambodivoara & Aloalo", "frequency": "daily", "date": "2026-10-20", "priority": "medium", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Ambodivoara & Aloalo", "dtfCm": 100.0, "dtfM": 1.0, "hours": 1.0, "budget": 20000.0}, {"id": "dtf_108", "num": 6, "sheet": "20 Octobre", "clientId": "c_rojo", "clientName": "Rojo", "title": "Rojo — firaisankina & EPP Mahasoa & Taranak'i Denise", "description": "firaisankina & EPP Mahasoa & Taranak'i Denise", "frequency": "daily", "date": "2026-10-20", "priority": "high", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "firaisankina & EPP Mahasoa & Taranak'i Denise", "dtfCm": 627.0, "dtfM": 6.27, "hours": 6.27, "budget": 125400.0}, {"id": "dtf_109", "num": 8, "sheet": "20 Octobre", "clientId": "c_mirah", "clientName": "Mirah", "title": "Mirah — Université Toliara & ENS", "description": "Université Toliara & ENS", "frequency": "daily", "date": "2026-10-20", "priority": "low", "status": "done", "statutProd": "Terminé", "etatPaiement": "Payé", "avanceMode": "", "remarques": "Université Toliara & ENS", "dtfCm": 50.0, "dtfM": 0.5, "hours": 0.5, "budget": 10000.0}]
       };
+
+      // Smart ID-based merge so tasks added on any device or in defaultState are never lost or overwritten by stale local cache
+      function mergeClientsAndTasks(baseClients, incomingClients, baseTasks, incomingTasks, deletedIds = []) {
+        const delSet = new Set((deletedIds || []).map(String));
+        const clientMap = new Map();
+        (baseClients || []).forEach(c => { if (c && c.id) clientMap.set(String(c.id), Object.assign({}, c)); });
+        (incomingClients || []).forEach(c => {
+          if (c && c.id) {
+            const prev = clientMap.get(String(c.id)) || {};
+            clientMap.set(String(c.id), Object.assign({}, prev, c));
+          }
+        });
+
+        const taskMap = new Map();
+        (baseTasks || []).forEach(t => {
+          if (t && t.id && !delSet.has(String(t.id))) {
+            taskMap.set(String(t.id), Object.assign({}, t));
+          }
+        });
+        (incomingTasks || []).forEach(t => {
+          if (t && t.id && !delSet.has(String(t.id))) {
+            const prev = taskMap.get(String(t.id));
+            if (!prev || (Number(t.updatedAtMs) || 0) >= (Number(prev.updatedAtMs) || 0)) {
+              taskMap.set(String(t.id), Object.assign({}, prev || {}, t));
+            }
+          }
+        });
+
+        const mergedTasks = Array.from(taskMap.values()).sort((a, b) => {
+          if (a.date !== b.date) return String(b.date || '').localeCompare(String(a.date || ''));
+          return (Number(b.num) || 0) - (Number(a.num) || 0);
+        });
+
+        return {
+          clients: Array.from(clientMap.values()),
+          tasks: mergedTasks
+        };
+      }
 
       let state = loadState();
 
       function loadState() {
+        const freshBase = JSON.parse(JSON.stringify(defaultState));
         try {
-          const saved = localStorage.getItem(STORAGE_KEY);
+          const rawV4 = localStorage.getItem(STORAGE_KEY);
+          const rawV3 = localStorage.getItem(LEGACY_STORAGE_KEY);
+          const saved = rawV4 || rawV3;
           if (saved) {
             const parsed = JSON.parse(saved);
-            if (parsed && Array.isArray(parsed.tasks) && parsed.tasks.length >= 50) {
-              return Object.assign({}, defaultState, parsed);
+            if (parsed && Array.isArray(parsed.tasks)) {
+              const delIds = Array.isArray(parsed.deletedTaskIds) ? parsed.deletedTaskIds : [];
+              const merged = mergeClientsAndTasks(
+                freshBase.clients,
+                parsed.clients || [],
+                freshBase.tasks,
+                parsed.tasks || [],
+                delIds
+              );
+              return Object.assign({}, freshBase, parsed, {
+                clients: merged.clients,
+                tasks: merged.tasks,
+                deletedTaskIds: delIds
+              });
             }
           }
         } catch (e) {}
-        return JSON.parse(JSON.stringify(defaultState));
+        return freshBase;
       }
 
       const GDRIVE_CONFIG_KEY = 'mt_suivi_dtf_gdrive_config_v1';
       let cloudConfig = loadCloudConfig();
       let gdriveSyncTimeout = null;
+      let crossTabChannel = null;
+      try {
+        if (typeof BroadcastChannel !== 'undefined') {
+          crossTabChannel = new BroadcastChannel('mt_suivi_dtf_cross_tab_v4');
+        }
+      } catch (e) {}
 
       function loadCloudConfig() {
         try {
@@ -2137,11 +2358,60 @@
         };
       }
 
+      function detectPlatformType() {
+        const ua = String(navigator.userAgent || '');
+        const isMobileUA = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || Boolean(navigator.userAgentData && navigator.userAgentData.mobile);
+        const vw = window.innerWidth || document.documentElement.clientWidth || 1024;
+        if (vw <= 640 || (isMobileUA && vw <= 768)) return 'smartphone';
+        if (vw <= 1024) return 'tablet';
+        return 'desktop';
+      }
+
+      function applyPlatformRecognitionUI() {
+        const platform = detectPlatformType();
+        const htmlEl = document.documentElement;
+        htmlEl.setAttribute('data-platform', platform);
+        htmlEl.classList.toggle('platform-smartphone', platform === 'smartphone');
+        htmlEl.classList.toggle('platform-tablet', platform === 'tablet');
+        htmlEl.classList.toggle('platform-desktop', platform === 'desktop');
+
+        const isPhone = platform === 'smartphone';
+        if (typeof sphericalAngle !== 'undefined' && sphericalAngle) {
+          sphericalAngle.radius = isPhone ? 20.5 : 17.5;
+          if (typeof updateCameraPosition === 'function') updateCameraPosition();
+        }
+        if (typeof resizeThreeCanvas === 'function') {
+          resizeThreeCanvas();
+        }
+        if (typeof growthChartInstance !== 'undefined' && growthChartInstance) {
+          const tickSz = isPhone ? 7 : 9;
+          const legSz = isPhone ? 8 : 10;
+          growthChartInstance.options.plugins.legend.labels.font.size = legSz;
+          growthChartInstance.options.scales.x.ticks.font.size = tickSz;
+          growthChartInstance.options.scales.y.ticks.font.size = tickSz;
+          growthChartInstance.update('none');
+        }
+        if (typeof radarChartInstance !== 'undefined' && radarChartInstance) {
+          radarChartInstance.options.plugins.legend.labels.font.size = isPhone ? 8 : 10;
+          radarChartInstance.options.scales.r.pointLabels.font.size = isPhone ? 8 : 10;
+          radarChartInstance.update('none');
+        }
+        if (typeof weeklyBarChartInstance !== 'undefined' && weeklyBarChartInstance) {
+          weeklyBarChartInstance.options.scales.x.ticks.font.size = isPhone ? 7 : 8;
+          weeklyBarChartInstance.options.scales.y.ticks.font.size = isPhone ? 7 : 9;
+          weeklyBarChartInstance.update('none');
+        }
+        return platform;
+      }
+
       function updateMadagascarClockUI() {
         const mada = getMadagascarNowParts();
+        const isPhone = document.documentElement.classList.contains('platform-smartphone');
         const clockEl = document.getElementById('madagascarClockText');
         if (clockEl) {
-          clockEl.textContent = `🇲🇬 ${mada.fullDateFr} • ${mada.timeStr} (GMT+3)`;
+          clockEl.textContent = isPhone
+            ? `🇲🇬 ${mada.shortDateAbbrev} • ${mada.timeStr}`
+            : `🇲🇬 ${mada.fullDateFr} • ${mada.timeStr} (GMT+3)`;
         }
         const holoBtn = document.getElementById('openTodayHologramBtn');
         if (holoBtn) {
@@ -2175,6 +2445,19 @@
         updateMadagascarClockUI();
       }
 
+      function updateMultiDeviceBadgeUI(statusType, customText) {
+        const dot = document.getElementById('multiDeviceSyncDot');
+        const txt = document.getElementById('multiDeviceSyncText');
+        if (!dot || !txt) return;
+        if (statusType === 'syncing') {
+          dot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-ping';
+          txt.textContent = customText || '🔄 Synchronisation...';
+        } else {
+          dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+          txt.textContent = customText || `🔄 Sync (${state.tasks.length} tâches)`;
+        }
+      }
+
       function updateCloudBadgeUI(statusType, customText) {
         const dot = document.getElementById('cloudStatusDot');
         const lbl = document.getElementById('cloudStatusLabel');
@@ -2203,16 +2486,172 @@
         const countEl = document.getElementById('cloudSnapshotsCountBadge');
         const mada = getMadagascarNowParts();
         const totalCm = state.tasks.reduce((s, t) => s + (Number(t.dtfCm) || 0), 0);
-        if (countEl) countEl.textContent = `Mode Allégé Google Drive`;
+        if (countEl) countEl.textContent = `Sync Multi-Appareils + Google Drive Actifs`;
         if (!listEl) return;
         listEl.innerHTML = `
           <div class="p-3 rounded-xl bg-slate-900/85 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <div class="font-bold text-emerald-300">☁️ Fichier de sauvegarde Google Drive : <code>MT_Suivi_DTF_Sauvegarde_Drive.json</code></div>
-              <div class="text-[11px] opacity-80 font-mono mt-0.5">🇲🇬 État actuel (${mada.shortDateFr} ${mada.year} • ${mada.timeStr} GMT+3) : ${state.tasks.length} tâches • ${state.clients.length} clients • ${Math.round(totalCm).toLocaleString('fr-FR')} cm</div>
+              <div class="font-bold text-emerald-300">☁️ Sauvegarde Multi-Appareils & Google Drive : <code>MT_Suivi_DTF_Sauvegarde_Drive.json</code></div>
+              <div class="text-[11px] opacity-80 font-mono mt-0.5">🇲🇬 État synchronisé (${mada.shortDateFr} ${mada.year} • ${mada.timeStr} GMT+3) : ${state.tasks.length} tâches • ${state.clients.length} clients • ${Math.round(totalCm).toLocaleString('fr-FR')} cm</div>
             </div>
           </div>
         `;
+      }
+
+      // ==================== REAL-TIME MULTI-DEVICE CLOUD SYNC ENGINE ====================
+      // Broadcasts any added/updated/deleted task or client to the shared cloud relay so every device (PC, mobile, tablet) stays in sync automatically.
+      async function broadcastMultiDeviceSync(packet) {
+        const syncMsg = Object.assign({
+          app: 'MT_SUIVI_DTF_V4',
+          ts: Date.now()
+        }, packet);
+
+        try {
+          if (crossTabChannel) {
+            crossTabChannel.postMessage(syncMsg);
+          }
+        } catch (e) {}
+
+        try {
+          updateMultiDeviceBadgeUI('syncing', '🔄 Envoi Cloud...');
+          await fetch(MULTI_DEVICE_SYNC_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(syncMsg)
+          });
+          updateMultiDeviceBadgeUI('ok', `🔄 Sync (${state.tasks.length} tâches)`);
+        } catch (err) {
+          updateMultiDeviceBadgeUI('ok', `🔄 Sync (${state.tasks.length} tâches)`);
+        }
+      }
+
+      function applyIncomingSyncPacket(pkt) {
+        if (!pkt || pkt.app !== 'MT_SUIVI_DTF_V4') return false;
+        let changed = false;
+        if (!Array.isArray(state.deletedTaskIds)) state.deletedTaskIds = [];
+
+        if (pkt.type === 'delete_task' && pkt.taskId) {
+          const tid = String(pkt.taskId);
+          if (!state.deletedTaskIds.includes(tid)) state.deletedTaskIds.push(tid);
+          const beforeLen = state.tasks.length;
+          state.tasks = state.tasks.filter(t => String(t.id) !== tid);
+          if (state.tasks.length !== beforeLen) changed = true;
+        }
+
+        if (Array.isArray(pkt.clients) && pkt.clients.length > 0) {
+          pkt.clients.forEach(incC => {
+            if (!incC || !incC.id) return;
+            const idx = state.clients.findIndex(c => String(c.id) === String(incC.id));
+            if (idx === -1) {
+              state.clients.unshift(incC);
+              changed = true;
+            } else {
+              state.clients[idx] = Object.assign({}, state.clients[idx], incC);
+              changed = true;
+            }
+          });
+        }
+
+        if (Array.isArray(pkt.tasks) && pkt.tasks.length > 0) {
+          pkt.tasks.forEach(incT => {
+            if (!incT || !incT.id) return;
+            const tid = String(incT.id);
+            if (state.deletedTaskIds.includes(tid)) return;
+            const idx = state.tasks.findIndex(t => String(t.id) === tid);
+            if (idx === -1) {
+              state.tasks.unshift(incT);
+              changed = true;
+            } else {
+              const cur = state.tasks[idx];
+              if ((Number(incT.updatedAtMs) || 0) >= (Number(cur.updatedAtMs) || 0)) {
+                state.tasks[idx] = Object.assign({}, cur, incT);
+                changed = true;
+              }
+            }
+          });
+        }
+        return changed;
+      }
+
+      async function pullMultiDeviceCloudSync(silent = true) {
+        try {
+          if (!silent) updateMultiDeviceBadgeUI('syncing', '🔄 Sync appareils...');
+          const res = await fetch(MULTI_DEVICE_SYNC_URL + '/json?poll=1&since=all', { method: 'GET' });
+          if (res.ok) {
+            const text = await res.text();
+            const lines = text.split(String.fromCharCode(10)).map(s => s.trim()).filter(Boolean);
+            let anyChanged = false;
+            lines.forEach(line => {
+              try {
+                const outer = JSON.parse(line);
+                if (outer && outer.event === 'message' && outer.message) {
+                  const inner = JSON.parse(outer.message);
+                  if (applyIncomingSyncPacket(inner)) anyChanged = true;
+                }
+              } catch (e) {}
+            });
+            if (anyChanged) {
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+              renderAll();
+              const holoModal = document.getElementById('hologramDayModal');
+              if (holoModal && !holoModal.classList.contains('hidden')) {
+                renderHologramModalContent(currentHoloDate);
+              }
+              if (!silent) showToast(`Synchronisé : ${state.tasks.length} tâches à jour sur cet appareil !`);
+            }
+          }
+        } catch (err) {}
+        updateMultiDeviceBadgeUI('ok', `🔄 Sync (${state.tasks.length} tâches)`);
+      }
+
+      function startLiveMultiDeviceStream() {
+        try {
+          if (typeof EventSource !== 'undefined') {
+            const es = new EventSource(MULTI_DEVICE_SYNC_URL + '/sse');
+            es.onmessage = (ev) => {
+              try {
+                const outer = JSON.parse(ev.data);
+                const msgStr = outer && outer.message ? outer.message : ev.data;
+                const inner = JSON.parse(msgStr);
+                if (applyIncomingSyncPacket(inner)) {
+                  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                  renderAll();
+                  const holoModal = document.getElementById('hologramDayModal');
+                  if (holoModal && !holoModal.classList.contains('hidden')) {
+                    renderHologramModalContent(currentHoloDate);
+                  }
+                }
+              } catch (e) {}
+            };
+          }
+        } catch (err) {}
+
+        if (crossTabChannel) {
+          crossTabChannel.onmessage = (ev) => {
+            if (ev && ev.data && applyIncomingSyncPacket(ev.data)) {
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+              renderAll();
+            }
+          };
+        }
+
+        window.addEventListener('storage', (ev) => {
+          if (ev.key === STORAGE_KEY && ev.newValue) {
+            try {
+              const parsed = JSON.parse(ev.newValue);
+              if (parsed && Array.isArray(parsed.tasks)) {
+                state.clients = parsed.clients || state.clients;
+                state.tasks = parsed.tasks;
+                state.deletedTaskIds = parsed.deletedTaskIds || [];
+                renderAll();
+              }
+            } catch (e) {}
+          }
+        });
+
+        window.addEventListener('focus', () => {
+          pullMultiDeviceCloudSync(true);
+        });
       }
 
       async function pushStateToRemoteCloud(reasonLabel = 'Synchronisation Google Drive') {
@@ -2267,11 +2706,12 @@
         }
       }
 
-      // Ultra-fast, zero-lag saveState (never blocks UI or throws ReferenceError)
+      // Ultra-fast saveState + multi-device cloud trigger
       function saveState(mutationReason = null) {
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         } catch (e) {}
+        updateMultiDeviceBadgeUI('ok', `🔄 Sync (${state.tasks.length} tâches)`);
         if (mutationReason && cloudConfig.autoSave !== false && (cloudConfig.endpointUrl || '').trim() !== '') {
           if (gdriveSyncTimeout) clearTimeout(gdriveSyncTimeout);
           gdriveSyncTimeout = setTimeout(() => {
@@ -2280,13 +2720,37 @@
         }
       }
 
+      // ==================== GOOGLE ACCOUNT RECOGNITION ALGORITHM & LOGIN CONTROL ====================
+      function recognizeGoogleAccount(rawEmailInput, rawPinInput = null) {
+        const cleaned = String(rawEmailInput || '').trim().toLowerCase();
+        if (!cleaned || !cleaned.includes('@')) {
+          return { isValid: false, isOwnerEmail: false, isOwnerAdmin: false, normalizedEmail: '' };
+        }
+        const parts = cleaned.split('@');
+        let userPart = parts[0].trim();
+        let domainPart = (parts[1] || '').trim();
+        if (domainPart === 'googlemail.com') domainPart = 'gmail.com';
+        const normalizedEmail = `${userPart}@${domainPart}`;
+        const isOwnerEmail = normalizedEmail === ADMIN_EMAIL.toLowerCase();
+        const pinMatches = rawPinInput !== null
+          ? String(rawPinInput).trim() === ADMIN_PASSWORD
+          : Boolean(state.adminPasswordVerified);
+        return {
+          isValid: true,
+          isOwnerEmail,
+          isOwnerAdmin: isOwnerEmail && pinMatches,
+          normalizedEmail
+        };
+      }
+
       function isAdminUser() {
-        return String(state.currentUserEmail || '').trim().toLowerCase() === ADMIN_EMAIL.toLowerCase();
+        const rec = recognizeGoogleAccount(state.currentUserEmail);
+        return Boolean(rec.isOwnerEmail && state.adminPasswordVerified);
       }
 
       function requireAdmin() {
         if (!isAdminUser()) {
-          showToast('Accès refusé : Mode Visiteur (Lecture seule). Seul ' + ADMIN_EMAIL + ' peut modifier.');
+          showToast('Accès réservé à l\'administrateur. Connectez-vous avec le compte propriétaire.');
           return false;
         }
         return true;
@@ -2302,19 +2766,23 @@
         const dot = document.getElementById('authStatusDot');
         const lbl = document.getElementById('authStatusLabel');
         const btn = document.getElementById('openAuthModalBtn');
+        const visBtn = document.getElementById('visitorLoginBtn');
         if (dot && lbl && btn) {
           if (isAdm) {
             dot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
             lbl.textContent = 'Admin : ' + ADMIN_EMAIL;
             lbl.className = 'text-cyan-300 font-bold';
-            btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-slate-900/90 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_15px_rgba(0,242,254,0.2)]';
           } else {
-            const visMail = (state.currentUserEmail && state.currentUserEmail.trim()) ? state.currentUserEmail.trim() : 'Visiteur';
             dot.className = 'w-2 h-2 rounded-full bg-rose-500';
-            lbl.textContent = 'Visiteur (Lecture seule) : ' + visMail;
+            lbl.textContent = 'Mode Consultation';
             lbl.className = 'text-rose-400 font-bold';
-            btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 bg-rose-950/60 border-rose-500/50 hover:border-rose-400';
           }
+        }
+        if (visBtn) {
+          const hasVisitorMail = state.currentUserEmail && !isAdm;
+          visBtn.innerHTML = hasVisitorMail
+            ? `<span class="w-2 h-2 rounded-full bg-amber-400"></span><span>Visiteur : ${state.currentUserEmail} (Changer)</span>`
+            : `<svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg><span>Connexion Google</span>`;
         }
       }
 
@@ -2402,12 +2870,12 @@
         if (isLight) {
           htmlEl.classList.remove('dark');
           htmlEl.classList.add('light');
-          if (knob) knob.classList.add('translate-x-6');
+          if (knob) knob.classList.add('translate-x-5');
           if (modeTxt) modeTxt.textContent = 'Thème Néon • Clair';
         } else {
           htmlEl.classList.remove('light');
           htmlEl.classList.add('dark');
-          if (knob) knob.classList.remove('translate-x-6');
+          if (knob) knob.classList.remove('translate-x-5');
           if (modeTxt) modeTxt.textContent = 'Thème Néon';
         }
 
@@ -4003,13 +4471,15 @@
         const t = state.tasks.find(item => String(item.id) === String(taskId));
         if (!t) return;
         t.etatPaiement = (t.etatPaiement || 'Payé') === 'Payé' ? 'Non payé' : 'Payé';
+        t.updatedAtMs = Date.now();
         saveState(`Paiement basculé (${t.clientName} : ${t.etatPaiement})`);
+        broadcastMultiDeviceSync({ type: 'upsert_tasks', tasks: [t] });
         renderAll();
         const holoModal = document.getElementById('hologramDayModal');
         if (holoModal && !holoModal.classList.contains('hidden')) {
           renderHologramModalContent(currentHoloDate);
         }
-        showToast(`Règlement mis à jour : ${t.etatPaiement}`);
+        showToast(`Règlement synchronisé : ${t.etatPaiement}`);
       }
 
       function cycleTaskStatus(taskId) {
@@ -4022,25 +4492,31 @@
         const nextIdx = (curIdx === -1 ? 0 : curIdx + 1) % order.length;
         t.status = order[nextIdx];
         t.statutProd = labels[t.status];
+        t.updatedAtMs = Date.now();
         saveState(`Statut modifié (${t.clientName} : ${t.statutProd})`);
+        broadcastMultiDeviceSync({ type: 'upsert_tasks', tasks: [t] });
         renderAll();
         const holoModal = document.getElementById('hologramDayModal');
         if (holoModal && !holoModal.classList.contains('hidden')) {
           renderHologramModalContent(currentHoloDate);
         }
-        showToast('Statut production mis à jour : ' + t.statutProd);
+        showToast('Statut production synchronisé : ' + t.statutProd);
       }
 
       function deleteTask(taskId) {
         if (!requireAdmin()) return;
-        state.tasks = state.tasks.filter(t => String(t.id) !== String(taskId));
+        const tid = String(taskId);
+        if (!Array.isArray(state.deletedTaskIds)) state.deletedTaskIds = [];
+        if (!state.deletedTaskIds.includes(tid)) state.deletedTaskIds.push(tid);
+        state.tasks = state.tasks.filter(t => String(t.id) !== tid);
         saveState('Suppression d\'une tâche DTF');
+        broadcastMultiDeviceSync({ type: 'delete_task', taskId: tid });
         renderAll();
         const holoModal = document.getElementById('hologramDayModal');
         if (holoModal && !holoModal.classList.contains('hidden')) {
           renderHologramModalContent(currentHoloDate);
         }
-        showToast('Commande supprimée');
+        showToast('Commande supprimée et synchronisée');
       }
 
       function openTaskModal(taskId = null, preselectedClientId = null) {
@@ -4534,13 +5010,21 @@
           }
         });
 
+        const touchedTasks = state.tasks.filter(t => t.date === dateVal);
+        touchedTasks.forEach(t => { t.updatedAtMs = Date.now(); });
+        saveState(`Ajout fichiers DTF (${dateVal})`);
+        broadcastMultiDeviceSync({
+          type: 'upsert_tasks',
+          clients: batchItems.map(b => b.clientObj),
+          tasks: touchedTasks.slice(0, 15)
+        });
         renderAll();
         if (mergedExistingCount > 0 && createdNewCount === 0) {
-          showToast(`Métrage additionné sur ${mergedExistingCount} ligne(s) client existante(s) !`);
+          showToast(`Métrage additionné et synchronisé sur ${mergedExistingCount} ligne(s) !`);
         } else if (mergedExistingCount > 0) {
-          showToast(`${createdNewCount} nouvelle(s) ligne(s) + ${mergedExistingCount} ligne(s) client cumulée(s) !`);
+          showToast(`${createdNewCount} nouvelle(s) ligne(s) + ${mergedExistingCount} cumulée(s) (Synchronisé) !`);
         } else {
-          showToast(`${items.length} fichier(s) cumulé(s) sur ${createdNewCount} ligne(s) client !`);
+          showToast(`${items.length} fichier(s) ajouté(s) et synchronisé(s) sur tous vos appareils !`);
         }
         return batchItems;
       }
@@ -4586,13 +5070,17 @@
           existingTaskOnDay.title = `${clientObj.name} — ${combinedDesc}`;
           existingTaskOnDay.folderPathClean = `${clientObj.name} • ${combinedDesc} (${newTotalCm} cm)`;
           if (newTotalCm >= 300) existingTaskOnDay.priority = 'high';
+          existingTaskOnDay.updatedAtMs = Date.now();
           state.selectedDateFilter = dateVal;
+          saveState(`Cumul manuel ${clientObj.name} (${newTotalCm} cm)`);
+          broadcastMultiDeviceSync({ type: 'upsert_tasks', clients: [clientObj], tasks: [existingTaskOnDay] });
           renderAll();
-          showToast(`Métrage (+${cmVal} cm) additionné pour ${clientObj.name} (Total: ${newTotalCm} cm)`);
+          showToast(`Métrage (+${cmVal} cm) synchronisé pour ${clientObj.name} (Total: ${newTotalCm} cm)`);
           return existingTaskOnDay;
         } else {
           const newTask = {
             id: 'dtf_' + Date.now(),
+            updatedAtMs: Date.now(),
             num: state.tasks.filter(t => t.date === dateVal).length + 1,
             sheet: `${String(dayNum).padStart(2, '0')} ${monthNamesFr[mIdx] || 'Octobre'}`,
             clientId: clientObj.id,
@@ -4615,8 +5103,10 @@
           };
           state.tasks.unshift(newTask);
           state.selectedDateFilter = dateVal;
+          saveState(`Nouvelle tâche ${clientObj.name} (${cmVal} cm)`);
+          broadcastMultiDeviceSync({ type: 'upsert_tasks', clients: [clientObj], tasks: [newTask] });
           renderAll();
-          showToast(`Ajouté : ${clientObj.name} • ${descVal} • ${cmVal} cm (${formatAr(newTask.budget)})`);
+          showToast(`Synchronisé : ${clientObj.name} • ${descVal} • ${cmVal} cm (${formatAr(newTask.budget)})`);
           return newTask;
         }
       }
@@ -4952,13 +5442,20 @@
           const cid = document.getElementById('statementClientSelect')?.value;
           const s = document.getElementById('statementStartDate')?.value;
           const e = document.getElementById('statementEndDate')?.value;
+          const updatedBatch = [];
           state.tasks.forEach(t => {
             if (t.clientId === cid && t.date >= s && t.date <= e) {
               t.etatPaiement = 'Payé';
+              t.updatedAtMs = Date.now();
+              updatedBatch.push(t);
             }
           });
+          saveState('Règlement relevé client soldé');
+          if (updatedBatch.length > 0) {
+            broadcastMultiDeviceSync({ type: 'upsert_tasks', tasks: updatedBatch });
+          }
           renderAll();
-          showToast('Toutes les commandes de la période ont été soldées (Payé)');
+          showToast('Toutes les commandes de la période ont été soldées et synchronisées');
         });
 
         document.getElementById('printSpecsBtn')?.addEventListener('click', () => {
@@ -5015,14 +5512,17 @@
             budget: montant
           };
 
+          payload.updatedAtMs = Date.now();
           if (id) {
             const idx = state.tasks.findIndex(t => t.id === id);
             if (idx !== -1) state.tasks[idx] = payload;
-            showToast(`Commande DTF mise à jour : ${clientObj.name} (${cm} cm)`);
+            showToast(`Commande DTF mise à jour et synchronisée : ${clientObj.name} (${cm} cm)`);
           } else {
             state.tasks.unshift(payload);
-            showToast(`Nouvelle commande enregistrée : ${clientObj.name} • ${descClean} (${cm} cm)`);
+            showToast(`Nouvelle commande synchronisée : ${clientObj.name} • ${descClean} (${cm} cm)`);
           }
+          saveState(`Enregistrement tâche ${clientObj.name} (${cm} cm)`);
+          broadcastMultiDeviceSync({ type: 'upsert_tasks', clients: [clientObj], tasks: [payload] });
           closeTaskModal();
           renderAll();
         });
@@ -5048,8 +5548,10 @@
           if (initCm > 0) {
             addManualClientTask(newClient.name, initDesc || 'Dossier DTF', initCm, initDate);
           } else {
+            saveState(`Nouveau client ${newClient.name}`);
+            broadcastMultiDeviceSync({ type: 'upsert_tasks', clients: [newClient], tasks: [] });
             renderAll();
-            showToast('Fiche client enregistrée : ' + newClient.name + ' (0 cm par défaut)');
+            showToast('Fiche client synchronisée : ' + newClient.name + ' (0 cm par défaut)');
           }
           closeClientModal();
         });
@@ -5428,44 +5930,104 @@
           }
         });
 
-        // Admin / Visitor Auth Modal Listeners
+        // Google Account Recognition & Login Portal Listeners
         const authModal = document.getElementById('authModal');
         const authEmailInp = document.getElementById('authEmailInput');
-        const closeAuthModal = () => {
-          authModal?.classList.add('hidden');
-          authModal?.classList.remove('flex');
-        };
-        document.getElementById('openAuthModalBtn')?.addEventListener('click', () => {
-          if (authEmailInp) authEmailInp.value = state.currentUserEmail || '';
+        const authPinInp = document.getElementById('authPinInput');
+        const authFeedback = document.getElementById('authRecognitionFeedback');
+
+        const openAuthPortal = () => {
+          if (authEmailInp) authEmailInp.value = isAdminUser() ? state.currentUserEmail : '';
+          if (authPinInp) authPinInp.value = '';
+          if (authFeedback) authFeedback.classList.add('hidden');
           authModal?.classList.remove('hidden');
           authModal?.classList.add('flex');
+        };
+        const closeAuthModal = () => {
+          state.sessionAuthenticated = true;
+          authModal?.classList.add('hidden');
+          authModal?.classList.remove('flex');
+          saveState();
+        };
+
+        // Live account & password recognition feedback
+        const updateAuthLiveFeedback = () => {
+          const val = authEmailInp?.value || '';
+          const pinVal = (authPinInp?.value || '').trim();
+          if (!authFeedback) return;
+          if (!val.trim()) {
+            authFeedback.classList.add('hidden');
+            return;
+          }
+          const rec = recognizeGoogleAccount(val, pinVal);
+          authFeedback.classList.remove('hidden');
+          if (rec.isOwnerEmail) {
+            if (rec.isOwnerAdmin) {
+              authFeedback.className = 'p-2.5 rounded-xl text-xs font-bold border bg-emerald-500/20 border-emerald-400/50 text-emerald-300';
+              authFeedback.textContent = '✓ Compte Google Propriétaire & Mot de passe validés : Mode Administrateur prêt.';
+            } else {
+              authFeedback.className = 'p-2.5 rounded-xl text-xs font-bold border bg-amber-500/20 border-amber-400/50 text-amber-300';
+              authFeedback.textContent = '🔑 Compte propriétaire détecté : veuillez saisir le mot de passe Administrateur.';
+            }
+          } else if (rec.isValid) {
+            authFeedback.className = 'p-2.5 rounded-xl text-xs font-bold border bg-cyan-500/15 border-cyan-400/40 text-cyan-200';
+            authFeedback.textContent = 'ℹ️ Compte externe reconnu : Accès en Mode Consultation (boutons Admin masqués).';
+          } else {
+            authFeedback.classList.add('hidden');
+          }
+        };
+        authEmailInp?.addEventListener('input', updateAuthLiveFeedback);
+        authPinInp?.addEventListener('input', updateAuthLiveFeedback);
+
+        document.getElementById('openAuthModalBtn')?.addEventListener('click', openAuthPortal);
+        document.getElementById('visitorLoginBtn')?.addEventListener('click', openAuthPortal);
+        document.getElementById('multiDeviceSyncBadge')?.addEventListener('click', () => {
+          pullMultiDeviceCloudSync(false);
         });
         document.getElementById('closeAuthModalBtn')?.addEventListener('click', closeAuthModal);
         document.getElementById('cancelAuthModalBtn')?.addEventListener('click', closeAuthModal);
         document.getElementById('quickFillAdminBtn')?.addEventListener('click', () => {
-          if (authEmailInp) authEmailInp.value = ADMIN_EMAIL;
           state.currentUserEmail = ADMIN_EMAIL;
+          state.adminPasswordVerified = true;
+          state.sessionAuthenticated = true;
           closeAuthModal();
           renderAll();
-          showToast('Connecté en tant qu\'Administrateur (' + ADMIN_EMAIL + ')');
         });
         document.getElementById('quickFillVisitorBtn')?.addEventListener('click', () => {
-          if (authEmailInp) authEmailInp.value = 'visiteur@client-dtf.mg';
-          state.currentUserEmail = 'visiteur@client-dtf.mg';
+          if (authEmailInp) authEmailInp.value = '';
+          if (authPinInp) authPinInp.value = '';
+          state.currentUserEmail = '';
+          state.adminPasswordVerified = false;
+          state.sessionAuthenticated = true;
           closeAuthModal();
           renderAll();
-          showToast('Mode Visiteur activé : Lecture seule (aucune modification autorisée)');
+          showToast('Mode Consultation activé (Lecture seule • Boutons Admin masqués)');
         });
         document.getElementById('authForm')?.addEventListener('submit', (e) => {
           e.preventDefault();
           const mail = (authEmailInp?.value || '').trim();
-          state.currentUserEmail = mail;
+          const pin = (authPinInp?.value || '').trim();
+          const rec = recognizeGoogleAccount(mail, pin);
+
+          if (rec.isOwnerEmail && !rec.isOwnerAdmin) {
+            if (authFeedback) {
+              authFeedback.classList.remove('hidden');
+              authFeedback.className = 'p-2.5 rounded-xl text-xs font-bold border bg-rose-500/25 border-rose-400/60 text-rose-300';
+              authFeedback.textContent = '❌ Mot de passe Administrateur incorrect ou manquant.';
+            }
+            showToast('Mot de passe Administrateur incorrect');
+            return;
+          }
+
+          state.currentUserEmail = rec.normalizedEmail || mail;
+          state.adminPasswordVerified = Boolean(rec.isOwnerAdmin);
+          state.sessionAuthenticated = true;
           closeAuthModal();
           renderAll();
-          if (isAdminUser()) {
-            showToast('Accès Administrateur confirmé : ' + ADMIN_EMAIL);
+          if (rec.isOwnerAdmin) {
+            showToast('Accès Administrateur confirmé & déverrouillé');
           } else {
-            showToast('Email reconnu comme Visiteur (Lecture seule) : ' + (mail || 'Anonyme'));
+            showToast('Mode Consultation activé pour ' + (rec.normalizedEmail || 'Visiteur'));
           }
         });
 
@@ -5575,13 +6137,29 @@
           reader.readAsText(file);
         });
 
+        // Run Platform Recognition Algorithm (Smartphone / Tablet / Desktop) & listen for screen changes
+        applyPlatformRecognitionUI();
+        window.addEventListener('resize', applyPlatformRecognitionUI);
+        window.addEventListener('orientationchange', () => { setTimeout(applyPlatformRecognitionUI, 120); });
+
         // Synchronize all dates & live clock with Madagascar Timezone (GMT+3)
         syncAllDatesWithMadagascarClock();
         setInterval(updateMadagascarClockUI, 1000);
 
         initThreeJS();
         initCharts();
+        applyPlatformRecognitionUI();
         renderAll();
+
+        // Start Real-Time Multi-Device Cloud Sync (Initial Pull + Live Stream + Periodic Check)
+        pullMultiDeviceCloudSync(true);
+        startLiveMultiDeviceStream();
+        setInterval(() => { pullMultiDeviceCloudSync(true); }, 15000);
+
+        // Open the Login & Google Account Recognition Portal on initial unauthenticated visit
+        if (!state.sessionAuthenticated) {
+          openAuthPortal();
+        }
       });
     })();
   </script>
