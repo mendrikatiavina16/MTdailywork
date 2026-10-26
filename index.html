@@ -2084,18 +2084,18 @@
         <button id="closeCloudModalBtn" type="button" class="p-1.5 rounded-lg hover:bg-purple-500/20 text-purple-300 text-lg font-bold">&times;</button>
       </div>
 
-      <div class="p-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/35 text-xs space-y-1.5">
+      <div class="p-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/35 text-xs space-y-2">
         <div class="flex items-center justify-between">
           <span class="font-bold text-emerald-300 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            État de la base de données :
+            Base de données Cloud (Firebase Realtime Database) :
           </span>
-          <span id="cloudModalLastSyncBadge" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-bold">Synchronisé (GMT+3)</span>
+          <span id="cloudModalLastSyncBadge" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-bold">Connecté (Temps Réel)</span>
         </div>
-        <p class="opacity-85">
-          • <strong>Vos tâches sont enregistrées dans la base GitHub</strong> (<code>data.json</code>) à chaque ajout, modification ou suppression, puis relues automatiquement par tous les appareils et tous les visiteurs.<br/>
-          • <strong>Statut</strong> (Terminé / En cours / En attente) et <strong>Règlement</strong> (Payé / Non payé) s'appliquent instantanément et sont enregistrés comme le reste.<br/>
-          • La sauvegarde Google Drive / Firebase / JSONBin ci-dessous est <strong>facultative</strong> (copie de secours).
+        <p class="opacity-85 leading-relaxed">
+          • <strong>Vos tâches et clients sont synchronisés en direct sur Firebase Realtime Database</strong> (<code>https://mt-suivi-dtf-default-rtdb.firebaseio.com/</code>).<br/>
+          • Toute création, modification ou règlement est propagé <strong>instantanément</strong> sur tous vos appareils connectés (PC, smartphone, atelier).<br/>
+          • La sauvegarde GitHub (<code>data.json</code>) ci-dessous sert de <strong>copie miroir</strong> permanente.
         </p>
         <div class="pt-2 mt-1.5 flex flex-wrap items-center justify-between gap-2 border-t border-emerald-500/25">
           <span class="text-emerald-300 font-semibold">📁 Ancienne sauvegarde manuelle (Google Drive) :</span>
@@ -2235,7 +2235,8 @@
       const ADMIN_EMAIL = 'mendrikatiavina16@gmail.com';
       // Le mot de passe n'est plus écrit en clair dans le code : seule son empreinte SHA-256 est conservée.
       const ADMIN_PASSWORD_SHA256 = '83c07d0c81c80c947c1bcae68b9c2f27eed9530508a077925e6c55961bc71c8e';
-      // Base de données partagée = fichier data.json dans le dépôt GitHub (voir « BASE DE DONNÉES PARTAGÉE » plus bas).
+      // Base de données Cloud principale temps réel (Firebase Realtime Database) + miroir GitHub (data.json)
+      const FIREBASE_DB_URL = 'https://mt-suivi-dtf-default-rtdb.firebaseio.com/.json';
       const DB_CONFIG_KEY = 'mt_suivi_dtf_db_config_v1';
       const DB_DIRTY_KEY = 'mt_suivi_dtf_db_dirty_v1';
       const DB_DEFAULTS = { owner: 'mendrikatiavina16', repo: 'MTdailywork', branch: 'main', path: 'data.json' };
@@ -2347,9 +2348,9 @@
       function loadCloudConfig() {
         try {
           const raw = localStorage.getItem(GDRIVE_CONFIG_KEY);
-          if (raw) return Object.assign({ autoSave: true, endpointUrl: '', apiKey: '', lastSyncGMT3: '' }, JSON.parse(raw));
+          if (raw) return Object.assign({ autoSave: true, endpointUrl: FIREBASE_DB_URL, apiKey: '', lastSyncGMT3: '' }, JSON.parse(raw));
         } catch (e) {}
-        return { autoSave: true, endpointUrl: '', apiKey: '', lastSyncGMT3: '' };
+        return { autoSave: true, endpointUrl: FIREBASE_DB_URL, apiKey: '', lastSyncGMT3: '' };
       }
 
       function saveCloudConfig() {
@@ -2512,10 +2513,10 @@
         const V = {
           idle:    ['bg-slate-400', '📦 Données locales', 'Lecture de la base partagée en cours…'],
           syncing: ['bg-cyan-400 animate-ping', '🔄 Synchronisation…', 'Lecture de la base de données partagée'],
-          saving:  ['bg-cyan-400 animate-ping', '💾 Enregistrement…', 'Écriture dans data.json (GitHub)'],
-          pending: ['bg-amber-400 animate-pulse', '⏳ À enregistrer…', "Modification en attente d'envoi vers GitHub"],
-          ok:      ['bg-emerald-400', adm ? `✅ Enregistré • ${time}` : `✅ À jour • ${time}`, adm ? 'Vos modifications sont dans la base partagée' : 'Données synchronisées avec la base partagée'],
-          notoken: ['bg-rose-500 animate-pulse', '⚠️ Non publié • jeton requis', 'Les tâches ne sont gardées que sur cet appareil. Cliquez pour ajouter le jeton GitHub.'],
+          saving:  ['bg-cyan-400 animate-ping', '💾 Enregistrement…', 'Écriture dans Firebase Realtime Database'],
+          pending: ['bg-amber-400 animate-pulse', '⏳ À enregistrer…', "Modification en attente d'envoi vers Firebase"],
+          ok:      ['bg-emerald-400', adm ? `✅ En direct • ${time}` : `✅ À jour • ${time}`, adm ? 'Enregistré en direct dans Firebase' : 'Synchronisé en temps réel avec Firebase'],
+          notoken: ['bg-slate-400', '🔒 Mode visiteur', 'Connectez-vous en tant qu'administrateur pour modifier.'],
           error:   ['bg-rose-500 animate-pulse', '❌ Non enregistré', detail || "Échec de l'enregistrement. Cliquez pour ouvrir les réglages."],
           offline: ['bg-amber-400', '📴 Hors-ligne • données locales', detail || 'Base partagée injoignable : données locales affichées.'],
           nodata:  ['bg-slate-400', '📦 Données locales', 'Aucune base partagée publiée pour le moment.']
@@ -2675,7 +2676,7 @@
       }
 
       function dbHasToken() { return Boolean(String(dbConfig.token || '').trim()); }
-      function dbCanWrite() { return isAdminUser() && dbHasToken(); }
+      function dbCanWrite() { return isAdminUser(); }
 
       function markDbDirty() {
         dbDirty = true;
@@ -2766,8 +2767,39 @@
         return { data, sha: (meta && meta.sha) || null, via: 'api' };
       }
 
-      // Lecture « large » (visiteurs) : API GitHub d'abord, puis le fichier publié par GitHub Pages, puis raw.githubusercontent.com
+      // Lecture depuis Firebase Realtime Database
+      async function dbReadFirebase() {
+        try {
+          const res = await fetch(FIREBASE_DB_URL + '?v=' + Date.now(), { cache: 'no-store' });
+          if (!res.ok) return null;
+          const data = await res.json();
+          return dbValidate(data);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      // Écriture directe dans Firebase Realtime Database
+      async function dbPutFirebase(payload) {
+        try {
+          const res = await fetch(FIREBASE_DB_URL, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+          return res.ok;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      // Lecture « large » (visiteurs) : Firebase Realtime Database d'abord, puis GitHub API, puis raw.githubusercontent.com
       async function dbReadRemoteAny(fresh) {
+        try {
+          const fbData = await dbReadFirebase();
+          if (fbData) return { data: fbData, sha: null, via: 'firebase' };
+        } catch (_) {}
+
         let apiErr = null;
         let apiNotFound = null;
         try {
@@ -2949,43 +2981,51 @@
         if (!reasons.length && reasonOverride) reasons.push(reasonOverride);
         let ok = false;
         try {
-          let lastMsg = '';
-          for (let attempt = 0; attempt < 4 && !ok; attempt++) {
-            // 1) état actuel du dépôt (+ sha)   2) fusion : on n'écrase jamais le travail fait sur un autre appareil
-            const remote = await dbReadRemoteApi(true);
-            if (remote.data && dbMergeRemote(remote.data, true)) {
-              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
-              dbRefreshOpenViews();
-            }
-            if (remote.data && dbLocalSignature() === dbSignature(remote.data.clients, remote.data.tasks, remote.data.deletedTaskIds)) {
-              ok = true;            // la base contient déjà exactement ces données : rien à écrire
-              clearDbDirty();
-              break;
-            }
-            // 3) écriture
-            const seq = dbMutationSeq;
-            const res = await dbPutFile(dbSerialize(), remote.sha, dbCommitMessage(reasons));
-            if (res.ok) {
-              ok = true;
-              dbRetryMs = 0;
-              if (seq === dbMutationSeq) clearDbDirty();
-            } else {
-              lastMsg = res.message || '';
+          const mada = getMadagascarNowParts();
+          const tasks = (state.tasks || []).filter(Boolean).slice().sort((a, b) => {
+            if (a.date !== b.date) return String(b.date || '').localeCompare(String(a.date || ''));
+            const dn = (Number(b.num) || 0) - (Number(a.num) || 0);
+            return dn !== 0 ? dn : String(a.id).localeCompare(String(b.id));
+          });
+          const payload = {
+            app: "MT Suivi DTF",
+            schema: 2,
+            updatedAtGMT3: mada.fullDateTimeFr,
+            updatedAtMs: Date.now(),
+            deletedTaskIds: (state.deletedTaskIds || []).map(String),
+            clients: (state.clients || []).filter(Boolean),
+            tasks: tasks
+          };
+
+          // 1) Enregistrement direct et instantané dans Firebase Realtime Database
+          const fbOk = await dbPutFirebase(payload);
+          if (fbOk) {
+            ok = true;
+            dbRetryMs = 0;
+            clearDbDirty();
+          }
+
+          // 2) Sauvegarde miroir GitHub (si un jeton est configuré)
+          if (dbHasToken()) {
+            try {
+              const remote = await dbReadRemoteApi(true);
+              await dbPutFile(dbSerialize(), remote.sha, dbCommitMessage(reasons));
+            } catch (ghErr) {
+              console.warn('Sauvegarde miroir GitHub :', ghErr);
             }
           }
-          if (!ok) throw dbError("Conflit d'écriture répété avec GitHub" + (lastMsg ? ' (' + lastMsg + ')' : '') + '.', 409);
-          setDbStatus(dbDirty ? 'pending' : 'ok');
+
+          if (ok) {
+            setDbStatus('ok');
+          } else {
+            throw dbError('Échec de connexion à Firebase Realtime Database.', 0);
+          }
         } catch (e) {
           dbReasons.unshift(...reasons);
           const msg = dbErrorText(e);
-          const needsUser = Boolean(e && (e.status === 401 || e.status === 403 || e.status === 404));
-          if (needsUser) {
-            setDbStatus('error', msg);
-          } else {
-            dbRetryMs = Math.min((dbRetryMs || 10000) * 2, 300000);
-            scheduleDbPush(null, dbRetryMs);
-            setDbStatus('error', msg + ' Nouvel essai dans ' + Math.round(dbRetryMs / 1000) + ' s.');
-          }
+          dbRetryMs = Math.min((dbRetryMs || 10000) * 2, 300000);
+          scheduleDbPush(null, dbRetryMs);
+          setDbStatus('error', msg + ' Nouvel essai dans ' + Math.round(dbRetryMs / 1000) + ' s.');
         } finally {
           dbBusy = false;
           if (dbPushAgain) { dbPushAgain = false; scheduleDbPush(null, 600); }
@@ -3099,6 +3139,27 @@
             }
           };
         }
+
+        // Écoute en direct via Firebase Server-Sent Events (SSE)
+        try {
+          if (typeof EventSource !== 'undefined') {
+            const fbStream = new EventSource(FIREBASE_DB_URL);
+            fbStream.addEventListener('put', (ev) => {
+              try {
+                const pkt = JSON.parse(ev.data);
+                if (pkt && pkt.path === '/' && pkt.data) {
+                  if (dbMergeRemote(pkt.data, dbDirty)) {
+                    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+                    dbRefreshOpenViews();
+                  }
+                } else if (pkt && pkt.path && pkt.path !== '/') {
+                  pullMultiDeviceCloudSync(true, true);
+                }
+              } catch (_) {}
+            });
+            fbStream.onerror = () => {};
+          }
+        } catch (_) {}
 
         window.addEventListener('storage', (ev) => {
           if (ev.key === STORAGE_KEY && ev.newValue) {
@@ -6646,21 +6707,21 @@
           const repo = (dbEl('dbRepoInput')?.value || '').trim();
           const branch = (dbEl('dbBranchInput')?.value || '').trim() || 'main';
           const typedToken = (dbEl('dbTokenInput')?.value || '').trim();
-          if (!owner || !repo) { dbShowFeedback('Renseignez le compte GitHub et le nom du dépôt.', 'err'); return; }
-          if (!typedToken && !dbHasToken()) { dbShowFeedback('Collez votre jeton GitHub pour pouvoir enregistrer vos tâches.', 'warn'); return; }
-          dbConfig.owner = owner;
-          dbConfig.repo = repo;
-          dbConfig.branch = branch;
           if (typedToken) dbConfig.token = typedToken;
+          if (owner && repo) {
+            dbConfig.owner = owner;
+            dbConfig.repo = repo;
+            dbConfig.branch = branch;
+          }
           saveDbConfig();
-          dbShowFeedback('Connexion à GitHub et publication des données…', 'warn');
+          dbShowFeedback('Enregistrement en direct sur Firebase…', 'warn');
           for (let i = 0; i < 50 && dbBusy; i++) await new Promise(r => setTimeout(r, 200));
           markDbDirty();
           const ok = await dbPushNow('Publication des données');
           if (ok) {
             if (dbEl('dbTokenInput')) dbEl('dbTokenInput').value = '';
             dbFillFields();
-            dbShowFeedback(`✅ Connecté à ${owner}/${repo} : ${state.tasks.length} tâches enregistrées dans ${dbConfig.path}. Elles sont maintenant visibles sur tous les appareils.`, 'ok');
+            dbShowFeedback(`✅ Connecté & synchronisé : ${state.tasks.length} tâches enregistrées en direct sur Firebase Realtime Database.`, 'ok');
           } else {
             dbShowFeedback('❌ ' + (dbStatus.detail || 'Échec de la publication.'), 'err');
           }
