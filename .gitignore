@@ -1,0 +1,5 @@
+# Sauvegardes Google Drive locales et exports
+MT_Suivi_DTF_GoogleDrive_*.json
+
+# Fichiers temporaires et de secours
+*.bak
