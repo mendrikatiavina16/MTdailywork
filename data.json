@@ -1,11 +1,11 @@
 {
 "app": "MT Suivi DTF",
 "schema": 2,
-"updatedAtGMT3": "Lundi 26 Octobre 2026 • 15:24:04 (GMT+3)",
-"updatedAtMs": 1793017444397,
+"updatedAtGMT3": "Lundi 26 Octobre 2026 • 15:29:10 (GMT+3)",
+"updatedAtMs": 1793017750917,
 "deletedTaskIds": ["dtf_105","dtf_106","dtf_107","dtf_108","dtf_109"],
 "clients": [
-  {"id":"c_1793017441759_490","name":"Tsila","contact":"Tsila","sector":"Impression DTF Textile","email":"tsila@dtf-client.mg","retainer":200000,"color":"#00f2fe"},
+  {"id":"c_1793017747013_10","name":"Maholy","contact":"Maholy","sector":"Impression DTF Textile","email":"maholy@dtf-client.mg","retainer":200000,"color":"#00f2fe"},
   {"id":"c_tsiory","name":"Tsiory","contact":"Tsiory","sector":"Impression DTF Textile","email":"tsiory@dtf-client.mg","retainer":1099800,"color":"#38bdf8"},
   {"id":"c_lcagape","name":"LC Agape","contact":"LC Agape","sector":"Impression DTF Textile","email":"lcagape@dtf-client.mg","retainer":975800,"color":"#38bdf8"},
   {"id":"c_dinaandriamady","name":"Dina andriamady","contact":"Dina andriamady","sector":"Impression DTF Textile","email":"dinaandria@dtf-client.mg","retainer":443800,"color":"#00f2fe"},
@@ -63,6 +63,7 @@
   {"id":"c_tshirtmarion","name":"Tshirt Marion","contact":"Tshirt Marion","sector":"Impression DTF Textile","email":"tshirtmari@dtf-client.mg","retainer":5000,"color":"#ff3b30"},
   {"id":"c_tshirtlapaix","name":"Tshirt La paix","contact":"Tshirt La paix","sector":"Impression DTF Textile","email":"tshirtlapa@dtf-client.mg","retainer":4000,"color":"#eab308"},
   {"id":"c_tshirtmommy","name":"Tshirt Mommy","contact":"Tshirt Mommy","sector":"Impression DTF Textile","email":"tshirtmomm@dtf-client.mg","retainer":4000,"color":"#10b981"},
+  {"id":"c_1793017441759_490","name":"Tsila","contact":"Tsila","sector":"Impression DTF Textile","email":"tsila@dtf-client.mg","retainer":200000,"color":"#00f2fe"},
   {"id":"c_1792555415020_213","name":"Tsiahiana","contact":"Tsiahiana","sector":"Impression DTF Textile","email":"tsiahiana@dtf-client.mg","retainer":200000,"color":"#00f2fe"},
   {"id":"c_1793008310968_342","name":"Carim'el","contact":"Carim'el","sector":"Impression DTF Textile","email":"carimel@dtf-client.mg","retainer":200000,"color":"#00f2fe"},
   {"id":"c_1793008282126_491","name":"HEctor","contact":"HEctor","sector":"Impression DTF Textile","email":"hector@dtf-client.mg","retainer":200000,"color":"#00f2fe"},
@@ -77,6 +78,7 @@
   {"id":"c_1793008170245_326","name":"Tsiahiana","contact":"Tsiahiana","sector":"Impression DTF Textile","email":"tsiahiana@dtf-client.mg","retainer":200000,"color":"#00f2fe"}
 ],
 "tasks": [
+  {"id":"dtf_1793017747013","updatedAtMs":1793017747013,"num":7,"sheet":"26 Octobre","clientId":"c_1793017747013_10","clientName":"Maholy","frequency":"daily","title":"Maholy — Citrus","avanceMode":"","remarques":"Citrus","description":"Citrus","folderPathClean":"Maholy • Citrus (12 cm)","date":"2026-10-26","priority":"low","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":12,"dtfM":0.12,"hours":0.12,"budget":2400},
   {"id":"dtf_1793017441759_0","num":6,"sheet":"26 Octobre","clientId":"c_1793017441759_490","clientName":"Tsila","frequency":"daily","title":"Tsila — BTP & champion","avanceMode":"","remarques":"BTP & champion","description":"BTP & champion","folderPathClean":"Tsila • BTP & champion (25 cm)","date":"2026-10-26","priority":"low","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":25,"dtfM":0.25,"hours":0.25,"budget":5000,"updatedAtMs":1793017441760},
   {"id":"dtf_1793008337118_4","num":5,"sheet":"26 Octobre","clientId":"c_ranto","clientName":"Ranto","frequency":"daily","title":"Ranto — Migachou & justice et paix & district manakara & maire","avanceMode":"","remarques":"Migachou & justice et paix & district manakara & maire","description":"Migachou & justice et paix & district manakara & maire","folderPathClean":"Ranto • Migachou & justice et paix & district manakara & maire (232 cm)","date":"2026-10-26","priority":"medium","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":232,"dtfM":2.32,"hours":2.32,"budget":46400,"updatedAtMs":1793017441760},
   {"id":"dtf_1793008337118_3","num":4,"sheet":"26 Octobre","clientId":"c_tiavina","clientName":"Tiavina","frequency":"daily","title":"Tiavina — Show M & NY new york city","avanceMode":"","remarques":"Show M & NY new york city","description":"Show M & NY new york city","folderPathClean":"Tiavina • Show M & NY new york city (153 cm)","date":"2026-10-26","priority":"medium","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":153,"dtfM":1.53,"hours":1.53,"budget":30600,"updatedAtMs":1793017441760},
