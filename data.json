@@ -1,9 +1,9 @@
 {
 "app": "MT Suivi DTF",
 "schema": 2,
-"updatedAtGMT3": "Lundi 26 Octobre 2026 • 15:29:10 (GMT+3)",
-"updatedAtMs": 1793017750917,
-"deletedTaskIds": ["dtf_105","dtf_106","dtf_107","dtf_108","dtf_109"],
+"updatedAtGMT3": "Lundi 26 Octobre 2026 • 15:29:37 (GMT+3)",
+"updatedAtMs": 1793017777882,
+"deletedTaskIds": ["dtf_105","dtf_106","dtf_107","dtf_108","dtf_109","dtf_1793017747013","dtf_1793017441759_0"],
 "clients": [
   {"id":"c_1793017747013_10","name":"Maholy","contact":"Maholy","sector":"Impression DTF Textile","email":"maholy@dtf-client.mg","retainer":200000,"color":"#00f2fe"},
   {"id":"c_tsiory","name":"Tsiory","contact":"Tsiory","sector":"Impression DTF Textile","email":"tsiory@dtf-client.mg","retainer":1099800,"color":"#38bdf8"},
@@ -78,8 +78,6 @@
   {"id":"c_1793008170245_326","name":"Tsiahiana","contact":"Tsiahiana","sector":"Impression DTF Textile","email":"tsiahiana@dtf-client.mg","retainer":200000,"color":"#00f2fe"}
 ],
 "tasks": [
-  {"id":"dtf_1793017747013","updatedAtMs":1793017747013,"num":7,"sheet":"26 Octobre","clientId":"c_1793017747013_10","clientName":"Maholy","frequency":"daily","title":"Maholy — Citrus","avanceMode":"","remarques":"Citrus","description":"Citrus","folderPathClean":"Maholy • Citrus (12 cm)","date":"2026-10-26","priority":"low","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":12,"dtfM":0.12,"hours":0.12,"budget":2400},
-  {"id":"dtf_1793017441759_0","num":6,"sheet":"26 Octobre","clientId":"c_1793017441759_490","clientName":"Tsila","frequency":"daily","title":"Tsila — BTP & champion","avanceMode":"","remarques":"BTP & champion","description":"BTP & champion","folderPathClean":"Tsila • BTP & champion (25 cm)","date":"2026-10-26","priority":"low","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":25,"dtfM":0.25,"hours":0.25,"budget":5000,"updatedAtMs":1793017441760},
   {"id":"dtf_1793008337118_4","num":5,"sheet":"26 Octobre","clientId":"c_ranto","clientName":"Ranto","frequency":"daily","title":"Ranto — Migachou & justice et paix & district manakara & maire","avanceMode":"","remarques":"Migachou & justice et paix & district manakara & maire","description":"Migachou & justice et paix & district manakara & maire","folderPathClean":"Ranto • Migachou & justice et paix & district manakara & maire (232 cm)","date":"2026-10-26","priority":"medium","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":232,"dtfM":2.32,"hours":2.32,"budget":46400,"updatedAtMs":1793017441760},
   {"id":"dtf_1793008337118_3","num":4,"sheet":"26 Octobre","clientId":"c_tiavina","clientName":"Tiavina","frequency":"daily","title":"Tiavina — Show M & NY new york city","avanceMode":"","remarques":"Show M & NY new york city","description":"Show M & NY new york city","folderPathClean":"Tiavina • Show M & NY new york city (153 cm)","date":"2026-10-26","priority":"medium","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":153,"dtfM":1.53,"hours":1.53,"budget":30600,"updatedAtMs":1793017441760},
   {"id":"dtf_1793008337118_2","num":3,"sheet":"26 Octobre","clientId":"c_tsiory","clientName":"Tsiory","frequency":"daily","title":"Tsiory — Souvenir Iakora plage & fianakaviana mamiko • EPP Tanandrefa é KTLM Begogo & Chat smile & farada & mekanitao & baleine sainte marie • baleine bleu & dauphin bleu (X3)","avanceMode":"","remarques":"Souvenir Iakora plage & fianakaviana mamiko • EPP Tanandrefa é KTLM Begogo & Chat smile & farada & mekanitao & baleine sainte marie • baleine bleu & dauphin bleu (X3)","description":"Souvenir Iakora plage & fianakaviana mamiko • EPP Tanandrefa é KTLM Begogo & Chat smile & farada & mekanitao & baleine sainte marie • baleine bleu & dauphin bleu (X3)","folderPathClean":"Tsiory • Souvenir Iakora plage & fianakaviana mamiko • EPP Tanandrefa é KTLM Begogo & Chat smile & farada & mekanitao & baleine sainte marie • baleine bleu & dauphin bleu (X3) (1228 cm)","date":"2026-10-26","priority":"high","status":"done","statutProd":"Terminé","etatPaiement":"Payé","dtfCm":1228,"dtfM":12.28,"hours":12.28,"budget":245600,"updatedAtMs":1793017441760},
