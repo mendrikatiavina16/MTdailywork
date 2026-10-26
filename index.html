@@ -778,8 +778,8 @@
           <span id="madagascarClockText" class="font-mono">🇲🇬 GMT+3</span>
         </div>
 
-        <!-- Hidden multi-device sync node kept for live sync telemetry -->
-        <div id="multiDeviceSyncBadge" class="hidden"><span id="multiDeviceSyncDot"></span><span id="multiDeviceSyncText"></span></div>
+        <!-- ÉTAT DE LA BASE DE DONNÉES PARTAGÉE (visible par tous) -->
+        <button id="multiDeviceSyncBadge" type="button" class="px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all flex items-center gap-1.5 bg-slate-900/90 border-cyan-400/40 hover:border-cyan-300 text-cyan-200" title="État de la sauvegarde des données — cliquez pour actualiser"><span id="multiDeviceSyncDot" class="w-2 h-2 rounded-full bg-slate-400"></span><span id="multiDeviceSyncText">📦 Données locales</span></button>
 
         <!-- 2. GOOGLE DRIVE SYNC (MASQUÉ SI NON CONNECTÉ AVEC LE COMPTE PROPRIÉTAIRE) -->
         <button id="openCloudModalBtn" type="button" class="admin-only-control px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all flex items-center gap-1.5 bg-slate-900/90 border-emerald-400/50 hover:border-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.2)]" title="Sauvegarde Google Drive & Synchronisation Multi-Appareils">
@@ -2078,8 +2078,8 @@
     <div class="neon-card w-full max-w-xl p-6 border border-emerald-400/60 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-purple-500/20">
         <div>
-          <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-500/20 text-emerald-300">Sauvegarde Cloud Temps Réel • Sans modifier index.html</span>
-          <h3 class="text-lg font-extrabold neon-text-gradient mt-1">☁️ Sauvegarde Légère sur Google Drive</h3>
+          <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-500/20 text-emerald-300">Enregistrement automatique • Visible sur tous les appareils</span>
+          <h3 class="text-lg font-extrabold neon-text-gradient mt-1">☁️ Base de données &amp; sauvegardes</h3>
         </div>
         <button id="closeCloudModalBtn" type="button" class="p-1.5 rounded-lg hover:bg-purple-500/20 text-purple-300 text-lg font-bold">&times;</button>
       </div>
@@ -2088,19 +2088,74 @@
         <div class="flex items-center justify-between">
           <span class="font-bold text-emerald-300 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            État de la sauvegarde automatique :
+            État de la base de données :
           </span>
           <span id="cloudModalLastSyncBadge" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-bold">Synchronisé (GMT+3)</span>
         </div>
         <p class="opacity-85">
-          • <strong>Interface allégée (0 latence)</strong> : Les changements de <strong>Statut</strong> (Terminé / En cours / En attente) et de <strong>Règlement</strong> (Payé / Non payé) s'appliquent désormais <strong>instantanément en direct</strong> sans avoir besoin de rouvrir la fenêtre.<br/>
-          • <strong>Sauvegarde Google Drive</strong> : Vos données sont transférées et synchronisées vers votre Google Drive (via script Google Drive Web App ou export direct Drive) sans alourdir le navigateur ni modifier <code>index.html</code>.
+          • <strong>Vos tâches sont enregistrées dans la base GitHub</strong> (<code>data.json</code>) à chaque ajout, modification ou suppression, puis relues automatiquement par tous les appareils et tous les visiteurs.<br/>
+          • <strong>Statut</strong> (Terminé / En cours / En attente) et <strong>Règlement</strong> (Payé / Non payé) s'appliquent instantanément et sont enregistrés comme le reste.<br/>
+          • La sauvegarde Google Drive / Firebase / JSONBin ci-dessous est <strong>facultative</strong> (copie de secours).
         </p>
         <div class="pt-2 mt-1.5 flex flex-wrap items-center justify-between gap-2 border-t border-emerald-500/25">
-          <span class="text-emerald-300 font-semibold">📁 Sauvegarde transférée sur Google Drive :</span>
+          <span class="text-emerald-300 font-semibold">📁 Ancienne sauvegarde manuelle (Google Drive) :</span>
           <a href="https://drive.google.com/file/d/1NFMdmwocQ7THmvjQzc85Mx-Us_Tvpi1K/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/35 border border-emerald-400/50 text-emerald-200 font-bold underline">
             Ouvrir MT_Suivi_DTF_Sauvegarde_Drive.json sur Google Drive &rarr;
           </a>
+        </div>
+      </div>
+
+      <!-- ==================== BASE DE DONNÉES PARTAGÉE (GitHub) ==================== -->
+      <div id="dbSettingsBox" class="space-y-3 text-xs admin-only-control">
+        <div class="p-3.5 rounded-xl bg-slate-950/85 border border-emerald-400/45 space-y-2.5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-extrabold text-emerald-300">🗄️ Base de données partagée (GitHub) — recommandée</span>
+            <span id="dbStatusPill" class="px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-mono text-[10px] font-bold">—</span>
+          </div>
+          <p class="opacity-85 leading-relaxed">
+            Chaque tâche ajoutée ou modifiée est écrite dans le fichier <code>data.json</code> de votre dépôt GitHub, puis relue automatiquement par tous les appareils et tous les visiteurs. Le jeton ci-dessous reste <strong>uniquement dans ce navigateur</strong> : à coller une fois sur chaque appareil administrateur.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div>
+              <label class="block text-[11px] font-semibold mb-1 opacity-85" for="dbOwnerInput">Compte GitHub</label>
+              <input id="dbOwnerInput" type="text" autocomplete="off" spellcheck="false"
+                class="w-full px-3 py-1.5 rounded-xl bg-slate-900 border border-cyan-500/40 text-white font-mono text-xs focus:outline-none focus:border-cyan-400" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold mb-1 opacity-85" for="dbRepoInput">Dépôt</label>
+              <input id="dbRepoInput" type="text" autocomplete="off" spellcheck="false"
+                class="w-full px-3 py-1.5 rounded-xl bg-slate-900 border border-cyan-500/40 text-white font-mono text-xs focus:outline-none focus:border-cyan-400" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold mb-1 opacity-85" for="dbBranchInput">Branche</label>
+              <input id="dbBranchInput" type="text" autocomplete="off" spellcheck="false"
+                class="w-full px-3 py-1.5 rounded-xl bg-slate-900 border border-cyan-500/40 text-white font-mono text-xs focus:outline-none focus:border-cyan-400" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold mb-1 opacity-85" for="dbTokenInput">
+              🔑 Jeton d'accès GitHub (type « fine-grained » : ce dépôt seulement, permission <em>Contents : Read and write</em>)
+            </label>
+            <input id="dbTokenInput" type="password" autocomplete="new-password" spellcheck="false" placeholder="github_pat_…"
+              class="w-full px-3 py-1.5 rounded-xl bg-slate-900 border border-purple-500/40 text-white font-mono text-xs focus:outline-none focus:border-cyan-400" />
+            <p class="text-[10px] opacity-70 mt-1">
+              Créer le jeton :
+              <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer" class="underline text-cyan-300">github.com/settings/personal-access-tokens/new</a>
+              → « Only select repositories » → votre dépôt → Permissions › Repository permissions › Contents › <em>Read and write</em>.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <button type="button" id="dbSaveAndPublishBtn" class="neon-gradient-btn px-3.5 py-1.5 rounded-xl text-xs font-bold">
+              💾 Enregistrer &amp; publier maintenant
+            </button>
+            <button type="button" id="dbReloadBtn" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-400/40 text-cyan-300">
+              📥 Recharger depuis la base
+            </button>
+            <button type="button" id="dbForgetTokenBtn" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-purple-500/20 hover:bg-purple-500/35 border border-purple-400/40 text-purple-200">
+              🚪 Oublier le jeton sur cet appareil
+            </button>
+          </div>
+          <div id="dbModalFeedback" class="hidden p-2.5 rounded-xl text-xs font-bold border"></div>
         </div>
       </div>
 
@@ -2119,7 +2174,7 @@
               placeholder="Ex: https://script.google.com/macros/s/.../exec (Web App Google Drive)"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-cyan-500/40 text-white font-mono text-xs focus:outline-none focus:border-cyan-400" />
             <p class="text-[10px] opacity-70 mt-1">
-              Astuce : Collez une URL Firebase (finissant par <code>.json</code>) ou JSONBin pour synchroniser vos données entre plusieurs appareils en temps réel sans toucher au fichier <code>index.html</code>. Même sans URL externe, le coffre Cloud local (IndexedDB + Stockage persistant) sauvegarde tout automatiquement.
+              Astuce : Collez une URL Firebase (finissant par <code>.json</code>) ou JSONBin pour synchroniser vos données entre plusieurs appareils en temps réel sans toucher au fichier <code>index.html</code>. Cette sauvegarde secondaire est facultative : la base GitHub ci-dessus suffit pour partager vos tâches.
             </p>
           </div>
 
@@ -2178,9 +2233,12 @@
       const STORAGE_KEY = 'neonpulse_dtf_oct2026_v4';
       const LEGACY_STORAGE_KEY = 'neonpulse_dtf_oct2026_v3';
       const ADMIN_EMAIL = 'mendrikatiavina16@gmail.com';
-      const ADMIN_PASSWORD = 'Nora1640';
-      const MULTI_DEVICE_SYNC_TOPIC = 'mt_suivi_dtf_mendrika_sync_2026_v4';
-      const MULTI_DEVICE_SYNC_URL = 'https://ntfy.sh/' + MULTI_DEVICE_SYNC_TOPIC;
+      // Le mot de passe n'est plus écrit en clair dans le code : seule son empreinte SHA-256 est conservée.
+      const ADMIN_PASSWORD_SHA256 = '83c07d0c81c80c947c1bcae68b9c2f27eed9530508a077925e6c55961bc71c8e';
+      // Base de données partagée = fichier data.json dans le dépôt GitHub (voir « BASE DE DONNÉES PARTAGÉE » plus bas).
+      const DB_CONFIG_KEY = 'mt_suivi_dtf_db_config_v1';
+      const DB_DIRTY_KEY = 'mt_suivi_dtf_db_dirty_v1';
+      const DB_DEFAULTS = { owner: 'mendrikatiavina16', repo: 'MTdailywork', branch: 'main', path: 'data.json' };
 
       const defaultState = {
         theme: 'dark',
@@ -2445,17 +2503,29 @@
         updateMadagascarClockUI();
       }
 
-      function updateMultiDeviceBadgeUI(statusType, customText) {
+      function updateMultiDeviceBadgeUI(kind, detail) {
         const dot = document.getElementById('multiDeviceSyncDot');
         const txt = document.getElementById('multiDeviceSyncText');
-        if (!dot || !txt) return;
-        if (statusType === 'syncing') {
-          dot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-ping';
-          txt.textContent = customText || '🔄 Synchronisation...';
-        } else {
-          dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
-          txt.textContent = customText || `🔄 Sync (${state.tasks.length} tâches)`;
-        }
+        const badge = document.getElementById('multiDeviceSyncBadge');
+        const time = getMadagascarNowParts().timeStr.slice(0, 5);
+        const adm = isAdminUser();
+        const V = {
+          idle:    ['bg-slate-400', '📦 Données locales', 'Lecture de la base partagée en cours…'],
+          syncing: ['bg-cyan-400 animate-ping', '🔄 Synchronisation…', 'Lecture de la base de données partagée'],
+          saving:  ['bg-cyan-400 animate-ping', '💾 Enregistrement…', 'Écriture dans data.json (GitHub)'],
+          pending: ['bg-amber-400 animate-pulse', '⏳ À enregistrer…', "Modification en attente d'envoi vers GitHub"],
+          ok:      ['bg-emerald-400', adm ? `✅ Enregistré • ${time}` : `✅ À jour • ${time}`, adm ? 'Vos modifications sont dans la base partagée' : 'Données synchronisées avec la base partagée'],
+          notoken: ['bg-rose-500 animate-pulse', '⚠️ Non publié • jeton requis', 'Les tâches ne sont gardées que sur cet appareil. Cliquez pour ajouter le jeton GitHub.'],
+          error:   ['bg-rose-500 animate-pulse', '❌ Non enregistré', detail || "Échec de l'enregistrement. Cliquez pour ouvrir les réglages."],
+          offline: ['bg-amber-400', '📴 Hors-ligne • données locales', detail || 'Base partagée injoignable : données locales affichées.'],
+          nodata:  ['bg-slate-400', '📦 Données locales', 'Aucune base partagée publiée pour le moment.']
+        };
+        const v = V[kind] || V.idle;
+        if (dot) dot.className = 'w-2 h-2 rounded-full ' + v[0];
+        if (txt) txt.textContent = v[1];
+        if (badge) badge.title = v[2];
+        const pill = document.getElementById('dbStatusPill');
+        if (pill) { pill.textContent = v[1]; pill.title = v[2]; }
       }
 
       function updateCloudBadgeUI(statusType, customText) {
@@ -2486,43 +2556,451 @@
         const countEl = document.getElementById('cloudSnapshotsCountBadge');
         const mada = getMadagascarNowParts();
         const totalCm = state.tasks.reduce((s, t) => s + (Number(t.dtfCm) || 0), 0);
-        if (countEl) countEl.textContent = `Sync Multi-Appareils + Google Drive Actifs`;
+        if (countEl) countEl.textContent = 'Base GitHub + sauvegarde Drive (facultative)';
         if (!listEl) return;
         listEl.innerHTML = `
           <div class="p-3 rounded-xl bg-slate-900/85 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <div class="font-bold text-emerald-300">☁️ Sauvegarde Multi-Appareils & Google Drive : <code>MT_Suivi_DTF_Sauvegarde_Drive.json</code></div>
-              <div class="text-[11px] opacity-80 font-mono mt-0.5">🇲🇬 État synchronisé (${mada.shortDateFr} ${mada.year} • ${mada.timeStr} GMT+3) : ${state.tasks.length} tâches • ${state.clients.length} clients • ${Math.round(totalCm).toLocaleString('fr-FR')} cm</div>
+              <div class="font-bold text-emerald-300">🗄️ Base partagée : <code>${dbEsc(dbConfig.owner)}/${dbEsc(dbConfig.repo)}</code> › <code>${dbEsc(dbConfig.path)}</code></div>
+              <div class="text-[11px] opacity-80 font-mono mt-0.5">🇲🇬 Sur cet appareil (${mada.shortDateFr} ${mada.year} • ${mada.timeStr} GMT+3) : ${state.tasks.length} tâches • ${state.clients.length} clients • ${Math.round(totalCm).toLocaleString('fr-FR')} cm</div>
             </div>
           </div>
         `;
       }
 
-      // ==================== REAL-TIME MULTI-DEVICE CLOUD SYNC ENGINE ====================
-      // Broadcasts any added/updated/deleted task or client to the shared cloud relay so every device (PC, mobile, tablet) stays in sync automatically.
-      async function broadcastMultiDeviceSync(packet) {
-        const syncMsg = Object.assign({
-          app: 'MT_SUIVI_DTF_V4',
-          ts: Date.now()
-        }, packet);
+      // ==================== BASE DE DONNÉES PARTAGÉE (fichier data.json sur GitHub) ====================
+      // Pourquoi : un site sur GitHub Pages n'a pas de serveur. Les tâches n'étaient gardées que dans le navigateur
+      // de chaque appareil (localStorage) : rien n'était partagé, et le relais ntfy.sh utilisé avant ne garde les
+      // messages que 12 h, limite chaque message à 4 Ko et accepte des messages de n'importe qui.
+      // Désormais, chaque modification de l'administrateur est écrite dans data.json (API GitHub « Contents ») et
+      // TOUS les visiteurs relisent ce fichier automatiquement.
+      //  - Écriture : réservée à l'administrateur qui a collé son jeton GitHub (le jeton reste dans CE navigateur ;
+      //    GitHub refuse toute écriture sans lui, même si quelqu'un contourne l'interface).
+      //  - Lecture : ouverte à tous, sans jeton.
+      //  - Fusion par identifiant : une tâche ajoutée sur un autre appareil n'est jamais écrasée ; les suppressions
+      //    sont mémorisées (deletedTaskIds) pour ne pas « ressusciter ».
+      const DB_API = 'https://api.github.com';
+      let dbConfig = loadDbConfig();
+      let dbBusy = false;
+      let dbPushAgain = false;
+      let dbPullInFlight = false;
+      let dbPushTimer = null;
+      let dbRetryMs = 0;
+      let dbLastPullAt = 0;
+      let dbMutationSeq = 0;
+      let dbDirty = (() => { try { return localStorage.getItem(DB_DIRTY_KEY) === '1'; } catch (e) { return false; } })();
+      let dbReasons = [];
+      let dbWarnedNoToken = false;
+      let dbStatus = { kind: 'idle', detail: '' };
 
+      function dbEsc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+      }
+
+      // SHA-256 synchrone (utilisé pour vérifier le mot de passe sans le stocker en clair)
+      function sha256Hex(input) {
+        const K = new Uint32Array([
+          0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+          0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+          0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+          0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+          0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+          0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+          0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+          0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+        ]);
+        const H = new Uint32Array([0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19]);
+        const bytes = new TextEncoder().encode(String(input));
+        const len = bytes.length;
+        const padded = new Uint8Array(((len + 9 + 63) >> 6) << 6);
+        padded.set(bytes);
+        padded[len] = 0x80;
+        const dv = new DataView(padded.buffer);
+        dv.setUint32(padded.length - 8, Math.floor((len * 8) / 4294967296));
+        dv.setUint32(padded.length - 4, (len * 8) >>> 0);
+        const w = new Uint32Array(64);
+        for (let off = 0; off < padded.length; off += 64) {
+          for (let i = 0; i < 16; i++) w[i] = dv.getUint32(off + i * 4);
+          for (let i = 16; i < 64; i++) {
+            const a15 = w[i - 15], a2 = w[i - 2];
+            const s0 = ((a15 >>> 7) | (a15 << 25)) ^ ((a15 >>> 18) | (a15 << 14)) ^ (a15 >>> 3);
+            const s1 = ((a2 >>> 17) | (a2 << 15)) ^ ((a2 >>> 19) | (a2 << 13)) ^ (a2 >>> 10);
+            w[i] = (w[i - 16] + s0 + w[i - 7] + s1) >>> 0;
+          }
+          let a = H[0], b = H[1], c = H[2], d = H[3], e = H[4], f = H[5], g = H[6], h = H[7];
+          for (let i = 0; i < 64; i++) {
+            const S1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7));
+            const ch = (e & f) ^ (~e & g);
+            const t1 = (h + S1 + ch + K[i] + w[i]) >>> 0;
+            const S0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10));
+            const maj = (a & b) ^ (a & c) ^ (b & c);
+            const t2 = (S0 + maj) >>> 0;
+            h = g; g = f; f = e; e = (d + t1) >>> 0; d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+          }
+          H[0] = H[0] + a; H[1] = H[1] + b; H[2] = H[2] + c; H[3] = H[3] + d;
+          H[4] = H[4] + e; H[5] = H[5] + f; H[6] = H[6] + g; H[7] = H[7] + h;
+        }
+        return Array.from(H, x => x.toString(16).padStart(8, '0')).join('');
+      }
+
+      // ---- Réglages (stockés dans CE navigateur uniquement ; le jeton n'est jamais écrit dans index.html) ----
+      function guessRepoFromLocation() {
         try {
-          if (crossTabChannel) {
-            crossTabChannel.postMessage(syncMsg);
+          const host = String(location.hostname || '');
+          if (/\.github\.io$/i.test(host)) {
+            const owner = host.split('.')[0];
+            const first = String(location.pathname || '/').split('/').filter(Boolean)[0];
+            return { owner, repo: (first && !/\.html?$/i.test(first)) ? first : owner + '.github.io' };
           }
         } catch (e) {}
+        return null;
+      }
 
+      function loadDbConfig() {
+        const cfg = Object.assign({}, DB_DEFAULTS, guessRepoFromLocation() || {}, { token: '' });
         try {
-          updateMultiDeviceBadgeUI('syncing', '🔄 Envoi Cloud...');
-          await fetch(MULTI_DEVICE_SYNC_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(syncMsg)
-          });
-          updateMultiDeviceBadgeUI('ok', `🔄 Sync (${state.tasks.length} tâches)`);
-        } catch (err) {
-          updateMultiDeviceBadgeUI('ok', `🔄 Sync (${state.tasks.length} tâches)`);
+          const raw = localStorage.getItem(DB_CONFIG_KEY);
+          if (raw) {
+            const saved = JSON.parse(raw);
+            ['owner', 'repo', 'branch', 'path', 'token'].forEach(k => {
+              if (typeof saved[k] === 'string' && saved[k].trim()) cfg[k] = saved[k].trim();
+            });
+          }
+        } catch (e) {}
+        return cfg;
+      }
+
+      function saveDbConfig() {
+        try { localStorage.setItem(DB_CONFIG_KEY, JSON.stringify(dbConfig)); } catch (e) {}
+      }
+
+      function dbHasToken() { return Boolean(String(dbConfig.token || '').trim()); }
+      function dbCanWrite() { return isAdminUser() && dbHasToken(); }
+
+      function markDbDirty() {
+        dbDirty = true;
+        dbMutationSeq++;
+        try { localStorage.setItem(DB_DIRTY_KEY, '1'); } catch (e) {}
+      }
+      function clearDbDirty() {
+        dbDirty = false;
+        try { localStorage.removeItem(DB_DIRTY_KEY); } catch (e) {}
+      }
+
+      // ---- Appels à l'API GitHub ----
+      function dbFilePath() {
+        return String(dbConfig.path || 'data.json').split('/').map(encodeURIComponent).join('/');
+      }
+      function dbApiUrl() {
+        return `${DB_API}/repos/${encodeURIComponent(dbConfig.owner)}/${encodeURIComponent(dbConfig.repo)}/contents/${dbFilePath()}`;
+      }
+      function dbHeaders(raw, withToken) {
+        const h = { 'Accept': raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json' };
+        if (withToken && dbHasToken()) h['Authorization'] = 'Bearer ' + String(dbConfig.token).trim();
+        return h;
+      }
+      function dbError(message, status) {
+        const e = new Error(message);
+        e.status = status || 0;
+        return e;
+      }
+      function dbHttpError(status, bodyText) {
+        let msg;
+        if (status === 401) msg = 'Jeton GitHub invalide ou expiré : créez-en un nouveau.';
+        else if (status === 403 && /rate limit/i.test(bodyText || '')) msg = "Limite d'appels GitHub atteinte : réessayez dans quelques minutes.";
+        else if (status === 403) msg = 'Droits insuffisants : le jeton doit avoir accès à ce dépôt avec « Contents : Read and write ».';
+        else if (status === 404) msg = 'Dépôt ou branche introuvable, ou jeton sans accès à ce dépôt.';
+        else if (status >= 500) msg = 'GitHub est momentanément indisponible.';
+        else msg = 'Erreur GitHub (HTTP ' + status + ').';
+        return dbError(msg, status);
+      }
+      function dbErrorText(e) {
+        if (e && e.status) return e.message;
+        if (e instanceof TypeError) return 'Pas de connexion à GitHub (Internet coupé ?). Vos données restent sur cet appareil.';
+        return (e && e.message) || 'Erreur inconnue.';
+      }
+      async function dbSafeText(res) {
+        try { return await res.text(); } catch (e) { return ''; }
+      }
+      function dbB64Encode(str) {
+        const bytes = new TextEncoder().encode(str);
+        let bin = '';
+        for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+        return btoa(bin);
+      }
+      function dbB64Decode(b64) {
+        const bin = atob(String(b64 || '').replace(/\s/g, ''));
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        return new TextDecoder('utf-8').decode(bytes);
+      }
+      function dbValidate(data) {
+        return (data && typeof data === 'object' && Array.isArray(data.tasks) && Array.isArray(data.clients)) ? data : null;
+      }
+
+      // Lecture stricte par l'API (donne aussi le « sha » indispensable pour écrire).
+      async function dbReadRemoteApi(fresh) {
+        const withToken = dbHasToken();
+        const cache = (fresh || withToken) ? 'no-store' : 'default';
+        const url = dbApiUrl() + '?ref=' + encodeURIComponent(dbConfig.branch || 'main');
+        const res = await fetch(url, { method: 'GET', cache, headers: dbHeaders(false, withToken) });
+        if (res.status === 404) return { data: null, sha: null, notFound: true, via: 'api' };
+        if (!res.ok) throw dbHttpError(res.status, await dbSafeText(res));
+        const meta = await res.json();
+        let text = '';
+        if (meta && meta.encoding === 'base64' && meta.content) {
+          text = dbB64Decode(meta.content);
+        } else if (meta && Number(meta.size) > 0) {
+          // fichier de plus de 1 Mo : l'API ne renvoie pas le contenu en base64, on le relit en brut
+          const r2 = await fetch(url, { method: 'GET', cache, headers: dbHeaders(true, withToken) });
+          if (!r2.ok) throw dbHttpError(r2.status, await dbSafeText(r2));
+          text = await r2.text();
         }
+        if (!text.trim()) return { data: null, sha: (meta && meta.sha) || null, via: 'api' };
+        let parsed;
+        try { parsed = JSON.parse(text); } catch (e) {
+          throw dbError('Le fichier data.json du dépôt est illisible (JSON invalide). Corrigez-le ou supprimez-le sur GitHub.', 0);
+        }
+        const data = dbValidate(parsed);
+        if (!data) throw dbError("Le fichier data.json du dépôt n'a pas le bon format.", 0);
+        return { data, sha: (meta && meta.sha) || null, via: 'api' };
+      }
+
+      // Lecture « large » (visiteurs) : API GitHub d'abord, puis le fichier publié par GitHub Pages, puis raw.githubusercontent.com
+      async function dbReadRemoteAny(fresh) {
+        let apiErr = null;
+        let apiNotFound = null;
+        try {
+          const r = await dbReadRemoteApi(fresh);
+          if (!r.notFound) return r;
+          apiNotFound = r;
+        } catch (e) { apiErr = e; }
+        const urls = [];
+        try {
+          const u = new URL(dbConfig.path || 'data.json', location.href);
+          u.searchParams.set('v', String(Date.now()));
+          urls.push(u.toString());
+        } catch (e) {}
+        urls.push(`https://raw.githubusercontent.com/${encodeURIComponent(dbConfig.owner)}/${encodeURIComponent(dbConfig.repo)}/${encodeURIComponent(dbConfig.branch || 'main')}/${dbFilePath()}?v=${Date.now()}`);
+        for (const u of urls) {
+          try {
+            const r = await fetch(u, { cache: 'no-store' });
+            if (!r.ok) continue;
+            const data = dbValidate(await r.json());
+            if (data) return { data, sha: null, via: 'fallback' };
+          } catch (e) {}
+        }
+        if (apiNotFound) return apiNotFound;
+        throw apiErr || dbError('Aucune source de données distante disponible.', 0);
+      }
+
+      async function dbPutFile(text, sha, message) {
+        const body = { message, content: dbB64Encode(text), branch: dbConfig.branch || 'main' };
+        if (sha) body.sha = sha;
+        const res = await fetch(dbApiUrl(), {
+          method: 'PUT',
+          headers: Object.assign({ 'Content-Type': 'application/json' }, dbHeaders(false, true)),
+          body: JSON.stringify(body)
+        });
+        if (res.status === 409 || res.status === 422) {
+          const t = await dbSafeText(res);
+          let m = '';
+          try { m = JSON.parse(t).message || ''; } catch (e) {}
+          return { conflict: true, message: m };
+        }
+        if (!res.ok) throw dbHttpError(res.status, await dbSafeText(res));
+        let newSha = null;
+        try { const j = await res.json(); newSha = (j && j.content && j.content.sha) || null; } catch (e) {}
+        return { ok: true, sha: newSha };
+      }
+
+      // ---- Contenu du fichier data.json (un élément par ligne : lisible et facile à comparer dans l'historique Git) ----
+      function dbSerialize() {
+        const mada = getMadagascarNowParts();
+        const tasks = (state.tasks || []).filter(Boolean).slice().sort((a, b) => {
+          if (a.date !== b.date) return String(b.date || '').localeCompare(String(a.date || ''));
+          const dn = (Number(b.num) || 0) - (Number(a.num) || 0);
+          return dn !== 0 ? dn : String(a.id).localeCompare(String(b.id));
+        });
+        const lines = (arr) => '[\n' + arr.map(x => '  ' + JSON.stringify(x)).join(',\n') + '\n]';
+        return '{\n'
+          + '"app": "MT Suivi DTF",\n'
+          + '"schema": 2,\n'
+          + '"updatedAtGMT3": ' + JSON.stringify(mada.fullDateTimeFr) + ',\n'
+          + '"updatedAtMs": ' + Date.now() + ',\n'
+          + '"deletedTaskIds": ' + JSON.stringify((state.deletedTaskIds || []).map(String)) + ',\n'
+          + '"clients": ' + lines((state.clients || []).filter(Boolean)) + ',\n'
+          + '"tasks": ' + lines(tasks) + '\n}\n';
+      }
+
+      function dbCommitMessage(reasons) {
+        const mada = getMadagascarNowParts();
+        let msg = String(reasons[0] || 'Mise à jour des données').replace(/\s+/g, ' ').slice(0, 120);
+        if (reasons.length > 1) msg += ` (+${reasons.length - 1} autre${reasons.length > 2 ? 's' : ''})`;
+        return `${msg} — ${mada.dateStr} ${mada.timeStr.slice(0, 5)} GMT+3`;
+      }
+
+      // ---- Fusion : ne perd jamais une tâche (union par identifiant ; la version la plus récente gagne) ----
+      function dbStable(v) {
+        if (Array.isArray(v)) return '[' + v.map(dbStable).join(',') + ']';
+        if (v && typeof v === 'object') {
+          return '{' + Object.keys(v).filter(k => v[k] !== undefined).sort().map(k => JSON.stringify(k) + ':' + dbStable(v[k])).join(',') + '}';
+        }
+        return JSON.stringify(v === undefined ? null : v);
+      }
+      function dbSignature(clients, tasks, deleted) {
+        const cmp = (a, b) => (String(a.id) < String(b.id) ? -1 : String(a.id) > String(b.id) ? 1 : 0);
+        const del = new Set((deleted || []).map(String));
+        const t = (tasks || []).filter(x => x && x.id && !del.has(String(x.id))).sort(cmp);
+        const c = (clients || []).filter(x => x && x.id).sort(cmp);
+        return dbStable({ c, t, d: Array.from(del).sort() });
+      }
+      function dbLocalSignature() {
+        return dbSignature(state.clients, state.tasks, state.deletedTaskIds);
+      }
+
+      function dbMergeRemote(remote, preferLocalOnTie) {
+        if (!remote || !Array.isArray(remote.tasks)) return false;
+        const before = dbLocalSignature();
+        const del = new Set((state.deletedTaskIds || []).map(String));
+        (remote.deletedTaskIds || []).forEach(id => del.add(String(id)));
+
+        const cm = new Map();
+        (state.clients || []).forEach(c => { if (c && c.id) cm.set(String(c.id), c); });
+        (remote.clients || []).forEach(c => {
+          if (!c || !c.id) return;
+          const k = String(c.id);
+          const cur = cm.get(k);
+          if (!cur) cm.set(k, c);
+          else cm.set(k, preferLocalOnTie ? Object.assign({}, c, cur) : Object.assign({}, cur, c));
+        });
+
+        const tm = new Map();
+        (state.tasks || []).forEach(t => { if (t && t.id && !del.has(String(t.id))) tm.set(String(t.id), t); });
+        (remote.tasks || []).forEach(t => {
+          if (!t || !t.id) return;
+          const k = String(t.id);
+          if (del.has(k)) return;
+          const cur = tm.get(k);
+          if (!cur) { tm.set(k, t); return; }
+          const a = Number(cur.updatedAtMs) || 0;
+          const b = Number(t.updatedAtMs) || 0;
+          if (b > a || (b === a && !preferLocalOnTie)) tm.set(k, Object.assign({}, cur, t));
+        });
+
+        state.deletedTaskIds = Array.from(del);
+        state.clients = Array.from(cm.values());
+        state.tasks = Array.from(tm.values()).sort((a, b) => {
+          if (a.date !== b.date) return String(b.date || '').localeCompare(String(a.date || ''));
+          return (Number(b.num) || 0) - (Number(a.num) || 0);
+        });
+        return dbLocalSignature() !== before;
+      }
+
+      function dbRefreshOpenViews() {
+        renderAll();
+        const holoModal = document.getElementById('hologramDayModal');
+        if (holoModal && !holoModal.classList.contains('hidden')) {
+          renderHologramModalContent(currentHoloDate);
+        }
+      }
+
+      // ---- État affiché (badge en haut de page + fenêtre ☁️) ----
+      function setDbStatus(kind, detail) {
+        dbStatus = { kind, detail: detail || '' };
+        updateMultiDeviceBadgeUI(kind, detail);
+      }
+      function dbRefreshStatusForRole() {
+        if (dbBusy || dbPullInFlight || dbPushTimer) return;
+        if (isAdminUser() && !dbHasToken()) {
+          if (dbStatus.kind !== 'notoken') setDbStatus('notoken');
+        } else if (dbStatus.kind === 'notoken') {
+          setDbStatus('ok');
+        } else {
+          updateMultiDeviceBadgeUI(dbStatus.kind, dbStatus.detail);
+        }
+      }
+
+      // ---- Enregistrement (administrateur) ----
+      function scheduleDbPush(reason, delayMs) {
+        if (reason && dbReasons.length < 20) dbReasons.push(String(reason));
+        if (!dbCanWrite()) {
+          if (isAdminUser()) {
+            setDbStatus('notoken');
+            if (!dbWarnedNoToken) {
+              dbWarnedNoToken = true;
+              showToast('⚠️ Enregistré sur cet appareil seulement : ajoutez le jeton GitHub (bouton ☁️ en haut) pour publier vos tâches.');
+            }
+          }
+          return;
+        }
+        if (dbPushTimer) clearTimeout(dbPushTimer);
+        setDbStatus('pending');
+        dbPushTimer = setTimeout(() => { dbPushTimer = null; dbPushNow(); }, delayMs == null ? 1800 : delayMs);
+      }
+
+      async function dbPushNow(reasonOverride) {
+        if (!dbCanWrite()) return false;
+        if (dbBusy) { dbPushAgain = true; return false; }
+        dbBusy = true;
+        if (dbPushTimer) { clearTimeout(dbPushTimer); dbPushTimer = null; }
+        setDbStatus('saving');
+        const reasons = dbReasons.splice(0, dbReasons.length);
+        if (!reasons.length && reasonOverride) reasons.push(reasonOverride);
+        let ok = false;
+        try {
+          let lastMsg = '';
+          for (let attempt = 0; attempt < 4 && !ok; attempt++) {
+            // 1) état actuel du dépôt (+ sha)   2) fusion : on n'écrase jamais le travail fait sur un autre appareil
+            const remote = await dbReadRemoteApi(true);
+            if (remote.data && dbMergeRemote(remote.data, true)) {
+              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+              dbRefreshOpenViews();
+            }
+            if (remote.data && dbLocalSignature() === dbSignature(remote.data.clients, remote.data.tasks, remote.data.deletedTaskIds)) {
+              ok = true;            // la base contient déjà exactement ces données : rien à écrire
+              clearDbDirty();
+              break;
+            }
+            // 3) écriture
+            const seq = dbMutationSeq;
+            const res = await dbPutFile(dbSerialize(), remote.sha, dbCommitMessage(reasons));
+            if (res.ok) {
+              ok = true;
+              dbRetryMs = 0;
+              if (seq === dbMutationSeq) clearDbDirty();
+            } else {
+              lastMsg = res.message || '';
+            }
+          }
+          if (!ok) throw dbError("Conflit d'écriture répété avec GitHub" + (lastMsg ? ' (' + lastMsg + ')' : '') + '.', 409);
+          setDbStatus(dbDirty ? 'pending' : 'ok');
+        } catch (e) {
+          dbReasons.unshift(...reasons);
+          const msg = dbErrorText(e);
+          const needsUser = Boolean(e && (e.status === 401 || e.status === 403 || e.status === 404));
+          if (needsUser) {
+            setDbStatus('error', msg);
+          } else {
+            dbRetryMs = Math.min((dbRetryMs || 10000) * 2, 300000);
+            scheduleDbPush(null, dbRetryMs);
+            setDbStatus('error', msg + ' Nouvel essai dans ' + Math.round(dbRetryMs / 1000) + ' s.');
+          }
+        } finally {
+          dbBusy = false;
+          if (dbPushAgain) { dbPushAgain = false; scheduleDbPush(null, 600); }
+        }
+        return ok;
+      }
+
+      // Diffusion immédiate aux autres onglets ouverts sur ce même navigateur.
+      // (Le partage entre appareils passe par la base GitHub : voir saveState → scheduleDbPush.)
+      async function broadcastMultiDeviceSync(packet) {
+        try {
+          if (crossTabChannel) {
+            crossTabChannel.postMessage(Object.assign({ app: 'MT_SUIVI_DTF_V4', ts: Date.now() }, packet));
+          }
+        } catch (e) {}
       }
 
       function applyIncomingSyncPacket(pkt) {
@@ -2573,63 +3051,50 @@
         return changed;
       }
 
-      async function pullMultiDeviceCloudSync(silent = true) {
+      // ---- Lecture (tout le monde) ----
+      async function pullMultiDeviceCloudSync(silent = true, force = false) {
+        if (dbBusy || dbPullInFlight) return false;
+        if (!force && Date.now() - dbLastPullAt < 4000) return true;
+        dbPullInFlight = true;
+        let ok = false;
         try {
-          if (!silent) updateMultiDeviceBadgeUI('syncing', '🔄 Sync appareils...');
-          const res = await fetch(MULTI_DEVICE_SYNC_URL + '/json?poll=1&since=all', { method: 'GET' });
-          if (res.ok) {
-            const text = await res.text();
-            const lines = text.split(String.fromCharCode(10)).map(s => s.trim()).filter(Boolean);
-            let anyChanged = false;
-            lines.forEach(line => {
-              try {
-                const outer = JSON.parse(line);
-                if (outer && outer.event === 'message' && outer.message) {
-                  const inner = JSON.parse(outer.message);
-                  if (applyIncomingSyncPacket(inner)) anyChanged = true;
-                }
-              } catch (e) {}
-            });
-            if (anyChanged) {
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-              renderAll();
-              const holoModal = document.getElementById('hologramDayModal');
-              if (holoModal && !holoModal.classList.contains('hidden')) {
-                renderHologramModalContent(currentHoloDate);
-              }
+          if (!silent) setDbStatus('syncing');
+          const remote = await dbReadRemoteAny(force || !silent);
+          dbLastPullAt = Date.now();
+          if (remote.data) {
+            if (dbMergeRemote(remote.data, dbDirty)) {
+              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+              dbRefreshOpenViews();
               if (!silent) showToast(`Synchronisé : ${state.tasks.length} tâches à jour sur cet appareil !`);
             }
+            // L'administrateur a-t-il des données que la base n'a pas encore ? (saisies faites avant la mise à jour, hors-ligne…)
+            if (dbCanWrite() && remote.via === 'api'
+                && dbLocalSignature() !== dbSignature(remote.data.clients, remote.data.tasks, remote.data.deletedTaskIds)) {
+              markDbDirty();
+              scheduleDbPush('Synchronisation des données de cet appareil', 800);
+            }
+          } else if (remote.notFound && dbCanWrite()) {
+            markDbDirty();
+            scheduleDbPush('Création de la base de données', 800);
           }
-        } catch (err) {}
-        updateMultiDeviceBadgeUI('ok', `🔄 Sync (${state.tasks.length} tâches)`);
+          ok = true;
+          if (dbCanWrite()) { if (!dbDirty && !dbPushTimer) setDbStatus('ok'); }
+          else if (isAdminUser()) setDbStatus('notoken');
+          else setDbStatus(remote.data ? 'ok' : 'nodata');
+        } catch (e) {
+          dbLastPullAt = Date.now();
+          setDbStatus((isAdminUser() && !dbHasToken()) ? 'notoken' : 'offline', dbErrorText(e));
+        } finally {
+          dbPullInFlight = false;
+        }
+        return ok;
       }
 
       function startLiveMultiDeviceStream() {
-        try {
-          if (typeof EventSource !== 'undefined') {
-            const es = new EventSource(MULTI_DEVICE_SYNC_URL + '/sse');
-            es.onmessage = (ev) => {
-              try {
-                const outer = JSON.parse(ev.data);
-                const msgStr = outer && outer.message ? outer.message : ev.data;
-                const inner = JSON.parse(msgStr);
-                if (applyIncomingSyncPacket(inner)) {
-                  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-                  renderAll();
-                  const holoModal = document.getElementById('hologramDayModal');
-                  if (holoModal && !holoModal.classList.contains('hidden')) {
-                    renderHologramModalContent(currentHoloDate);
-                  }
-                }
-              } catch (e) {}
-            };
-          }
-        } catch (err) {}
-
         if (crossTabChannel) {
           crossTabChannel.onmessage = (ev) => {
             if (ev && ev.data && applyIncomingSyncPacket(ev.data)) {
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
               renderAll();
             }
           };
@@ -2649,8 +3114,16 @@
           }
         });
 
-        window.addEventListener('focus', () => {
-          pullMultiDeviceCloudSync(true);
+        // Relecture de la base quand on revient sur l'onglet / quand la connexion revient
+        window.addEventListener('focus', () => { pullMultiDeviceCloudSync(true); });
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) pullMultiDeviceCloudSync(true); });
+        window.addEventListener('online', () => {
+          if (dbDirty && dbCanWrite()) scheduleDbPush(null, 500);
+          pullMultiDeviceCloudSync(true, true);
+        });
+        // Évite de fermer l'onglet pendant qu'une modification n'est pas encore partie vers GitHub
+        window.addEventListener('beforeunload', (ev) => {
+          if (dbDirty && dbCanWrite()) { ev.preventDefault(); ev.returnValue = ''; return ''; }
         });
       }
 
@@ -2706,17 +3179,23 @@
         }
       }
 
-      // Ultra-fast saveState + multi-device cloud trigger
+      // saveState : garde une copie locale (rapide) et, pour toute vraie modification (mutationReason), déclenche
+      // l'enregistrement dans la base partagée GitHub (+ l'éventuelle sauvegarde secondaire Google Drive / JSONBin).
       function saveState(mutationReason = null) {
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        } catch (e) {}
-        updateMultiDeviceBadgeUI('ok', `🔄 Sync (${state.tasks.length} tâches)`);
-        if (mutationReason && cloudConfig.autoSave !== false && (cloudConfig.endpointUrl || '').trim() !== '') {
-          if (gdriveSyncTimeout) clearTimeout(gdriveSyncTimeout);
-          gdriveSyncTimeout = setTimeout(() => {
-            pushStateToRemoteCloud(mutationReason);
-          }, 400);
+        } catch (e) {
+          if (mutationReason) showToast('⚠️ Stockage du navigateur plein ou bloqué : vos données risquent de ne pas être conservées sur cet appareil.');
+        }
+        if (mutationReason) {
+          markDbDirty();
+          scheduleDbPush(mutationReason);
+          if (cloudConfig.autoSave !== false && (cloudConfig.endpointUrl || '').trim() !== '') {
+            if (gdriveSyncTimeout) clearTimeout(gdriveSyncTimeout);
+            gdriveSyncTimeout = setTimeout(() => {
+              pushStateToRemoteCloud(mutationReason);
+            }, 400);
+          }
         }
       }
 
@@ -2733,7 +3212,7 @@
         const normalizedEmail = `${userPart}@${domainPart}`;
         const isOwnerEmail = normalizedEmail === ADMIN_EMAIL.toLowerCase();
         const pinMatches = rawPinInput !== null
-          ? String(rawPinInput).trim() === ADMIN_PASSWORD
+          ? sha256Hex(String(rawPinInput).trim()) === ADMIN_PASSWORD_SHA256
           : Boolean(state.adminPasswordVerified);
         return {
           isValid: true,
@@ -2757,6 +3236,7 @@
       }
 
       function applyRolePermissionsUI() {
+        dbRefreshStatusForRole();
         const isAdm = isAdminUser();
         if (isAdm) {
           document.body.classList.remove('visitor-readonly');
@@ -5981,9 +6461,6 @@
 
         document.getElementById('openAuthModalBtn')?.addEventListener('click', openAuthPortal);
         document.getElementById('visitorLoginBtn')?.addEventListener('click', openAuthPortal);
-        document.getElementById('multiDeviceSyncBadge')?.addEventListener('click', () => {
-          pullMultiDeviceCloudSync(false);
-        });
         document.getElementById('closeAuthModalBtn')?.addEventListener('click', closeAuthModal);
         document.getElementById('cancelAuthModalBtn')?.addEventListener('click', closeAuthModal);
         document.getElementById('quickFillAdminBtn')?.addEventListener('click', () => {
@@ -6081,10 +6558,10 @@
             const data = await res.json();
             const record = data.record || data;
             if (record && Array.isArray(record.tasks) && Array.isArray(record.clients)) {
-              state.clients = record.clients;
-              state.tasks = record.tasks;
+              dbMergeRemote(record, true);
+              saveState('Restauration depuis le cloud distant');
               renderAll();
-              showToast(`Sauvegarde Google Drive chargée (${record.tasks.length} tâches) !`);
+              showToast(`Sauvegarde distante fusionnée (${record.tasks.length} tâches lues) !`);
             } else {
               showToast('Aucune sauvegarde valide trouvée sur ce lien.');
             }
@@ -6124,17 +6601,94 @@
             try {
               const parsed = JSON.parse(ev.target.result);
               if (parsed && Array.isArray(parsed.tasks) && Array.isArray(parsed.clients)) {
-                state.clients = parsed.clients;
-                state.tasks = parsed.tasks;
+                dbMergeRemote(parsed, true);
                 saveState('Import sauvegarde Google Drive');
                 renderAll();
-                showToast(`Sauvegarde Google Drive restaurée (${parsed.tasks.length} tâches)`);
+                showToast(`Sauvegarde importée et fusionnée (${parsed.tasks.length} tâches lues)`);
               }
             } catch (err) {
               showToast('Fichier JSON invalide.');
             }
           };
           reader.readAsText(file);
+        });
+
+        // ==================== BASE DE DONNÉES PARTAGÉE : réglages (fenêtre ☁️) ====================
+        const dbEl = (id) => document.getElementById(id);
+        const dbShowFeedback = (message, kind) => {
+          const el = dbEl('dbModalFeedback');
+          if (!el) return;
+          el.textContent = message;
+          el.className = 'p-2.5 rounded-xl text-xs font-bold border ' + (kind === 'ok'
+            ? 'bg-emerald-500/20 border-emerald-400/50 text-emerald-300'
+            : (kind === 'warn'
+              ? 'bg-amber-500/20 border-amber-400/50 text-amber-300'
+              : 'bg-rose-500/20 border-rose-400/60 text-rose-300'));
+        };
+        const dbFillFields = () => {
+          if (dbEl('dbOwnerInput')) dbEl('dbOwnerInput').value = dbConfig.owner || '';
+          if (dbEl('dbRepoInput')) dbEl('dbRepoInput').value = dbConfig.repo || '';
+          if (dbEl('dbBranchInput')) dbEl('dbBranchInput').value = dbConfig.branch || 'main';
+          const tokInp = dbEl('dbTokenInput');
+          if (tokInp) {
+            tokInp.value = '';
+            tokInp.placeholder = dbHasToken()
+              ? '•••••••• jeton enregistré sur cet appareil (laisser vide pour le conserver)'
+              : 'github_pat_… (collez ici votre jeton)';
+          }
+          updateMultiDeviceBadgeUI(dbStatus.kind, dbStatus.detail);
+        };
+        dbEl('openCloudModalBtn')?.addEventListener('click', dbFillFields);
+
+        dbEl('dbSaveAndPublishBtn')?.addEventListener('click', async () => {
+          if (!requireAdmin()) return;
+          const owner = (dbEl('dbOwnerInput')?.value || '').trim();
+          const repo = (dbEl('dbRepoInput')?.value || '').trim();
+          const branch = (dbEl('dbBranchInput')?.value || '').trim() || 'main';
+          const typedToken = (dbEl('dbTokenInput')?.value || '').trim();
+          if (!owner || !repo) { dbShowFeedback('Renseignez le compte GitHub et le nom du dépôt.', 'err'); return; }
+          if (!typedToken && !dbHasToken()) { dbShowFeedback('Collez votre jeton GitHub pour pouvoir enregistrer vos tâches.', 'warn'); return; }
+          dbConfig.owner = owner;
+          dbConfig.repo = repo;
+          dbConfig.branch = branch;
+          if (typedToken) dbConfig.token = typedToken;
+          saveDbConfig();
+          dbShowFeedback('Connexion à GitHub et publication des données…', 'warn');
+          for (let i = 0; i < 50 && dbBusy; i++) await new Promise(r => setTimeout(r, 200));
+          markDbDirty();
+          const ok = await dbPushNow('Publication des données');
+          if (ok) {
+            if (dbEl('dbTokenInput')) dbEl('dbTokenInput').value = '';
+            dbFillFields();
+            dbShowFeedback(`✅ Connecté à ${owner}/${repo} : ${state.tasks.length} tâches enregistrées dans ${dbConfig.path}. Elles sont maintenant visibles sur tous les appareils.`, 'ok');
+          } else {
+            dbShowFeedback('❌ ' + (dbStatus.detail || 'Échec de la publication.'), 'err');
+          }
+        });
+
+        dbEl('dbReloadBtn')?.addEventListener('click', async () => {
+          dbShowFeedback('Lecture de la base de données…', 'warn');
+          const ok = await pullMultiDeviceCloudSync(false, true);
+          if (ok) dbShowFeedback(`✅ Base relue : ${state.tasks.length} tâches sur cet appareil.`, 'ok');
+          else dbShowFeedback('❌ ' + (dbStatus.detail || 'Base injoignable pour le moment.'), 'err');
+        });
+
+        dbEl('dbForgetTokenBtn')?.addEventListener('click', () => {
+          dbConfig.token = '';
+          saveDbConfig();
+          dbFillFields();
+          setDbStatus(isAdminUser() ? 'notoken' : 'ok');
+          dbShowFeedback("Jeton supprimé de cet appareil. Les nouvelles saisies ne seront plus publiées tant qu'un jeton n'est pas ajouté.", 'warn');
+        });
+
+        // Le badge d'état : réglages si le jeton manque ou en cas d'erreur, sinon envoi / actualisation immédiats
+        dbEl('multiDeviceSyncBadge')?.addEventListener('click', () => {
+          if (isAdminUser() && (!dbHasToken() || dbStatus.kind === 'error' || dbStatus.kind === 'notoken')) {
+            dbEl('openCloudModalBtn')?.click();
+            return;
+          }
+          if (dbCanWrite() && dbDirty) { dbPushNow('Envoi manuel'); return; }
+          pullMultiDeviceCloudSync(false, true);
         });
 
         // Run Platform Recognition Algorithm (Smartphone / Tablet / Desktop) & listen for screen changes
@@ -6151,10 +6705,11 @@
         applyPlatformRecognitionUI();
         renderAll();
 
-        // Start Real-Time Multi-Device Cloud Sync (Initial Pull + Live Stream + Periodic Check)
-        pullMultiDeviceCloudSync(true);
+        // Base de données partagée : lecture au chargement, puis toutes les 60 s tant que l'onglet est visible
+        pullMultiDeviceCloudSync(true, true);
         startLiveMultiDeviceStream();
-        setInterval(() => { pullMultiDeviceCloudSync(true); }, 15000);
+        setInterval(() => { if (!document.hidden) pullMultiDeviceCloudSync(true); }, 60000);
+        try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
 
         // Open the Login & Google Account Recognition Portal on initial unauthenticated visit
         if (!state.sessionAuthenticated) {
