@@ -11,6 +11,7 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -670,6 +671,36 @@
       font-size: 10.5px !important;
     }
 
+
+    /* ==================== STYLES D'IMPRESSION A4 HAUTE DÉFINITION (@media print) ==================== */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      body * {
+        visibility: hidden !important;
+      }
+      #printInvoiceContainer, #printInvoiceContainer * {
+        visibility: visible !important;
+      }
+      #printInvoiceContainer {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 8mm 8mm 10mm 8mm;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row selection:bg-cyan-500 selection:text-white">
@@ -1502,17 +1533,38 @@
       <div class="neon-card p-5 border border-cyan-500/40">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
           <div>
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-rose-600/20 text-rose-500">Relevé Périodique Client (Modèle 19 Octobre)</span>
-            <h2 class="text-base sm:text-lg font-extrabold mt-1">Générateur de Relevé & Facturation Client (DTF cm / m / Ar)</h2>
-            <p class="text-xs opacity-75">Ex: Relevé de Tsiory du 11 au 18 Octobre = 2 589 cm (25,89 m) soit 517 800 Ar</p>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-rose-600/20 text-rose-400">Relevé &amp; Facturation Client</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-cyan-500/20 text-cyan-300">Format Impression &amp; Export PDF A4</span>
+            </div>
+            <h2 class="text-base sm:text-lg font-extrabold mt-1">Générateur de Relevé &amp; Facturation Client (DTF cm / m / Ar)</h2>
+            <p class="text-xs opacity-75">Consultez, soldez, imprimez ou exportez en PDF le relevé détaillé de n'importe quel client.</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <select id="statementClientSelect" class="px-3 py-2 rounded-xl text-xs bg-purple-950/60 border border-purple-500/40"></select>
-            <input id="statementStartDate" type="date" value="2026-10-11" class="px-3 py-1.5 rounded-xl text-xs bg-purple-950/60 border border-purple-500/40" />
-            <span class="text-xs">au</span>
-            <input id="statementEndDate" type="date" value="2026-10-18" class="px-3 py-1.5 rounded-xl text-xs bg-purple-950/60 border border-purple-500/40" />
-            <button id="markClientStatementPaidBtn" class="admin-only-control neon-gradient-btn px-3.5 py-2 rounded-xl text-xs font-bold">
-              Solder la sélection
+            <select id="statementClientSelect" class="px-3 py-2 rounded-xl text-xs bg-purple-950/60 border border-purple-500/40 text-white font-semibold focus:outline-none focus:border-cyan-400"></select>
+            <div class="flex items-center gap-1.5 bg-purple-950/40 border border-purple-500/30 px-2 py-1 rounded-xl">
+              <input id="statementStartDate" type="date" value="2026-10-01" class="px-2 py-1 rounded-lg text-xs bg-slate-900 border border-purple-500/30 text-white" />
+              <span class="text-xs opacity-70">au</span>
+              <input id="statementEndDate" type="date" value="2026-10-31" class="px-2 py-1 rounded-lg text-xs bg-slate-900 border border-purple-500/30 text-white" />
+            </div>
+            <button id="statementThisMonthBtn" type="button" class="px-2.5 py-2 rounded-xl text-[11px] font-semibold bg-purple-500/20 hover:bg-purple-500/35 border border-purple-400/40 text-purple-200" title="Sélectionner le mois en cours">
+              Ce mois
+            </button>
+            <button id="statementAllDatesBtn" type="button" class="px-2.5 py-2 rounded-xl text-[11px] font-semibold bg-slate-900 hover:bg-purple-500/20 border border-purple-400/40 text-purple-200" title="Afficher toutes les commandes sans restriction de dates">
+              Tout
+            </button>
+            <button id="markClientStatementPaidBtn" type="button" class="admin-only-control neon-gradient-btn px-3 py-2 rounded-xl text-xs font-bold" title="Passer toutes les commandes de la période sélectionnée en état Payé">
+              Solder
+            </button>
+            <!-- BOUTONS D'IMPRESSION ET D'EXPORTATION PDF -->
+            <button id="previewClientStatementBtn" type="button" class="px-3 py-2 rounded-xl text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-400/50 text-cyan-200 flex items-center gap-1.5 transition-all shadow-lg hover:shadow-cyan-500/20" title="Ouvrir l'aperçu A4 avant impression ou téléchargement PDF">
+              👁️ Aperçu
+            </button>
+            <button id="printClientStatementBtn" type="button" class="px-3 py-2 rounded-xl text-xs font-bold bg-indigo-500/20 hover:bg-indigo-500/35 border border-indigo-400/50 text-indigo-200 flex items-center gap-1.5 transition-all shadow-md hover:shadow-indigo-500/20" title="Lancer directement l'impression du relevé client (A4)">
+              🖨️ Imprimer
+            </button>
+            <button id="exportClientPdfBtn" type="button" class="neon-gradient-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-lg" title="Télécharger directement le document au format PDF">
+              📄 Exporter PDF
             </button>
           </div>
         </div>
@@ -1531,6 +1583,24 @@
             </thead>
             <tbody id="clientStatementBody" class="divide-y divide-purple-500/15"></tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3">
+        <div>
+          <h3 class="text-base font-extrabold flex items-center gap-2">
+            <span>👥 Répertoire &amp; Fiches Individuelles Clients</span>
+            <span id="clientsCountBadge" class="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-500/20 text-purple-300"></span>
+          </h3>
+          <p class="text-xs opacity-75">Métrage cumulé, chiffre d'affaires, taux de règlement et relevés individuels en un clic.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="printGlobalClientsDirectoryBtn" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-purple-500/20 hover:bg-purple-500/35 border border-purple-400/40 text-purple-200 flex items-center gap-1.5 shadow-md">
+            📊 Imprimer Annuaire Global
+          </button>
+          <button id="exportGlobalClientsPdfBtn" type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-400/50 text-cyan-200 flex items-center gap-1.5 shadow-md">
+            📄 Exporter Annuaire PDF
+          </button>
         </div>
       </div>
 
@@ -2221,6 +2291,53 @@
       </div>
     </div>
   </div>
+
+  <!-- ==================== CLIENT STATEMENT PDF / PRINT PREVIEW MODAL ==================== -->
+  <div id="clientPdfPreviewModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
+    <div class="relative w-full max-w-4xl max-h-[94vh] flex flex-col rounded-2xl bg-slate-900 border border-cyan-500/40 shadow-2xl overflow-hidden my-auto">
+      
+      <!-- Modal Header (Controls) -->
+      <div class="px-5 py-3.5 bg-slate-950/90 border-b border-cyan-500/30 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-base">📄</span>
+          <div>
+            <h3 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+              <span>Relevé Client DTF</span>
+              <span id="pdfModalClientNameBadge" class="px-2 py-0.5 rounded text-[11px] font-bold bg-cyan-500/20 text-cyan-300"></span>
+            </h3>
+            <p id="pdfModalPeriodSubtitle" class="text-[11px] opacity-75 font-mono text-cyan-200"></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="modalDirectPrintBtn" type="button" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-400/50 text-cyan-200 flex items-center gap-1.5 shadow-md hover:bg-cyan-500/30 transition-all">
+            🖨️ Imprimer (A4)
+          </button>
+          <button id="modalDirectDownloadPdfBtn" type="button" class="neon-gradient-btn px-4 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-lg">
+            ⬇️ Télécharger PDF
+          </button>
+          <button id="closeClientPdfPreviewBtn" type="button" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-red-500/25 border border-slate-700 hover:border-red-500/40 text-slate-300 hover:text-red-300 font-bold flex items-center justify-center text-lg transition-colors">&times;</button>
+        </div>
+      </div>
+
+      <!-- Modal Body (A4 Document Preview) -->
+      <div class="flex-1 overflow-y-auto p-3 sm:p-6 bg-slate-950/70 flex justify-center">
+        <div id="statementDocumentPreview" class="w-full max-w-[210mm] bg-white text-slate-900 p-6 sm:p-8 rounded-xl shadow-2xl border border-slate-200 text-xs sm:text-sm">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-5 py-2.5 bg-slate-950/90 border-t border-cyan-500/20 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 shrink-0">
+        <span>💡 Impression ou export PDF propre sans les menus de navigation ni les fonds sombres.</span>
+        <button id="closeClientPdfPreviewBottomBtn" type="button" class="px-3.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold">
+          Fermer l'aperçu
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Container exclusively visible during @media print -->
+  <div id="printInvoiceContainer" class="hidden"></div>
 
   <!-- TOAST NOTIFICATION -->
   <div id="toastNotification" class="fixed bottom-5 right-5 z-50 px-4 py-3 rounded-xl neon-gradient-btn text-white text-xs font-bold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
@@ -4873,6 +4990,409 @@
         });
       }
 
+
+      // ==================== FONCTIONS D'IMPRESSION & D'EXPORTATION PDF CLIENTS ====================
+      const MT_LOGO_BASE64 = "data:image/webp;base64,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";
+
+      function generateClientStatementHtml(clientId, customStart, customEnd) {
+        const cid = clientId || document.getElementById('statementClientSelect')?.value || state.clients[0]?.id;
+        const client = state.clients.find(c => String(c.id) === String(cid)) || { name: 'Client DTF', contact: '', email: '', sector: 'Impression DTF' };
+        const start = customStart !== undefined ? customStart : (document.getElementById('statementStartDate')?.value || '');
+        const end = customEnd !== undefined ? customEnd : (document.getElementById('statementEndDate')?.value || '');
+
+        const rows = state.tasks
+          .filter(t => String(t.clientId) === String(cid) && (!start || t.date >= start) && (!end || t.date <= end))
+          .sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')) || (Number(a.num) || 0) - (Number(b.num) || 0));
+
+        const totalCm = rows.reduce((s, t) => s + (Number(t.dtfCm) || 0), 0);
+        const totalM = totalCm / 100;
+        const totalCA = rows.reduce((s, t) => s + (Number(t.budget) || 0), 0);
+        const totalPaid = rows.filter(t => t.etatPaiement === 'Payé').reduce((s, t) => s + (Number(t.budget) || 0), 0);
+        const totalUnpaid = totalCA - totalPaid;
+        const mada = getMadagascarNowParts();
+        const refCode = `REL-${String(client.id || 'C').replace(/^c_/, '').toUpperCase()}-${mada.year}${String(mada.month + 1).padStart(2, '0')}`;
+
+        const periodLabel = (start && end)
+          ? `Du ${start.split('-').reverse().join('/')} au ${end.split('-').reverse().join('/')}`
+          : (start ? `À partir du ${start.split('-').reverse().join('/')}` : (end ? `Jusqu'au ${end.split('-').reverse().join('/')}` : 'Tout l\'historique complet'));
+
+        return `
+          <div style="font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #0f172a; line-height: 1.45; background-color: #ffffff;">
+            <!-- Header Entreprise & Titre Document -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2.5px solid #0284c7; padding-bottom: 14px; margin-bottom: 16px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 52px; height: 52px; border-radius: 12px; border: 1.5px solid #0284c7; overflow: hidden; background: #080e24; flex-shrink: 0;">
+                  <img src="${MT_LOGO_BASE64}" alt="Logo MT" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+                <div>
+                  <h1 style="margin: 0; font-size: 19px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; text-transform: uppercase;">MT SUIVI DTF</h1>
+                  <p style="margin: 2px 0 0; font-size: 11.5px; font-weight: 700; color: #0284c7;">Atelier d'Impression DTF Haute Définition &amp; Design Textile</p>
+                  <p style="margin: 2px 0 0; font-size: 10px; color: #64748b;">Antananarivo, Madagascar • Email : mendrikatiavina16@gmail.com</p>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="display: inline-block; background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">
+                  RELEVÉ DE FACTURATION
+                </div>
+                <div style="font-size: 10.5px; font-family: monospace; color: #475569; font-weight: bold;">Réf : ${refCode}</div>
+                <div style="font-size: 10px; color: #64748b; margin-top: 2px;">Édité le : ${mada.fullDateTimeFr}</div>
+              </div>
+            </div>
+
+            <!-- Fiche Client & Période -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;">
+              <div>
+                <span style="display: block; font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 2px;">Fiche Client</span>
+                <div style="font-size: 15px; font-weight: 900; color: #0f172a;">${client.name}</div>
+                <div style="font-size: 11px; color: #475569; margin-top: 2px;">Contact : <strong>${client.contact || client.name}</strong></div>
+                <div style="font-size: 10.5px; color: #64748b;">Activité : ${client.sector || 'Impression DTF Textile'} ${client.email ? '• ' + client.email : ''}</div>
+              </div>
+              <div style="text-align: right;">
+                <span style="display: block; font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 2px;">Période du Relevé</span>
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a;">${periodLabel}</div>
+                <div style="font-size: 11px; color: #0284c7; font-weight: 700; margin-top: 2px;">${rows.length} commande(s) / tirage(s) DTF</div>
+                <div style="font-size: 10px; color: #64748b; margin-top: 2px;">Tarif appliqué : <strong>200 Ar / cm</strong> (20 000 Ar / m)</div>
+              </div>
+            </div>
+
+            <!-- Tableau Détaillé des Tirages DTF -->
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 16px;">
+              <thead>
+                <tr style="background-color: #0f172a; color: #ffffff; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px;">
+                  <th style="padding: 7px 8px; text-align: center; width: 28px;">#</th>
+                  <th style="padding: 7px 8px; text-align: left; width: 85px;">Date / Réf</th>
+                  <th style="padding: 7px 8px; text-align: left;">Désignation / Nom du Fichier DTF</th>
+                  <th style="padding: 7px 8px; text-align: right; width: 65px;">DTF (cm)</th>
+                  <th style="padding: 7px 8px; text-align: right; width: 65px;">DTF (m)</th>
+                  <th style="padding: 7px 8px; text-align: right; width: 85px;">Montant</th>
+                  <th style="padding: 7px 8px; text-align: center; width: 75px;">Règlement</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows.length === 0 ? `
+                  <tr>
+                    <td colspan="7" style="padding: 24px; text-align: center; color: #94a3b8; font-style: italic; border: 1px solid #e2e8f0;">
+                      Aucune commande enregistrée pour ce client sur la période sélectionnée.
+                    </td>
+                  </tr>
+                ` : rows.map((t, idx) => `
+                  <tr style="border-bottom: 1px solid #e2e8f0; background-color: ${idx % 2 === 0 ? '#ffffff' : '#f8fafc'};">
+                    <td style="padding: 6px 8px; text-align: center; color: #64748b; font-family: monospace; font-size: 10px;">${idx + 1}</td>
+                    <td style="padding: 6px 8px; font-weight: 700; color: #0f172a; white-space: nowrap;">${t.sheet || t.date}</td>
+                    <td style="padding: 6px 8px; color: #1e293b;">
+                      <div style="font-weight: 600;">${dbEsc(t.remarques || t.title || t.description || 'Impression DTF')}</div>
+                    </td>
+                    <td style="padding: 6px 8px; text-align: right; font-family: monospace; font-weight: 700; color: #0f172a;">${Math.round(t.dtfCm)} cm</td>
+                    <td style="padding: 6px 8px; text-align: right; font-family: monospace; color: #0284c7; font-weight: 700;">${(t.dtfCm / 100).toFixed(2)} m</td>
+                    <td style="padding: 6px 8px; text-align: right; font-family: monospace; font-weight: 800; color: #0f172a;">${formatAr(t.budget)}</td>
+                    <td style="padding: 6px 8px; text-align: center;">
+                      <span style="display: inline-block; padding: 2px 7px; border-radius: 6px; font-size: 9.5px; font-weight: 800; text-transform: uppercase; ${t.etatPaiement === 'Payé' ? 'background: #dcfce7; color: #15803d; border: 1px solid #86efac;' : 'background: #ffe4e6; color: #be123c; border: 1px solid #fecdd3;'}">
+                        ${t.etatPaiement || 'Payé'}
+                      </span>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+
+            <!-- Bloc Récapitulatif Financier (Métrage & Totaux) -->
+            <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; margin-bottom: 18px;">
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <span style="display: block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 3px;">Métrage Cumulé Imprimé</span>
+                  <div style="display: flex; align-items: baseline; gap: 8px;">
+                    <span style="font-size: 22px; font-weight: 900; color: #0284c7; font-family: monospace;">${totalM.toFixed(2)} m</span>
+                    <span style="font-size: 12px; font-weight: 700; color: #475569; font-family: monospace;">(${Math.round(totalCm).toLocaleString('fr-FR')} cm)</span>
+                  </div>
+                </div>
+                <div style="font-size: 10px; color: #64748b; margin-top: 8px; line-height: 1.4;">
+                  ✓ Tirage industriel sur film DTF Premium double enduction avec poudrage polyuréthane et séchage haute précision.
+                </div>
+              </div>
+
+              <div style="background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px 14px;">
+                <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 5px;">
+                  <span style="color: #475569;">Total Facturé (Brut) :</span>
+                  <span style="font-weight: 800; font-family: monospace; color: #0f172a;">${formatAr(totalCA)}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 6px;">
+                  <span style="color: #475569;">Montant Réglé (Payé) :</span>
+                  <span style="font-weight: 800; font-family: monospace; color: #16a34a;">${formatAr(totalPaid)}</span>
+                </div>
+                <div style="border-top: 1.5px solid #cbd5e1; padding-top: 6px; display: flex; justify-content: space-between; align-items: baseline;">
+                  <span style="font-size: 11.5px; font-weight: 900; text-transform: uppercase; color: #0f172a;">Reste à Payer :</span>
+                  <span style="font-size: 15px; font-weight: 900; font-family: monospace; color: ${totalUnpaid > 0 ? '#dc2626' : '#16a34a'};">
+                    ${formatAr(totalUnpaid)}
+                  </span>
+                </div>
+                <div style="text-align: right; margin-top: 6px;">
+                  <span style="display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 9.5px; font-weight: 900; text-transform: uppercase; ${totalUnpaid === 0 ? 'background: #dcfce7; color: #15803d; border: 1px solid #86efac;' : 'background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;'}">
+                    ${totalUnpaid === 0 ? '✓ RELEVÉ ENTIÈREMENT SOLDÉ' : '⚠️ SOLDE EN ATTENTE DE RÈGLEMENT'}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mentions & Signatures -->
+            <div style="font-size: 10px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; margin-bottom: 14px;">
+              Arrêté le présent relevé de facturation à la somme de : <strong>${formatAr(totalCA)}</strong> (Solde dû : <strong>${formatAr(totalUnpaid)}</strong>).
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div style="border: 1px dashed #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; height: 80px; display: flex; flex-direction: column; justify-content: space-between;">
+                <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: #475569;">Pour Accord — Le Client</span>
+                <span style="font-size: 9px; color: #94a3b8; font-style: italic;">Date et mention manuscrite « Bon pour accord »</span>
+              </div>
+              <div style="border: 1px dashed #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; height: 80px; display: flex; flex-direction: column; justify-content: space-between;">
+                <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: #475569;">L'Atelier MT Suivi DTF</span>
+                <span style="font-size: 9px; color: #94a3b8; font-style: italic;">Cachet &amp; Signature</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function generateClientsDirectoryHtml() {
+        const mada = getMadagascarNowParts();
+        const totalClients = state.clients.length;
+        const totalTasks = state.tasks.length;
+        const totalCm = state.tasks.reduce((s, t) => s + (Number(t.dtfCm) || 0), 0);
+        const totalCA = state.tasks.reduce((s, t) => s + (Number(t.budget) || 0), 0);
+        const totalPaid = state.tasks.filter(t => t.etatPaiement === 'Payé').reduce((s, t) => s + (Number(t.budget) || 0), 0);
+        const totalUnpaid = totalCA - totalPaid;
+
+        return `
+          <div style="font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #0f172a; line-height: 1.45; background-color: #ffffff;">
+            <!-- Header -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2.5px solid #0284c7; padding-bottom: 14px; margin-bottom: 16px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 52px; height: 52px; border-radius: 12px; border: 1.5px solid #0284c7; overflow: hidden; background: #080e24; flex-shrink: 0;">
+                  <img src="${MT_LOGO_BASE64}" alt="Logo MT" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+                <div>
+                  <h1 style="margin: 0; font-size: 19px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; text-transform: uppercase;">MT SUIVI DTF</h1>
+                  <p style="margin: 2px 0 0; font-size: 11.5px; font-weight: 700; color: #0284c7;">Annuaire &amp; Bilan Financier Global des Clients</p>
+                  <p style="margin: 2px 0 0; font-size: 10px; color: #64748b;">Antananarivo, Madagascar • Synthèse complète d'activité</p>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="display: inline-block; background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 800; text-transform: uppercase;">
+                  ANNUAIRE GLOBAL CLIENTS
+                </div>
+                <div style="font-size: 10px; color: #64748b; margin-top: 4px;">Édité le : ${mada.fullDateTimeFr}</div>
+              </div>
+            </div>
+
+            <!-- KPIs Globaux -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px;">
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px;">
+                <span style="font-size: 9.5px; font-weight: 700; text-transform: uppercase; color: #64748b; display: block;">Total Clients</span>
+                <span style="font-size: 17px; font-weight: 900; color: #0f172a;">${totalClients}</span>
+              </div>
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px;">
+                <span style="font-size: 9.5px; font-weight: 700; text-transform: uppercase; color: #64748b; display: block;">Métrage Imprimé</span>
+                <span style="font-size: 17px; font-weight: 900; color: #0284c7; font-family: monospace;">${(totalCm / 100).toFixed(2)} m</span>
+              </div>
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px;">
+                <span style="font-size: 9.5px; font-weight: 700; text-transform: uppercase; color: #64748b; display: block;">CA Total Brut</span>
+                <span style="font-size: 15px; font-weight: 900; color: #0f172a; font-family: monospace;">${formatAr(totalCA)}</span>
+              </div>
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px;">
+                <span style="font-size: 9.5px; font-weight: 700; text-transform: uppercase; color: #64748b; display: block;">Reste à Recouvrer</span>
+                <span style="font-size: 15px; font-weight: 900; color: ${totalUnpaid > 0 ? '#dc2626' : '#16a34a'}; font-family: monospace;">${formatAr(totalUnpaid)}</span>
+              </div>
+            </div>
+
+            <!-- Tableau -->
+            <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margin-bottom: 16px;">
+              <thead>
+                <tr style="background-color: #0f172a; color: #ffffff; text-transform: uppercase; font-size: 9.5px;">
+                  <th style="padding: 6px 8px; text-align: center; width: 26px;">#</th>
+                  <th style="padding: 6px 8px; text-align: left;">Client</th>
+                  <th style="padding: 6px 8px; text-align: center; width: 60px;">Tirages</th>
+                  <th style="padding: 6px 8px; text-align: right; width: 80px;">DTF (m)</th>
+                  <th style="padding: 6px 8px; text-align: right; width: 90px;">CA Total</th>
+                  <th style="padding: 6px 8px; text-align: right; width: 90px;">Encaissé</th>
+                  <th style="padding: 6px 8px; text-align: right; width: 90px;">Impayé</th>
+                  <th style="padding: 6px 8px; text-align: center; width: 55px;">Taux</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${state.clients.map((c, idx) => {
+                  const cTasks = state.tasks.filter(t => t.clientId === c.id);
+                  const cCm = cTasks.reduce((s, t) => s + (Number(t.dtfCm) || 0), 0);
+                  const cCA = cTasks.reduce((s, t) => s + (Number(t.budget) || 0), 0);
+                  const cPaid = cTasks.filter(t => t.etatPaiement === 'Payé').reduce((s, t) => s + (Number(t.budget) || 0), 0);
+                  const cUnpaid = cCA - cPaid;
+                  const pct = cCA > 0 ? Math.round((cPaid / cCA) * 100) : 100;
+
+                  return `
+                    <tr style="border-bottom: 1px solid #e2e8f0; background-color: ${idx % 2 === 0 ? '#ffffff' : '#f8fafc'};">
+                      <td style="padding: 5px 8px; text-align: center; color: #64748b; font-family: monospace; font-size: 9.5px;">${idx + 1}</td>
+                      <td style="padding: 5px 8px; font-weight: 700; color: #0f172a;">${dbEsc(c.name)}</td>
+                      <td style="padding: 5px 8px; text-align: center; font-weight: 600;">${cTasks.length}</td>
+                      <td style="padding: 5px 8px; text-align: right; font-family: monospace; color: #0284c7; font-weight: 700;">${(cCm / 100).toFixed(2)} m</td>
+                      <td style="padding: 5px 8px; text-align: right; font-family: monospace; font-weight: 700;">${formatAr(cCA)}</td>
+                      <td style="padding: 5px 8px; text-align: right; font-family: monospace; color: #16a34a; font-weight: 700;">${formatAr(cPaid)}</td>
+                      <td style="padding: 5px 8px; text-align: right; font-family: monospace; font-weight: 800; color: ${cUnpaid > 0 ? '#dc2626' : '#64748b'};">${formatAr(cUnpaid)}</td>
+                      <td style="padding: 5px 8px; text-align: center; font-weight: 800; color: ${pct === 100 ? '#16a34a' : '#d97706'};">${pct}%</td>
+                    </tr>
+                  `;
+                }).join('')}
+                <tr style="background-color: #0f172a; color: #ffffff; font-weight: 800; font-size: 10.5px;">
+                  <td colspan="2" style="padding: 8px;">TOTAL GÉNÉRAL</td>
+                  <td style="padding: 8px; text-align: center;">${totalTasks}</td>
+                  <td style="padding: 8px; text-align: right; font-family: monospace; color: #38bdf8;">${(totalCm / 100).toFixed(2)} m</td>
+                  <td style="padding: 8px; text-align: right; font-family: monospace;">${formatAr(totalCA)}</td>
+                  <td style="padding: 8px; text-align: right; font-family: monospace; color: #4ade80;">${formatAr(totalPaid)}</td>
+                  <td style="padding: 8px; text-align: right; font-family: monospace; color: #f87171;">${formatAr(totalUnpaid)}</td>
+                  <td style="padding: 8px; text-align: center;">${totalCA > 0 ? Math.round((totalPaid / totalCA) * 100) : 100}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      function openClientPdfPreview(clientId) {
+        const selectEl = document.getElementById('statementClientSelect');
+        const cid = clientId || selectEl?.value || state.statementClientId || state.clients[0]?.id;
+        const start = document.getElementById('statementStartDate')?.value || '';
+        const end = document.getElementById('statementEndDate')?.value || '';
+        const client = state.clients.find(c => String(c.id) === String(cid));
+
+        const html = generateClientStatementHtml(cid, start, end);
+        const previewEl = document.getElementById('statementDocumentPreview');
+        if (previewEl) previewEl.innerHTML = html;
+
+        const nameBadge = document.getElementById('pdfModalClientNameBadge');
+        if (nameBadge) nameBadge.textContent = client ? client.name : 'Client DTF';
+
+        const subtitle = document.getElementById('pdfModalPeriodSubtitle');
+        if (subtitle) {
+          subtitle.textContent = (start && end) ? `Période : ${start} au ${end}` : 'Historique complet';
+        }
+
+        const modal = document.getElementById('clientPdfPreviewModal');
+        if (modal) {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        }
+      }
+
+      function closeClientPdfPreview() {
+        const modal = document.getElementById('clientPdfPreviewModal');
+        if (modal) {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        }
+      }
+
+      function printClientStatement(clientId) {
+        const selectEl = document.getElementById('statementClientSelect');
+        const cid = clientId || selectEl?.value || state.statementClientId || state.clients[0]?.id;
+        const start = document.getElementById('statementStartDate')?.value || '';
+        const end = document.getElementById('statementEndDate')?.value || '';
+        const html = generateClientStatementHtml(cid, start, end);
+
+        const printBox = document.getElementById('printInvoiceContainer');
+        if (printBox) {
+          printBox.innerHTML = html;
+          window.print();
+        }
+      }
+
+      async function exportClientStatementToPdf(clientId) {
+        const selectEl = document.getElementById('statementClientSelect');
+        const cid = clientId || selectEl?.value || state.statementClientId || state.clients[0]?.id;
+        const client = state.clients.find(c => String(c.id) === String(cid));
+        const clientName = client ? client.name : 'Client';
+        const start = document.getElementById('statementStartDate')?.value || 'tout';
+        const end = document.getElementById('statementEndDate')?.value || 'tout';
+        const safeName = clientName.replace(/[^a-zA-Z0-9_-]/g, '_');
+        const fileName = `Releve_DTF_${safeName}_${start}_au_${end}.pdf`;
+
+        const html = generateClientStatementHtml(cid);
+
+        if (typeof html2pdf !== 'undefined') {
+          showToast('📄 Génération du PDF haute définition...');
+          const container = document.createElement('div');
+          container.style.width = '210mm';
+          container.style.padding = '8mm 10mm';
+          container.style.backgroundColor = '#ffffff';
+          container.style.boxSizing = 'border-box';
+          container.innerHTML = html;
+          document.body.appendChild(container);
+
+          const opt = {
+            margin: [6, 6, 8, 6],
+            filename: fileName,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, logging: false },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+          };
+
+          try {
+            await html2pdf().set(opt).from(container).save();
+            showToast(`✅ PDF téléchargé : ${fileName}`);
+          } catch (err) {
+            console.warn('html2pdf error, fallback to print dialog:', err);
+            printClientStatement(cid);
+          } finally {
+            if (container.parentNode) container.parentNode.removeChild(container);
+          }
+        } else {
+          showToast("🖨️ Ouverture de la boîte d'impression pour enregistrer en PDF...");
+          printClientStatement(cid);
+        }
+      }
+
+      function printGlobalClientsDirectory() {
+        const html = generateClientsDirectoryHtml();
+        const printBox = document.getElementById('printInvoiceContainer');
+        if (printBox) {
+          printBox.innerHTML = html;
+          window.print();
+        }
+      }
+
+      async function exportGlobalClientsDirectoryToPdf() {
+        const mada = getMadagascarNowParts();
+        const fileName = `MT_Suivi_DTF_Annuaire_Clients_${mada.dateStr}.pdf`;
+        const html = generateClientsDirectoryHtml();
+
+        if (typeof html2pdf !== 'undefined') {
+          showToast('📄 Génération de l\'annuaire PDF...');
+          const container = document.createElement('div');
+          container.style.width = '210mm';
+          container.style.padding = '8mm 10mm';
+          container.style.backgroundColor = '#ffffff';
+          container.style.boxSizing = 'border-box';
+          container.innerHTML = html;
+          document.body.appendChild(container);
+
+          const opt = {
+            margin: [6, 6, 8, 6],
+            filename: fileName,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, logging: false },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+          };
+
+          try {
+            await html2pdf().set(opt).from(container).save();
+            showToast(`✅ Annuaire PDF téléchargé : ${fileName}`);
+          } catch (err) {
+            console.warn('html2pdf error, fallback to print dialog:', err);
+            printGlobalClientsDirectory();
+          } finally {
+            if (container.parentNode) container.parentNode.removeChild(container);
+          }
+        } else {
+          printGlobalClientsDirectory();
+        }
+      }
+
       function renderClientStatement() {
         const selectEl = document.getElementById('statementClientSelect');
         const tbody = document.getElementById('clientStatementBody');
@@ -4970,15 +5490,46 @@
                 </div>
               </div>
 
-              <div class="pt-3 border-t border-purple-500/20 flex items-center justify-between gap-2">
+              <div class="pt-3 border-t border-purple-500/20 flex flex-wrap items-center justify-between gap-2">
                 <span class="text-xs opacity-75">Tarif std : <strong class="text-white">200 Ar/cm</strong></span>
-                <button data-add-for-client="${c.id}" class="admin-only-control px-3 py-1.5 rounded-xl text-xs font-semibold neon-gradient-btn">
-                  + Tâche pour ce client
-                </button>
+                <div class="flex items-center gap-1.5">
+                  <button data-print-client="${c.id}" type="button" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/15 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 flex items-center gap-1 transition-all" title="Ouvrir le relevé et exporter en PDF">
+                    🖨️ Relevé PDF
+                  </button>
+                  <button data-add-for-client="${c.id}" type="button" class="admin-only-control px-3 py-1.5 rounded-xl text-xs font-semibold neon-gradient-btn">
+                    + Tâche
+                  </button>
+                </div>
               </div>
             </div>
           `;
         }).join('');
+
+        const cntEl = document.getElementById('clientsCountBadge');
+        if (cntEl) cntEl.textContent = `${state.clients.length} clients enregistrés`;
+
+        container.querySelectorAll('[data-print-client]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const cid = btn.getAttribute('data-print-client');
+            const selectEl = document.getElementById('statementClientSelect');
+            if (selectEl) {
+              selectEl.value = cid;
+              state.statementClientId = cid;
+            }
+            const cTasks = state.tasks.filter(t => t.clientId === cid);
+            if (cTasks.length > 0) {
+              const dates = cTasks.map(t => t.date).filter(Boolean).sort();
+              if (dates.length > 0) {
+                const sEl = document.getElementById('statementStartDate');
+                const eEl = document.getElementById('statementEndDate');
+                if (sEl) sEl.value = dates[0];
+                if (eEl) eEl.value = dates[dates.length - 1];
+              }
+            }
+            renderClientStatement();
+            openClientPdfPreview(cid);
+          });
+        });
 
         container.querySelectorAll('[data-add-for-client]').forEach(btn => {
           btn.addEventListener('click', () => {
@@ -5978,6 +6529,56 @@
         });
         document.getElementById('statementStartDate')?.addEventListener('change', renderClientStatement);
         document.getElementById('statementEndDate')?.addEventListener('change', renderClientStatement);
+
+        // Boutons Période rapide
+        document.getElementById('statementAllDatesBtn')?.addEventListener('click', () => {
+          const s = document.getElementById('statementStartDate');
+          const e = document.getElementById('statementEndDate');
+          if (s) s.value = '';
+          if (e) e.value = '';
+          renderClientStatement();
+          showToast('Période étendue à tout l\'historique');
+        });
+
+        document.getElementById('statementThisMonthBtn')?.addEventListener('click', () => {
+          const mada = getMadagascarNowParts();
+          const s = document.getElementById('statementStartDate');
+          const e = document.getElementById('statementEndDate');
+          const lastDay = new Date(mada.year, mada.month + 1, 0).getDate();
+          if (s) s.value = `${mada.year}-${String(mada.month + 1).padStart(2, '0')}-01`;
+          if (e) e.value = `${mada.year}-${String(mada.month + 1).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+          renderClientStatement();
+          showToast('Période calée sur le mois en cours');
+        });
+
+        // Boutons Impression et Export PDF Relevé
+        document.getElementById('previewClientStatementBtn')?.addEventListener('click', () => {
+          openClientPdfPreview();
+        });
+
+        document.getElementById('printClientStatementBtn')?.addEventListener('click', () => {
+          printClientStatement();
+        });
+
+        document.getElementById('exportClientPdfBtn')?.addEventListener('click', () => {
+          exportClientStatementToPdf();
+        });
+
+        // Contrôles de la fenêtre Modale Aperçu PDF
+        document.getElementById('modalDirectPrintBtn')?.addEventListener('click', () => {
+          printClientStatement();
+        });
+
+        document.getElementById('modalDirectDownloadPdfBtn')?.addEventListener('click', () => {
+          exportClientStatementToPdf();
+        });
+
+        document.getElementById('closeClientPdfPreviewBtn')?.addEventListener('click', closeClientPdfPreview);
+        document.getElementById('closeClientPdfPreviewBottomBtn')?.addEventListener('click', closeClientPdfPreview);
+
+        // Boutons Annuaire Global
+        document.getElementById('printGlobalClientsDirectoryBtn')?.addEventListener('click', printGlobalClientsDirectory);
+        document.getElementById('exportGlobalClientsPdfBtn')?.addEventListener('click', exportGlobalClientsDirectoryToPdf);
         document.getElementById('markClientStatementPaidBtn')?.addEventListener('click', () => {
           if (!requireAdmin()) return;
           const cid = document.getElementById('statementClientSelect')?.value;
